@@ -26,6 +26,7 @@ export { MainSections } from './MainSections';
 
 // UI Components (re-export from shadcn/ui)
 export { Button } from './ui/button';
+export { IconButton } from './ui/icon-button';
 export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 export { Input } from './ui/input';
 export { Label } from './ui/label';
@@ -51,6 +52,7 @@ export { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 // Utility Components
 export { ImageWithFallback } from './ImageWithFallback';
+export { PWAInstallPrompt, PWAStatusIndicator, PWAFeaturesStatus, PWAUpdatePrompt } from './PWAComponents';
 
 // Types and Utilities
 export type { ComponentProps } from 'react';

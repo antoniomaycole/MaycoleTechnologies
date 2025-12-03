@@ -1,7 +1,9 @@
 # 🌐 MaycoleTechnologies.com Domain Setup Guide
 
 ## ✅ Configuration Complete
+
 Your `vercel.json` is configured for:
+
 - **Primary Domain**: maycoletechnologies.com
 - **WWW Domain**: www.maycoletechnologies.com
 - **Framework**: Vite (automatic optimization)
@@ -11,14 +13,17 @@ Your `vercel.json` is configured for:
 ## 🚀 Domain Connection Steps
 
 ### Step 1: Deploy to Vercel First
+
 ```powershell
 npx vercel --prod
 ```
 
 After deployment, you'll get a Vercel URL like:
+
 - `maycoletechnologies.vercel.app`
 
 ### Step 2: Connect Custom Domain
+
 1. Go to **Vercel Dashboard** → Your Project
 2. Click **Settings** → **Domains**
 3. Click **Add Domain**
@@ -26,19 +31,23 @@ After deployment, you'll get a Vercel URL like:
 5. Choose one of two options:
 
 #### **Option A: Transfer Domain to Vercel** (Recommended)
+
 - Vercel manages DNS automatically
 - No manual DNS configuration needed
 - Included with Vercel pro plan
 - Simplest setup
 
 #### **Option B: Update DNS at Current Registrar**
+
 If domain is at GoDaddy, Namecheap, etc:
 
 1. Get **Vercel's Nameservers**:
+
    - ns1.vercel.com
    - ns2.vercel.com
 
 2. At your domain registrar:
+
    - Go to DNS/Nameserver settings
    - Replace existing nameservers with Vercel's
    - Wait 24-48 hours for propagation
@@ -47,6 +56,7 @@ If domain is at GoDaddy, Namecheap, etc:
    - Status changes from "pending" to "active"
 
 ### Step 3: Configure www Subdomain
+
 Vercel automatically creates www redirect, but to make it primary:
 
 1. In Vercel Dashboard → Domains
@@ -56,7 +66,9 @@ Vercel automatically creates www redirect, but to make it primary:
 ---
 
 ## 🔒 SSL/HTTPS Setup
+
 ✅ **Automatic** - Vercel provides free SSL certificate
+
 - HTTPS enabled by default
 - Certificate auto-renews
 - No additional configuration needed
@@ -79,6 +91,7 @@ Vercel automatically creates www redirect, but to make it primary:
 If manually managing DNS, add these records:
 
 ### For root domain (maycoletechnologies.com):
+
 ```
 Type: A or CNAME
 Name: @
@@ -90,6 +103,7 @@ Value: cname.vercel.com
 ```
 
 ### For www subdomain (www.maycoletechnologies.com):
+
 ```
 Type: CNAME
 Name: www
@@ -110,10 +124,12 @@ Value: cname.vercel.com
 ## 🧪 Verify Domain Connection
 
 After DNS propagates, test at:
+
 - https://maycoletechnologies.com
 - https://www.maycoletechnologies.com
 
 Both should show your app with:
+
 - ✓ SSL certificate valid
 - ✓ PWA installable
 - ✓ Icon buttons working
@@ -124,17 +140,20 @@ Both should show your app with:
 ## 📞 Troubleshooting
 
 **Domain not resolving?**
+
 - Check DNS propagation: https://whatsmydns.net
 - Enter: maycoletechnologies.com
 - Verify nameservers are correct
 - Wait 24-48 hours (DNS caching)
 
 **SSL certificate error?**
+
 - Vercel auto-generates certificates
 - Usually appears within 30 minutes
 - Check Vercel Dashboard → Domains → Status
 
 **WWW redirect not working?**
+
 - Set primary domain in Vercel Dashboard
 - Vercel handles automatic redirect
 - May take a few minutes to activate
@@ -144,9 +163,11 @@ Both should show your app with:
 ## 🎉 You're All Set!
 
 Your app will be live at:
+
 ### **https://maycoletechnologies.com**
 
 With:
+
 - ✅ Professional custom domain
 - ✅ SSL/HTTPS security
 - ✅ PWA features enabled

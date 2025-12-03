@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useState, FormEvent } from 'react';
 import { Button } from './ui/button';
+import { IconButton } from './ui/icon-button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
@@ -63,19 +64,19 @@ export function ContactSection() {
 
   const contactInfo = [
     {
-      icon: Mail,
+      iconName: "Mail" as const,
       title: "Email",
       value: "help@maycoletechnologies.com",
       link: "mailto:help@maycoletechnologies.com"
     },
     {
-      icon: Phone,
+      iconName: "Phone" as const,
       title: "Phone",
       value: "(213) 312-7814",
       link: "tel:+12133127814"
     },
     {
-      icon: MapPin,
+      iconName: "MapPin" as const,
       title: "Location",
       value: "Global Remote Team",
       link: "#"
@@ -194,7 +195,6 @@ export function ContactSection() {
 
             <div className="space-y-4">
               {contactInfo.map((info, index) => {
-                const Icon = info.icon;
                 return (
                   <motion.a
                     key={info.title}
@@ -205,9 +205,13 @@ export function ContactSection() {
                     viewport={{ once: true }}
                     className="flex items-center space-x-4 p-4 rounded-lg hover:bg-secondary/50 transition-colors group"
                   >
-                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200 transition-colors">
-                      <Icon className="w-6 h-6 text-green-600" />
-                    </div>
+                    <IconButton 
+                      iconName={info.iconName}
+                      size="lg"
+                      variant="default"
+                      className="!h-12 !w-12 flex-shrink-0"
+                      disabled
+                    />
                     <div>
                       <h4 className="font-medium">{info.title}</h4>
                       <p className="text-gray-300">{info.value}</p>

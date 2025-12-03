@@ -17,7 +17,11 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vendor-react': ['react', 'react-dom'],
-          'vendor-ui': ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+          'vendor-ui': [
+            '@radix-ui/react-accordion',
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+          ],
           'vendor-charts': ['recharts'],
           'vendor-forms': ['react-hook-form'],
           'vendor-utils': ['clsx', 'class-variance-authority'],

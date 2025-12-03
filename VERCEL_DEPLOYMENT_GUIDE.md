@@ -1,6 +1,7 @@
 # Vercel Deployment Guide - MaycoleTechnologies
 
 ## ✅ Prerequisites Met
+
 - ✓ React 18.3.1 + Vite 6.3.5 configured
 - ✓ TypeScript strict mode enabled
 - ✓ Build output: `build/` directory
@@ -10,6 +11,7 @@
 ## 🚀 Deploy to Vercel (2 Options)
 
 ### Option 1: Deploy Now (Recommended)
+
 Use Vercel CLI to deploy immediately:
 
 ```powershell
@@ -26,6 +28,7 @@ vercel --prod
 ```
 
 ### Option 2: Deploy via GitHub (Automatic)
+
 1. Go to https://vercel.com/new
 2. Import your GitHub repository: `AntonioMaycole/MaycoleTechnologies`
 3. Configure environment variables in Vercel Dashboard
@@ -51,6 +54,7 @@ VITE_SENTRY_DSN = [optional - your Sentry DSN]
 ## 📋 Deployment Checklist
 
 Before deploying:
+
 - [ ] Verify `npm run build` completes without errors (tested locally)
 - [ ] Check all environment variables are correctly configured in Vercel
 - [ ] Ensure .gitignore includes .env.local and node_modules
@@ -65,16 +69,19 @@ Before deploying:
 After successful deployment:
 
 1. **Verify Deployment**
+
    ```
    https://maycoletechnologies.vercel.app (or your custom domain)
    ```
 
 2. **Set Up Custom Domain** (Optional)
+
    - In Vercel Dashboard → Settings → Domains
    - Add your custom domain
    - Update DNS records as instructed
 
 3. **Enable Auto-Deployments** (Recommended)
+
    - GitHub integration automatically deploys on push to main branch
    - Disable by unchecking in Vercel Project Settings
 
@@ -85,6 +92,7 @@ After successful deployment:
 ## 📊 Performance Optimization
 
 Your build is optimized for:
+
 - ✓ Code splitting (Vite automatic)
 - ✓ CSS minification (Tailwind + PostCSS)
 - ✓ Image optimization (via components)
@@ -92,6 +100,7 @@ Your build is optimized for:
 - ✓ Tree shaking (ES modules)
 
 Vercel Edge Network will serve your assets with:
+
 - Automatic compression (gzip/brotli)
 - Geographic distribution
 - CDN caching
@@ -100,16 +109,19 @@ Vercel Edge Network will serve your assets with:
 ## 🔧 Troubleshooting
 
 **Build Fails?**
+
 - Check `npm run build` works locally
 - Verify Node.js version matches Vercel (20.x LTS recommended)
 - Check for circular dependencies
 
 **Environment Variables Not Loading?**
+
 - Vercel needs restart after adding env vars
 - Redeploy via Vercel Dashboard
 - Check variable names match exactly in code
 
 **App Loads but Shows Blank?**
+
 - Check browser console for errors (F12)
 - Verify public assets are in `public/` folder
 - Check vite.config.ts base path settings

@@ -25,6 +25,7 @@ git push -u origin main
 ```
 
 Replace:
+
 - `YOUR_USERNAME` with your GitHub username
 - `maycole-tracker` (or any name) with your preferred repository name
 
@@ -33,12 +34,14 @@ Replace:
 ## Before Running Those Commands:
 
 ### If Using Option 1 (Existing Repository)
+
 1. Make sure the repository on GitHub is empty or merge is acceptable
 2. Copy your repository URL from GitHub
 3. Replace the URL in the commands above
 4. Run the commands
 
 ### If Using Option 2 (New Repository Name)
+
 1. Go to: https://github.com/new
 2. Name: Use your preferred name (e.g., `maycole-tracker`)
 3. Visibility: **PRIVATE** ⚠️ IMPORTANT
@@ -80,7 +83,7 @@ Open http://localhost:3000 in your browser.
 ✅ Git installed  
 ✅ Code committed locally (166 files)  
 ✅ Security protection in place  
-✅ Ready to push to GitHub  
+✅ Ready to push to GitHub
 
 ⏭️ **Next**: Create GitHub repo and run the push commands above
 
@@ -89,7 +92,7 @@ Open http://localhost:3000 in your browser.
 ## All Documentation Files
 
 - **FINAL_AUDIT_REPORT.md** - Detailed security audit
-- **SECURITY.md** - Security guidelines  
+- **SECURITY.md** - Security guidelines
 - **GITHUB_SETUP_COMPLETE.md** - Complete setup guide
 - **GIT_SETUP_COMPLETE.md** - Setup summary
 - **.env.example** - Environment template

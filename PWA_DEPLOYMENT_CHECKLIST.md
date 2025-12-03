@@ -3,7 +3,9 @@
 ## ✅ PWA Features Implemented
 
 ### Core PWA Features
+
 - [x] **Service Worker** (public/sw.js)
+
   - Offline support with intelligent caching
   - Network-first strategy for APIs
   - Cache-first strategy for images
@@ -11,12 +13,14 @@
   - Push notification support
 
 - [x] **Web Manifest** (public/manifest.json)
+
   - App name, description, icons (multiple sizes)
   - Installation shortcuts
   - Share target configuration
   - Protocol handlers
 
 - [x] **Meta Tags** (index.html)
+
   - Apple mobile web app configuration
   - iOS home screen support
   - Status bar styling
@@ -38,13 +42,16 @@
 ## 🎯 Platform-Specific Setup
 
 ### iOS Configuration
+
 1. **Home Screen Installation**
+
    - Users tap Share → Add to Home Screen
    - App will launch in standalone mode
    - Status bar styling applied automatically
    - Supports notches and safe areas (viewport-fit=cover)
 
 2. **iOS Requirements**
+
    - iOS 11.3+ required for full PWA support
    - App icon: 192x192 or 512x512 PNG
    - Splash screen: Automatically generated
@@ -56,14 +63,17 @@
    - IndexedDB storage: ~50MB limit
 
 ### Android Configuration
+
 1. **Google Play Distribution** (Optional)
 2. **Installation Methods**
+
    - Chrome install prompt
    - Google Play Store (via Bubblewrap)
    - Direct add-to-home-screen
    - APK wrapping
 
 3. **Android Features**
+
    - Full background sync support
    - Push notifications
    - Share target integration
@@ -76,13 +86,16 @@
    - 512x512 icon (maskable PNG preferred)
 
 ### Desktop Configuration
+
 1. **Windows**
+
    - Works in all Chromium browsers
    - Microsoft Store distribution possible
    - Start menu shortcuts
    - Taskbar pinning
 
 2. **macOS**
+
    - Works in Safari 15+ and Chromium browsers
    - Can create alias from browser
    - Full offline support
@@ -95,11 +108,13 @@
 ## 🔐 Security Checklist
 
 - [ ] **HTTPS Required**
+
   - Service Worker requires HTTPS
   - All API calls should be HTTPS
   - Use secure cookies only
 
 - [ ] **Content Security Policy**
+
   ```
   default-src 'self';
   script-src 'self' 'unsafe-inline';
@@ -108,6 +123,7 @@
   ```
 
 - [ ] **Permissions Management**
+
   - Always request permissions explicitly
   - Handle denial gracefully
   - Explain why permission is needed
@@ -120,6 +136,7 @@
 ## 📱 Testing Checklist
 
 ### Desktop Testing
+
 - [ ] Build production: `npm run build`
 - [ ] Test with Lighthouse: `npm audit pwa`
 - [ ] Check manifest validity
@@ -129,6 +146,7 @@
 - [ ] Test install prompt
 
 ### Mobile Testing (iOS)
+
 - [ ] Build and run with HTTPS
 - [ ] Test home screen installation
 - [ ] Verify splash screen displays
@@ -139,6 +157,7 @@
 - [ ] Check permissions requests
 
 ### Mobile Testing (Android)
+
 - [ ] Test Chrome install prompt
 - [ ] Verify install on home screen
 - [ ] Test offline sync
@@ -150,6 +169,7 @@
 ## 🚀 Deployment Steps
 
 ### 1. Pre-Deployment
+
 ```bash
 # Build for production
 npm run build
@@ -160,6 +180,7 @@ lighthouse https://your-domain.com --view
 ```
 
 ### 2. Vercel Deployment
+
 ```bash
 # Deploy to Vercel
 vercel --prod
@@ -171,6 +192,7 @@ VITE_GA_TRACKING_ID=your-ga-id
 ```
 
 ### 3. Post-Deployment Verification
+
 ```bash
 # Verify service worker is registered
 # Open DevTools → Application → Service Workers
@@ -183,6 +205,7 @@ VITE_GA_TRACKING_ID=your-ga-id
 ```
 
 ### 4. iOS Distribution
+
 - [ ] Add HTTPS certificate (automatic with Vercel)
 - [ ] Test on iPhone/iPad
 - [ ] Share PWA link with users
@@ -190,6 +213,7 @@ VITE_GA_TRACKING_ID=your-ga-id
 - [ ] Create App Store alternative (optional)
 
 ### 5. Android Distribution
+
 - [ ] Build APK with Bubblewrap (optional)
 - [ ] Submit to Google Play Store (optional)
 - [ ] Or distribute via web link
@@ -199,6 +223,7 @@ VITE_GA_TRACKING_ID=your-ga-id
 ## 📊 Performance Optimization
 
 Your app is optimized for:
+
 - ✅ Instant loading (service worker caching)
 - ✅ Offline functionality (network-first strategy)
 - ✅ Small bundle size (code splitting via Vite)
@@ -206,6 +231,7 @@ Your app is optimized for:
 - ✅ Efficient caching (separate caches for API/images)
 
 Current Build Size:
+
 - CSS: 157.95 kB (gzip: 23.81 kB)
 - JS: 742.77 kB (gzip: 207.53 kB)
 - Total: ~908 kB (gzip: ~232 kB)
@@ -213,6 +239,7 @@ Current Build Size:
 ## 🔧 Advanced PWA Features
 
 ### Enabled Features
+
 - [x] Service Worker with offline support
 - [x] Push notifications
 - [x] Background sync
@@ -224,6 +251,7 @@ Current Build Size:
 - [x] Storage quota management
 
 ### Optional Advanced Features
+
 - [ ] Periodic background sync
 - [ ] Payment Request API
 - [ ] File System Access API
@@ -232,24 +260,28 @@ Current Build Size:
 ## 📞 Troubleshooting
 
 ### Service Worker Not Registering
+
 - Check browser DevTools → Application → Service Workers
 - Verify manifest.json is valid
 - Check for HTTPS (required for production)
 - Clear cache and hard refresh (Ctrl+Shift+R)
 
 ### App Not Installable
+
 - Check Lighthouse score (PWA audit)
 - Verify manifest.json has required fields
 - Ensure icon sizes are correct (192x192 minimum)
 - Check theme_color and background_color
 
 ### Offline Mode Not Working
+
 - Check service worker is active (DevTools)
 - Verify caching strategy in sw.js
 - Check Cache Storage in DevTools
 - Test in offline mode (DevTools → Network → Offline)
 
 ### Push Notifications Not Working
+
 - Verify service worker is registered
 - Check notification permission is granted
 - Ensure HTTPS is enabled

@@ -3,6 +3,16 @@
   "buildCommand": "npm run build",
   "outputDirectory": "build",
   "framework": "vite",
+  "domains": [
+    "maycoletechnologies.com",
+    "www.maycoletechnologies.com"
+  ],
+  "redirects": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://api.maycoletechnologies.com/:path*"
+    }
+  ],
   "env": {
     "VITE_DEMO_MODE": "@demo_mode",
     "VITE_ENABLE_ANALYTICS": "@enable_analytics",
@@ -12,5 +22,25 @@
     "SENDGRID_FROM_EMAIL": "@sendgrid_from_email",
     "MAILCHIMP_API_KEY": "@mailchimp_api_key",
     "VITE_SENTRY_DSN": "@sentry_dsn"
-  }
+  },
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/manifest.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/manifest+json"
+        }
+      ]
+    }
+  ]
 }

@@ -67,37 +67,25 @@ All these files are committed and in your repository:
 
 ## 🚀 NEXT STEPS: Push to GitHub
 
-### Step 1: Create Private Repository
+Since `MaycoleTechnologies` already exists on GitHub, you have two options:
+
+### Option A: Push to Existing Repository
+1. Copy your existing repository URL from GitHub (e.g., `https://github.com/YOUR_USERNAME/MaycoleTechnologies.git`)
+2. Run the push commands in `QUICK_GITHUB_PUSH.md`
+
+### Option B: Create Repository with Different Name
 1. Go to: **https://github.com/new**
-2. **Repository name**: `MaycoleTechnologies`
+2. **Repository name**: Choose a name (e.g., `maycole-tracker`, `maycole-app`)
 3. **Description**: "MaycoleTechnologies - Production-ready React web application"
 4. **Visibility**: 🔒 **PRIVATE** ⚠️ IMPORTANT!
 5. Click **Create repository**
+6. Copy the HTTPS URL shown
+7. Use the commands in `QUICK_GITHUB_PUSH.md` with your new URL
 
-### Step 2: Copy Your Repository URL
-After creation, GitHub shows you an HTTPS URL like:
-```
-https://github.com/YOUR_USERNAME/MaycoleTechnologies.git
-```
-Copy this URL.
-
-### Step 3: Push to GitHub
-Open PowerShell and paste these commands (one by one):
-
-```powershell
-$env:PATH = "C:\Program Files\Git\cmd;$env:PATH"
-cd "c:\Users\TEMP\Downloads\MaycoleTechnologies"
-git remote add origin https://github.com/YOUR_USERNAME/MaycoleTechnologies.git
-git branch -M main
-git push -u origin main
-```
-
-**Replace `YOUR_USERNAME` with your actual GitHub username!**
-
-### Step 4: Verify on GitHub
-1. Go to your repository: `https://github.com/YOUR_USERNAME/MaycoleTechnologies`
+### Verify on GitHub
+1. Go to your repository URL
 2. Verify it shows **PRIVATE** 🔒
-3. Verify you see 169 files
+3. Verify you see 170+ files
 4. Verify `.env*` files are **NOT** present ✓
 
 ---

@@ -1,8 +1,8 @@
 # 🚀 Quick Reference: Push to GitHub
 
-## Copy & Paste Commands
+## Option 1: Push to Existing Repository
 
-### 1️⃣ Open PowerShell and Run:
+If a `MaycoleTechnologies` repository already exists on GitHub:
 
 ```powershell
 $env:PATH = "C:\Program Files\Git\cmd;$env:PATH"
@@ -12,26 +12,40 @@ git branch -M main
 git push -u origin main
 ```
 
-**Replace `YOUR_USERNAME` with your GitHub username!**
+## Option 2: Create Repository with Different Name
+
+If you prefer a different repository name:
+
+```powershell
+$env:PATH = "C:\Program Files\Git\cmd;$env:PATH"
+cd "c:\Users\TEMP\Downloads\MaycoleTechnologies"
+git remote add origin https://github.com/YOUR_USERNAME/maycole-tracker.git
+git branch -M main
+git push -u origin main
+```
+
+Replace:
+- `YOUR_USERNAME` with your GitHub username
+- `maycole-tracker` (or any name) with your preferred repository name
 
 ---
 
 ## Before Running Those Commands:
 
-### Step 1: Create GitHub Repository
-- Go to: https://github.com/new
-- Name: `MaycoleTechnologies`
-- Visibility: **PRIVATE** ⚠️ IMPORTANT
-- Click **Create repository**
-- Copy the HTTPS URL shown
+### If Using Option 1 (Existing Repository)
+1. Make sure the repository on GitHub is empty or merge is acceptable
+2. Copy your repository URL from GitHub
+3. Replace the URL in the commands above
+4. Run the commands
 
-### Step 2: Update the Command Above
-Replace this in the command above:
-```
-https://github.com/YOUR_USERNAME/MaycoleTechnologies.git
-```
-
-With your actual repository URL shown on GitHub.
+### If Using Option 2 (New Repository Name)
+1. Go to: https://github.com/new
+2. Name: Use your preferred name (e.g., `maycole-tracker`)
+3. Visibility: **PRIVATE** ⚠️ IMPORTANT
+4. Click **Create repository**
+5. Copy the HTTPS URL shown from GitHub
+6. Replace the URL in the commands above
+7. Run the commands
 
 ---
 

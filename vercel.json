@@ -3,16 +3,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "build",
   "framework": "vite",
-  "domains": [
-    "maycoletechnologies.com",
-    "www.maycoletechnologies.com"
-  ],
-  "redirects": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://api.maycoletechnologies.com/:path*"
-    }
-  ],
   "env": {
     "VITE_DEMO_MODE": "@demo_mode",
     "VITE_ENABLE_ANALYTICS": "@enable_analytics",

@@ -23,6 +23,7 @@ export { TechnologiesSection } from './TechnologiesSection';
 export { PaymentSection } from './PaymentSection';
 export { ContactSection } from './ContactSection';
 export { MainSections } from './MainSections';
+export { LeadCapture } from './LeadCapture';
 
 // UI Components (re-export from shadcn/ui)
 export { Button } from './ui/button';

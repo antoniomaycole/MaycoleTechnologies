@@ -3,6 +3,7 @@ import { AtomicLogo } from './AtomicLogo';
 import { CleanIcon } from '../MaycoleTracker-Website-Logo-Transfer';
 import { Button } from './ui/button';
 import { BrandedIconButton } from './ui/branded-icon-button';
+import { LeadCapture } from './LeadCapture';
 import { Sparkles } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -85,6 +86,16 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
                 variant="default"
                 text="MaycoleTechnologies"
               />
+            </motion.div>
+
+            {/* Lead Capture - Seamless Integration */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+              className="mt-12 w-full max-w-xl mx-auto"
+            >
+              <LeadCapture variant="inline" />
             </motion.div>
           </motion.div>
         </motion.div>

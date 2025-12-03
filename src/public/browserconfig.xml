@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square70x70logo src="/icons/icon-72x72.png"/>
+            <square150x150logo src="/icons/icon-152x152.png"/>
+            <square310x310logo src="/icons/icon-384x384.png"/>
+            <wide310x150logo src="/icons/icon-384x384.png"/>
+            <TileColor>#1e7f3e</TileColor>
+        </tile>
+        <notification>
+            <polling-uri src="https://maycoletechnologies.com/api/notifications/poll?id=1"/>
+            <polling-uri2 src="https://maycoletechnologies.com/api/notifications/poll?id=2"/>
+            <polling-uri3 src="https://maycoletechnologies.com/api/notifications/poll?id=3"/>
+            <polling-uri4 src="https://maycoletechnologies.com/api/notifications/poll?id=4"/>
+            <polling-uri5 src="https://maycoletechnologies.com/api/notifications/poll?id=5"/>
+            <frequency>30</frequency>
+            <cycle>1</cycle>
+        </notification>
+    </msapplication>
+</browserconfig>

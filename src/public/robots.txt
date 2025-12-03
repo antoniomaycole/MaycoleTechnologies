@@ -1,0 +1,11 @@
+# MaycoleTechnologies™ - Robots.txt
+# Allow all crawlers
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://maycoletechnologies.com/sitemap.xml
+
+# Crawl-delay (optional, for slower crawling)
+# Crawl-delay: 10

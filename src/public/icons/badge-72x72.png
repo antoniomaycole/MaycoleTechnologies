@@ -1,0 +1,5 @@
+<!-- Notification Badge Icon -->
+<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="36" cy="36" r="36" fill="#1e7f3e"/>
+  <path d="M36 18c-4.4 0-8 3.6-8 8v12l-4 4v2h24v-2l-4-4V26c0-4.4-3.6-8-8-8zm4 32H32v4c0 2.2 1.8 4 4 4s4-1.8 4-4v-4z" fill="white"/>
+</svg>

@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///./~/*": "${webRoot}/node_modules/*",
+        "webpack:///./*": "${webRoot}/*",
+        "webpack:///*": "*"
+      }
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "Launch Firefox against localhost",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "reAttach": true,
+      "pathMappings": [
+        {
+          "url": "webpack:///src",
+          "path": "${workspaceFolder}/src"
+        }
+      ]
+    }
+  ]
+}

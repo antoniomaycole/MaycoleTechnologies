@@ -1,0 +1,145 @@
+{
+  "name": "MaycoleCheckBook™ - AI-Powered Digital Checkbook",
+  "short_name": "MaycoleCheckBook™",
+  "description": "Modern AI-powered digital checkbook register with intelligent expense tracking by MaycoleTechnologies™",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#1e7f3e",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["business", "productivity", "finance", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Launch Dashboard",
+      "short_name": "Dashboard",
+      "description": "Quick access to inventory dashboard",
+      "url": "/?view=dashboard",
+      "icons": [
+        {
+          "src": "/icons/dashboard-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Voice Control",
+      "short_name": "Voice",
+      "description": "Activate voice commands",
+      "url": "/?action=voice",
+      "icons": [
+        {
+          "src": "/icons/voice-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Barcode Scanner",
+      "short_name": "Scan",
+      "description": "Open barcode scanner",
+      "url": "/?action=scan",
+      "icons": [
+        {
+          "src": "/icons/scan-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "MaycoleTracker™ Dashboard - Desktop View"
+    },
+    {
+      "src": "/screenshots/mobile-launcher.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "MaycoleTracker™ Launcher - Mobile View"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "protocol_handlers": [
+    {
+      "protocol": "web+maycoletracker",
+      "url": "/?protocol=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/import",
+      "accept": {
+        "text/csv": [".csv"],
+        "application/vnd.ms-excel": [".xls"],
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"]
+      }
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 480
+  },
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  }
+}

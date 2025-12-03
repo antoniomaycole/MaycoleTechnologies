@@ -27,6 +27,7 @@ export { MainSections } from './MainSections';
 // UI Components (re-export from shadcn/ui)
 export { Button } from './ui/button';
 export { IconButton } from './ui/icon-button';
+export { BrandedIconButton } from './ui/branded-icon-button';
 export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 export { Input } from './ui/input';
 export { Label } from './ui/label';

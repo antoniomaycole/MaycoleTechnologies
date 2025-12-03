@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { AtomicLogo } from './AtomicLogo';
 import { CleanIcon } from '../MaycoleTracker-Website-Logo-Transfer';
 import { Button } from './ui/button';
+import { BrandedIconButton } from './ui/branded-icon-button';
 import { Sparkles } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -63,7 +64,7 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex items-center justify-center"
+            className="flex flex-col items-center justify-center gap-6"
           >
             <Button
               onClick={onLaunchTracker}
@@ -71,6 +72,20 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
             >
               <span>Launch MaycoleCheckBook™</span>
             </Button>
+            
+            {/* Branded Icon Button Display */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="mt-4"
+            >
+              <BrandedIconButton 
+                size="lg" 
+                variant="default"
+                text="MaycoleTechnologies"
+              />
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>

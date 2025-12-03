@@ -64,22 +64,32 @@ export function ContactSection() {
 
   const contactInfo = [
     {
+      iconName: "Globe" as const,
+      title: "Website",
+      value: "maycoletechnologies.com",
+      link: "https://maycoletechnologies.com",
+      platform: "web"
+    },
+    {
       iconName: "Mail" as const,
       title: "Email",
       value: "help@maycoletechnologies.com",
-      link: "mailto:help@maycoletechnologies.com"
+      link: "mailto:help@maycoletechnologies.com",
+      platform: "web"
     },
     {
       iconName: "Phone" as const,
       title: "Phone",
       value: "(213) 312-7814",
-      link: "tel:+12133127814"
+      link: "tel:+12133127814",
+      platform: "mobile"
     },
     {
       iconName: "MapPin" as const,
       title: "Location",
       value: "Global Remote Team",
-      link: "#"
+      link: "#",
+      platform: "web"
     }
   ];
 

@@ -1,5 +1,6 @@
 import { AtomicLogo } from './AtomicLogo';
 import { Button } from './ui/button';
+import { BrandedIconButton } from './ui/branded-icon-button';
 
 interface HeaderProps {
   onLaunchTracker?: () => void;
@@ -13,12 +14,20 @@ export function Header({ onLaunchTracker }: HeaderProps) {
           <div className="p-1">
             <AtomicLogo size="xs" />
           </div>
+          {/* Desktop Branding */}
           <div className="hidden sm:block leading-relaxed">
             <h1 className="text-base font-semibold maycole-gradient-text leading-tight pb-0.5">
               MaycoleTechnologies<sup className="maycole-trademark">™</sup>
             </h1>
             <p className="text-xs text-gray-700 leading-tight">Changing The Future One Product At A Time</p>
           </div>
+          {/* Mobile Branded Icon Button */}
+          <BrandedIconButton 
+            size="sm" 
+            variant="outline"
+            className="sm:hidden"
+            onClick={onLaunchTracker}
+          />
         </div>
         
         <nav className="hidden lg:flex items-center space-x-6 text-sm">

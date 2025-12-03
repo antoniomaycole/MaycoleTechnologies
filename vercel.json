@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "framework": "vite",
+  "env": {
+    "VITE_DEMO_MODE": "@demo_mode",
+    "VITE_ENABLE_ANALYTICS": "@enable_analytics",
+    "VITE_GA_TRACKING_ID": "@ga_tracking_id",
+    "VITE_CONTACT_EMAIL": "@contact_email",
+    "SENDGRID_API_KEY": "@sendgrid_api_key",
+    "SENDGRID_FROM_EMAIL": "@sendgrid_from_email",
+    "MAILCHIMP_API_KEY": "@mailchimp_api_key",
+    "VITE_SENTRY_DSN": "@sentry_dsn"
+  }
+}

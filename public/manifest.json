@@ -1,0 +1,138 @@
+{
+  "name": "MaycoleTechnologies",
+  "short_name": "Maycole",
+  "description": "Professional Inventory Tracking & Management System",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1a1a1a",
+  "background_color": "#ffffff",
+  "categories": ["business", "productivity"],
+  "screenshots": [
+    {
+      "src": "/icons/screenshot-540x720.png",
+      "type": "image/png",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/icons/screenshot-1280x720.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "form_factor": "wide"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icons/favicon-16x16.png",
+      "type": "image/png",
+      "sizes": "16x16",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/favicon-32x32.png",
+      "type": "image/png",
+      "sizes": "32x32",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-64x64.png",
+      "type": "image/png",
+      "sizes": "64x64",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-256x256.png",
+      "type": "image/png",
+      "sizes": "256x256",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "type": "image/png",
+      "sizes": "384x384",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your inventory dashboard",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "/icons/dashboard-96x96.png",
+          "type": "image/png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Add Inventory",
+      "short_name": "Add Item",
+      "description": "Add new inventory item",
+      "url": "/inventory/new",
+      "icons": [
+        {
+          "src": "/icons/add-96x96.png",
+          "type": "image/png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "media",
+          "accept": ["image/*", "video/*", "audio/*"]
+        }
+      ]
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+maycole",
+      "url": "/protocol?url=%s"
+    }
+  ]
+}

@@ -5,10 +5,23 @@ import './index.css'
 import './styles/globals.css'
 import { initializeAnalytics, initScrollTracking } from './lib/analytics'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { initPWA, isOnline, onOnlineStatusChange } from './lib/pwa'
 
 // Initialize Google Analytics
 initializeAnalytics();
 initScrollTracking();
+
+// Initialize PWA features
+initPWA();
+
+// Monitor online/offline status
+const unsubscribe = onOnlineStatusChange((online) => {
+  if (online) {
+    console.log('[PWA] App is now online');
+  } else {
+    console.log('[PWA] App is now offline - using cached content');
+  }
+});
 
 // Service Worker Registration for PWA functionality
 if ('serviceWorker' in navigator) {
@@ -30,7 +43,7 @@ if ('serviceWorker' in navigator) {
               
               // Optionally show update notification
               if ('Notification' in window && Notification.permission === 'granted') {
-                new Notification('MaycoleTracker™ Update Available', {
+                new Notification('MaycoleTechnologies™ Update Available', {
                   body: 'A new version is available. Refresh to update.',
                   icon: '/icons/icon-192x192.png',
                   tag: 'app-update'
@@ -85,10 +98,18 @@ window.addEventListener('appinstalled', () => {
   }
 };
 
+// Check initial online status
+console.log('[PWA] Initial online status:', isOnline());
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
       <App />
     </ErrorBoundary>
   </StrictMode>,
-)
+);
+
+// Cleanup on unload
+window.addEventListener('beforeunload', () => {
+  unsubscribe();
+});

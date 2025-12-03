@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { cn } from './ui/utils';
 import { toast } from 'sonner';
+import { getAnalytics } from '../lib/analytics-tracker';
 
 interface LeadCaptureProps {
   variant?: 'modal' | 'inline' | 'compact' | 'full';
@@ -58,6 +59,10 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
 
+      // Track form submission attempt
+      const analytics = getAnalytics();
+      analytics.trackFormStart('lead-capture');
+
       // Validation
       if (!formState.email.trim()) {
         setFormState(prev => ({
@@ -102,7 +107,10 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
           throw new Error('Failed to subscribe');
         }
 
-        const data = await response.json();
+        await response.json();
+
+        // Track successful form submission
+        analytics.trackFormSubmit('lead-capture', true);
 
         // Success state
         setFormState(prev => ({
@@ -128,6 +136,13 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
           });
         }, 3000);
       } catch (error) {
+        // Track failed form submission
+        analytics.trackFormSubmit('lead-capture', false);
+        analytics.trackError(
+          error instanceof Error ? error.message : 'Unknown error',
+          { source: 'lead-capture-submission' }
+        );
+        
         setFormState(prev => ({
           ...prev,
           isLoading: false,

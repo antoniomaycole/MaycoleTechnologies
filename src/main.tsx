@@ -4,12 +4,20 @@ import App from './App.tsx'
 import './index.css'
 import './styles/globals.css'
 import { initializeAnalytics, initScrollTracking } from './lib/analytics'
+import { initializeAnalytics as initializeClickTracking } from './lib/analytics-tracker'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { initPWA, isOnline, onOnlineStatusChange } from './lib/pwa'
 
 // Initialize Google Analytics
 initializeAnalytics();
 initScrollTracking();
+
+// Initialize Click & Event Tracking
+initializeClickTracking({
+  enableRemoteTracking: true,
+  remoteEndpoint: '/api/analytics',
+  samplingRate: 1, // Track all events
+});
 
 // Initialize PWA features
 initPWA();

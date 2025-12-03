@@ -21,6 +21,7 @@ export { ServicesSection } from './ServicesSection';
 export { ProductsSection } from './ProductsSection';
 export { TechnologiesSection } from './TechnologiesSection';
 export { PaymentSection } from './PaymentSection';
+export { EnhancedPaymentSection } from './EnhancedPaymentSection';
 export { ContactSection } from './ContactSection';
 export { MainSections } from './MainSections';
 export { LeadCapture } from './LeadCapture';

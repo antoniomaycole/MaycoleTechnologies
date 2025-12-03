@@ -9,7 +9,7 @@
 import { useEffect, useCallback, useRef } from 'react';
 
 interface AnalyticsEvent {
-  type: 'click' | 'view' | 'scroll' | 'form_start' | 'form_submit' | 'error' | 'engagement';
+  type: 'click' | 'view' | 'scroll' | 'form_start' | 'form_submit' | 'error' | 'engagement' | 'payment';
   target: string;
   section?: string;
   timestamp: number;

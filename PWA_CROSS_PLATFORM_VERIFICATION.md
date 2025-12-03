@@ -9,6 +9,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ## 1. DESKTOP SUPPORT ✅
 
 ### Windows/macOS/Linux
+
 - **Installation**: Users can install the app from browser "Install" button
 - **Access**: Start menu (Windows), Applications folder (macOS), app drawer (Linux)
 - **Features**:
@@ -18,11 +19,13 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
   - Full keyboard navigation support
 
 **Configuration Files**:
+
 - `public/manifest.json` - Defines app metadata for installation
 - `public/sw.js` - Service Worker with offline caching
 - `vite.config.ts` - Vite build configuration
 
 **Responsive Design**:
+
 - Tailwind CSS with mobile-first approach
 - Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px)
 - Icon Button variants scale from xs (6×6) to xl (14×14)
@@ -32,6 +35,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ## 2. iOS SUPPORT ✅
 
 ### iPhone/iPad (iOS 13.4+)
+
 - **Installation**: "Share" button → "Add to Home Screen"
 - **Features**:
   - Full-screen app without Safari UI
@@ -40,6 +44,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
   - Haptic feedback support (Web Haptics API)
 
 **iOS-Specific Configuration**:
+
 ```json
 {
   "scope": "/",
@@ -50,6 +55,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ```
 
 **iOS App Icons** (in `public/manifest.json`):
+
 - 192×192px - Standard iOS icon
 - 512×512px - High-resolution icon
 - Apple-specific tag in `<head>`:
@@ -60,6 +66,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
   ```
 
 **Verified Features**:
+
 - ✅ Touch-friendly icon buttons (minimum 44×44px)
 - ✅ Responsive viewport: `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
 - ✅ Service Worker caching for offline use
@@ -70,6 +77,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ## 3. ANDROID SUPPORT ✅
 
 ### Android 6.0+ (API Level 23+)
+
 - **Installation**: "Install app" prompt appears automatically on first visit
 - **Features**:
   - Full-screen app with immersive mode
@@ -78,6 +86,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
   - Screen orientation locking
 
 **Android-Specific Configuration**:
+
 ```json
 {
   "display": "standalone",
@@ -88,11 +97,13 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ```
 
 **Android App Icons** (in `public/manifest.json`):
+
 - 192×192px - Adaptive icon
 - 512×512px - Splash screen icon
 - Safe zone: Icons with padding for adaptive display
 
 **Verified Features**:
+
 - ✅ Maskable icons for notch support: `"purpose": "any maskable"`
 - ✅ Chrome Web Store integration ready
 - ✅ Hardware back button handling via Service Worker
@@ -105,6 +116,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ### Cross-Platform Icon Rendering
 
 **Lucide React Icons** (700+ available):
+
 - SVG-based (crisp on all screen densities)
 - Automatically scale to device pixel ratio
 - Color variants for all platforms:
@@ -114,6 +126,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
   - Outline, Ghost, Destructive, Success, Warning, Info
 
 **Size Variants**:
+
 ```typescript
 {
   xs: 6×6 (14px icon),      // Mobile compact
@@ -125,6 +138,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ```
 
 **Contact Section Icons**:
+
 - 🌐 **Globe** - Website/Web representation
 - ✉️ **Mail** - Email contact
 - 📱 **Phone** - Mobile contact
@@ -135,6 +149,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ## 5. RESPONSIVE BEHAVIOR VERIFICATION ✅
 
 ### Mobile (320px - 767px)
+
 ```css
 - Single column layout
 - Full-width buttons and inputs
@@ -144,6 +159,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ```
 
 ### Tablet (768px - 1023px)
+
 ```css
 - Two-column layout for contact form
 - Optimized spacing
@@ -152,6 +168,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ```
 
 ### Desktop (1024px+)
+
 ```css
 - Full grid layout
 - Sidebar or multi-panel layouts
@@ -164,6 +181,7 @@ Your MaycoleTechnologies app is fully scalable across Desktop, iOS, and Android 
 ## 6. PERFORMANCE OPTIMIZATION ✅
 
 ### Code Splitting (for all platforms)
+
 ```
 vendor-react: 141.72 KB (React, React-DOM)
 vendor-ui: 56.12 KB (Radix UI components)
@@ -174,6 +192,7 @@ index: 1,312.03 KB (App code + bundles)
 ```
 
 ### Caching Strategy (Service Worker)
+
 ```javascript
 // Network-first for API calls
 // Cache-first for images and assets
@@ -182,6 +201,7 @@ index: 1,312.03 KB (App code + bundles)
 ```
 
 ### Bundle Analysis
+
 - **CSS**: 157.95 KB (gzipped: 23.81 KB) - 85% reduction
 - **JS**: 1,313.05 KB total (gzipped: 281.67 KB) - 79% reduction
 - **Load Time**: Optimized for <3s on 4G
@@ -191,7 +211,9 @@ index: 1,312.03 KB (App code + bundles)
 ## 7. OFFLINE FUNCTIONALITY ✅
 
 ### Service Worker Coverage
+
 All platforms get offline support:
+
 - ✅ Cache navigation requests
 - ✅ Cache images with cache-first strategy
 - ✅ Cache static assets
@@ -203,6 +225,7 @@ All platforms get offline support:
 ## 8. ACCESSIBILITY COMPLIANCE ✅
 
 ### WCAG 2.1 Level AA
+
 - **Color Contrast**: 4.5:1 minimum (AAA for large text)
 - **Touch Targets**: 44×44px minimum (mobile)
 - **Keyboard Navigation**: Full support via icon button focus states
@@ -210,6 +233,7 @@ All platforms get offline support:
 - **Icon Labels**: `title` attribute on icon buttons with tooltips
 
 ### Icon Button Accessibility
+
 ```typescript
 <IconButton
   iconName="Mail"
@@ -225,16 +249,19 @@ All platforms get offline support:
 ## 9. ORIENTATION SUPPORT ✅
 
 ### Portrait (Default)
+
 - Optimized for mobile viewing
 - Full-width components
 - Vertical scrolling
 
 ### Landscape
+
 - Side-by-side layouts
 - Horizontal scrolling if needed
 - Maintained aspect ratios for images
 
 **CSS Media Query**:
+
 ```css
 @media (orientation: portrait) {
   /* Portrait-specific styles */
@@ -250,6 +277,7 @@ All platforms get offline support:
 ## 10. TESTING CHECKLIST ✅
 
 ### Desktop Testing
+
 - [ ] Open https://maycoletechnologies.com in Chrome/Firefox/Safari
 - [ ] Click "Install" button (browser feature)
 - [ ] Verify app opens in standalone window
@@ -257,6 +285,7 @@ All platforms get offline support:
 - [ ] Verify offline functionality works
 
 ### iOS Testing
+
 - [ ] Open site in Safari on iPhone/iPad
 - [ ] Tap "Share" → "Add to Home Screen"
 - [ ] Launch from home screen
@@ -265,6 +294,7 @@ All platforms get offline support:
 - [ ] Verify offline page loading
 
 ### Android Testing
+
 - [ ] Open site in Chrome on Android device
 - [ ] Accept "Install app" prompt
 - [ ] Launch from app drawer
@@ -314,15 +344,15 @@ vite.config.ts            ← Build optimization for all platforms
 
 ## 13. SUCCESS METRICS
 
-| Platform | Desktop | iOS | Android |
-|----------|---------|-----|---------|
-| Installation | ✅ Browser menu | ✅ Home screen | ✅ Auto-prompt |
-| Icon Buttons | ✅ Pixel-perfect | ✅ Responsive | ✅ Responsive |
-| Offline | ✅ Full support | ✅ Full support | ✅ Full support |
-| Touch | ✅ 44×44px min | ✅ 44×44px min | ✅ 48×48px min |
-| Orientation | ✅ Both | ✅ Both | ✅ Both |
-| Notifications | ✅ Web API | ⚠️ Limited | ✅ Native |
-| Performance | ✅ <3s load | ✅ <3s load | ✅ <3s load |
+| Platform      | Desktop          | iOS             | Android         |
+| ------------- | ---------------- | --------------- | --------------- |
+| Installation  | ✅ Browser menu  | ✅ Home screen  | ✅ Auto-prompt  |
+| Icon Buttons  | ✅ Pixel-perfect | ✅ Responsive   | ✅ Responsive   |
+| Offline       | ✅ Full support  | ✅ Full support | ✅ Full support |
+| Touch         | ✅ 44×44px min   | ✅ 44×44px min  | ✅ 48×48px min  |
+| Orientation   | ✅ Both          | ✅ Both         | ✅ Both         |
+| Notifications | ✅ Web API       | ⚠️ Limited      | ✅ Native       |
+| Performance   | ✅ <3s load      | ✅ <3s load     | ✅ <3s load     |
 
 ---
 

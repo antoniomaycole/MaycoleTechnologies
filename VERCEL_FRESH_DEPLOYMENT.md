@@ -19,6 +19,7 @@ All code is built, tested, and committed to GitHub. This is a clean deployment f
 ## Fresh Deployment Steps
 
 ### Step 1: Clean Up Old Deployments
+
 All old failed deployments have been removed from local Vercel configuration.
 
 ### Step 2: Deploy to Vercel (First Time)
@@ -73,17 +74,20 @@ npx vercel status
 ## Important Notes
 
 ### Environment Variable Setup
+
 - Add environment variables via Vercel Dashboard, NOT in `.env` file
 - `.env.example` provided as template (don't commit actual `.env` with secrets)
 - Variables are automatically injected during build
 
 ### Vercel.json Configuration
+
 - ✅ Fixed: Removed unsupported `domains` property
 - ✅ Configured: Build command, output directory, framework
 - ✅ Configured: Cache headers for Service Worker (no cache)
 - ✅ Configured: Content-Type headers for manifest.json
 
 ### Build Output
+
 - Output Directory: `build/` (Vite default)
 - Build Command: `npm run build`
 - Framework: Vite (auto-detected)
@@ -100,6 +104,7 @@ npx vercel status
 ## Rollback (if needed)
 
 To rollback to a previous deployment:
+
 ```bash
 npx vercel rollback
 ```
@@ -107,6 +112,7 @@ npx vercel rollback
 ## Support
 
 If deployment fails:
+
 1. Check build logs: `npx vercel logs --follow`
 2. Verify environment variables are set
 3. Ensure all dependencies are installed: `npm install`

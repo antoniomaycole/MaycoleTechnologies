@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isBuild = process.argv.includes('build');
 
 export default defineConfig({
-  base: '/',
+  base: './',
   plugins: [
     react(),
     // Bundle analysis plugin - ONLY enable during production builds
@@ -41,6 +41,21 @@ export default defineConfig({
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
+        // Use relative paths for assets
+        entryFileNames: 'js/[name].[hash:8].js',
+        chunkFileNames: 'js/[name].[hash:8].js',
+        assetFileNames: (assetInfo: any) => {
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          if (/png|jpe?g|gif|svg|webp|ico/i.test(ext)) {
+            return `images/[name].[hash:8][extname]`;
+          } else if (/woff|woff2|eot|ttf|otf/.test(ext)) {
+            return `fonts/[name].[hash:8][extname]`;
+          } else if (ext === 'css') {
+            return `css/[name].[hash:8][extname]`;
+          }
+          return `[name].[hash:8][extname]`;
+        },
         // Aggressive code splitting for optimal performance
         manualChunks: (id: string) => {
           // Core framework
@@ -89,21 +104,6 @@ export default defineConfig({
 
           // React Helmet
           if (id.includes('react-helmet-async')) return 'vendor-seo';
-        },
-        // Optimize chunk filenames for better caching
-        entryFileNames: 'js/[name].[hash:8].js',
-        chunkFileNames: 'js/[name].[hash:8].js',
-        assetFileNames: (assetInfo: any) => {
-          const info = assetInfo.name.split('.');
-          const ext = info[info.length - 1];
-          if (/png|jpe?g|gif|svg|webp|ico/i.test(ext)) {
-            return `images/[name].[hash:8][extname]`;
-          } else if (/woff|woff2|eot|ttf|otf/.test(ext)) {
-            return `fonts/[name].[hash:8][extname]`;
-          } else if (ext === 'css') {
-            return `css/[name].[hash:8][extname]`;
-          }
-          return `[name].[hash:8][extname]`;
         },
       },
     },

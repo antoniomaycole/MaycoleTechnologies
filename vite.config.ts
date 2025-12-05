@@ -7,6 +7,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isBuild = process.argv.includes('build');
 
 export default defineConfig({
+  base: '/',
   plugins: [
     react(),
     // Bundle analysis plugin - ONLY enable during production builds

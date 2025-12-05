@@ -5,14 +5,9 @@ interface CheckbookIconProps {
   animated?: boolean;
 }
 
-export function CheckbookIcon({ className = "w-12 h-12", animated = true }: CheckbookIconProps) {
+export function CheckbookIcon({ className = 'w-12 h-12', animated = true }: CheckbookIconProps) {
   return (
-    <svg
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
       {/* Checkbook Cover - Outer */}
       <motion.rect
         x="10"
@@ -27,17 +22,10 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { scale: 1, opacity: 1 } : {}}
         transition={{ duration: 0.5 }}
       />
-      
+
       {/* Checkbook Inner Shadow */}
-      <rect
-        x="14"
-        y="24"
-        width="72"
-        height="52"
-        rx="2"
-        fill="rgba(0, 0, 0, 0.1)"
-      />
-      
+      <rect x="14" y="24" width="72" height="52" rx="2" fill="rgba(0, 0, 0, 0.1)" />
+
       {/* Check Page - White Background */}
       <motion.rect
         x="16"
@@ -52,7 +40,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { x: 16, opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
       />
-      
+
       {/* Check Lines - Top decorative line */}
       <motion.line
         x1="20"
@@ -66,7 +54,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { pathLength: 1, opacity: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.4 }}
       />
-      
+
       {/* Date Line */}
       <motion.line
         x1="58"
@@ -80,7 +68,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { pathLength: 1, opacity: 0.5 } : {}}
         transition={{ duration: 0.4, delay: 0.5 }}
       />
-      
+
       {/* Pay to the Order of Line */}
       <motion.line
         x1="20"
@@ -94,7 +82,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { pathLength: 1, opacity: 0.5 } : {}}
         transition={{ duration: 0.4, delay: 0.6 }}
       />
-      
+
       {/* Amount Box */}
       <motion.rect
         x="72"
@@ -109,7 +97,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { scale: 1, opacity: 1 } : {}}
         transition={{ duration: 0.3, delay: 0.7 }}
       />
-      
+
       {/* Memo Line */}
       <motion.line
         x1="20"
@@ -123,7 +111,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { pathLength: 1, opacity: 0.5 } : {}}
         transition={{ duration: 0.4, delay: 0.7 }}
       />
-      
+
       {/* Signature Line */}
       <motion.line
         x1="58"
@@ -137,7 +125,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { pathLength: 1, opacity: 0.5 } : {}}
         transition={{ duration: 0.4, delay: 0.8 }}
       />
-      
+
       {/* Routing Numbers - Bottom of Check */}
       <motion.text
         x="20"
@@ -153,7 +141,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
       >
         ⑆021000021⑆
       </motion.text>
-      
+
       {/* Account Number */}
       <motion.text
         x="50"
@@ -169,7 +157,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
       >
         1234567
       </motion.text>
-      
+
       {/* Check Number */}
       <motion.text
         x="72"
@@ -184,7 +172,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
       >
         001⑈
       </motion.text>
-      
+
       {/* Checkbook Spine/Binding */}
       <motion.rect
         x="10"
@@ -197,7 +185,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { opacity: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.3 }}
       />
-      
+
       {/* Binding Rings */}
       {[30, 45, 60].map((y, index) => (
         <motion.circle
@@ -213,7 +201,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
           transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
         />
       ))}
-      
+
       {/* Perforated Edge */}
       <motion.line
         x1="15"
@@ -228,7 +216,7 @@ export function CheckbookIcon({ className = "w-12 h-12", animated = true }: Chec
         animate={animated ? { pathLength: 1, opacity: 0.4 } : {}}
         transition={{ duration: 0.5, delay: 0.5 }}
       />
-      
+
       {/* Gradient Definitions */}
       <defs>
         <linearGradient id="checkbookGradient" x1="0%" y1="0%" x2="100%" y2="100%">

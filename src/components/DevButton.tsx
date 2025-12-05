@@ -13,7 +13,7 @@ export function DevButton() {
     const handleKeyPress = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
         e.preventDefault();
-        setIsPanelOpen(prev => !prev);
+        setIsPanelOpen((prev) => !prev);
       }
     };
 
@@ -37,14 +37,11 @@ export function DevButton() {
           className="h-14 w-14 rounded-full shadow-lg bg-gradient-to-br from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-2 border-white/20 hover:scale-110 transition-transform"
           title="Open Developer Panel"
         >
-          <motion.div
-            animate={{ rotate: isHovered ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <motion.div animate={{ rotate: isHovered ? 180 : 0 }} transition={{ duration: 0.3 }}>
             <Settings className="w-6 h-6" />
           </motion.div>
         </Button>
-        
+
         {/* Tooltip */}
         <AnimatePresence>
           {isHovered && (
@@ -66,9 +63,7 @@ export function DevButton() {
 
       {/* Dev Panel Modal */}
       <AnimatePresence>
-        {isPanelOpen && (
-          <DevPanel onClose={() => setIsPanelOpen(false)} />
-        )}
+        {isPanelOpen && <DevPanel onClose={() => setIsPanelOpen(false)} />}
       </AnimatePresence>
     </>
   );

@@ -83,14 +83,17 @@ export class ErrorBoundary extends Component<Props, State> {
                   </span>
                 </h1>
                 <p className="text-lg text-gray-300 mb-6">
-                  We're sorry for the inconvenience. Our team has been notified and we're working to fix the issue.
+                  We're sorry for the inconvenience. Our team has been notified and we're working to
+                  fix the issue.
                 </p>
               </div>
 
               {/* Error Details (Development Only) */}
               {config.dev.enabled && this.state.error && (
                 <div className="mb-8 p-4 bg-gray-900 rounded-lg border border-red-600/30">
-                  <h3 className="text-sm font-semibold text-red-600 mb-2">Error Details (Dev Mode):</h3>
+                  <h3 className="text-sm font-semibold text-red-600 mb-2">
+                    Error Details (Dev Mode):
+                  </h3>
                   <pre className="text-xs text-gray-400 overflow-auto max-h-40">
                     {this.state.error.toString()}
                     {'\n\n'}
@@ -137,8 +140,8 @@ export class ErrorBoundary extends Component<Props, State> {
                   <span className="bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-transparent font-semibold">
                     MaycoleTechnologies
                   </span>
-                  <sup style={{ fontSize: '0.4em', verticalAlign: 'super' }}>™</sup>
-                  {' '}- Changing The Future One Product At A Time
+                  <sup style={{ fontSize: '0.4em', verticalAlign: 'super' }}>™</sup> - Changing The
+                  Future One Product At A Time
                 </p>
               </div>
             </CardContent>

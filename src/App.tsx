@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from './components/ui/button';
 
@@ -10,7 +10,6 @@ import { MainSections } from './components/MainSections';
 import { Footer } from './components/Footer';
 import { TickerTape } from './components/TickerTape';
 import { FloatingTrialButton } from './components/FloatingTrialButton';
-import { LiveChatWidget } from './components/LiveChatWidget';
 import { CookieConsent } from './components/CookieConsent';
 import { DemoDisclaimer } from './components/DemoDisclaimer';
 import { DevButton } from './components/DevButton';
@@ -32,6 +31,11 @@ type AppView = 'website' | 'tracker' | 'privacy' | 'terms' | 'cookies' | '404';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>('website');
+
+  // DEBUG: Log render
+  useEffect(() => {
+    console.log('[App] Rendered with view:', currentView);
+  }, [currentView]);
 
   // Handle URL-based routing
   useEffect(() => {
@@ -92,10 +96,10 @@ export default function App() {
       <AuthProvider>
         {/* Authenticated MaycoleTracker™ Application with Real-time Features */}
         <AuthenticatedTracker onBack={goToWebsite} />
-        
+
         {/* Toast Notifications */}
         <Toaster />
-        
+
         {/* Back Button - Positioned over the professional app */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -122,9 +126,8 @@ export default function App() {
       <Header onLaunchTracker={goToTracker} />
       <HeroSection onLaunchTracker={goToTracker} />
       <TickerTape />
-      <MainSections />
-      <FloatingTrialButton />
-      <LiveChatWidget />
+      <MainSections onLaunchTracker={goToTracker} />
+      <FloatingTrialButton onLaunchTracker={goToTracker} />
       <CookieConsent />
       <DevButton />
       <Footer />

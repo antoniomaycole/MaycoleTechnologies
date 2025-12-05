@@ -45,7 +45,7 @@ export class RealtimeService {
     }
 
     console.log('Connecting to real-time service...');
-    
+
     // Simulate connection delay
     setTimeout(() => {
       this.isConnected = true;
@@ -66,7 +66,7 @@ export class RealtimeService {
     console.log('Disconnecting from real-time service...');
     this.isConnected = false;
     this.subscriptions.clear();
-    
+
     if (this.simulationInterval) {
       clearInterval(this.simulationInterval);
       this.simulationInterval = null;
@@ -95,7 +95,7 @@ export class RealtimeService {
     return () => {
       const subs = this.subscriptions.get(channel);
       if (subs) {
-        const index = subs.findIndex(s => s.id === subscription.id);
+        const index = subs.findIndex((s) => s.id === subscription.id);
         if (index !== -1) {
           subs.splice(index, 1);
         }
@@ -123,7 +123,7 @@ export class RealtimeService {
 
     const subscriptions = this.subscriptions.get(channel);
     if (subscriptions) {
-      subscriptions.forEach(sub => {
+      subscriptions.forEach((sub) => {
         try {
           sub.handler(event);
         } catch (error) {
@@ -135,7 +135,7 @@ export class RealtimeService {
     // Also emit to 'all' channel
     const allSubscriptions = this.subscriptions.get('all');
     if (allSubscriptions && channel !== 'all') {
-      allSubscriptions.forEach(sub => {
+      allSubscriptions.forEach((sub) => {
         try {
           sub.handler(event);
         } catch (error) {
@@ -150,14 +150,17 @@ export class RealtimeService {
    */
   private startSimulation(): void {
     // Simulate random inventory events every 5-15 seconds
-    this.simulationInterval = setInterval(() => {
-      if (!this.isConnected) return;
+    this.simulationInterval = setInterval(
+      () => {
+        if (!this.isConnected) return;
 
-      const eventType = this.getRandomEventType();
-      const payload = this.generateEventPayload(eventType);
+        const eventType = this.getRandomEventType();
+        const payload = this.generateEventPayload(eventType);
 
-      this.emit(eventType, payload);
-    }, 10000 + Math.random() * 5000);
+        this.emit(eventType, payload);
+      },
+      10000 + Math.random() * 5000
+    );
   }
 
   /**
@@ -234,12 +237,7 @@ export class RealtimeService {
   // ==================== HELPER METHODS ====================
 
   private getRandomEventType(): string {
-    const types = [
-      'inventory-updated',
-      'stock-movement',
-      'alert-created',
-      'order-updated',
-    ];
+    const types = ['inventory-updated', 'stock-movement', 'alert-created', 'order-updated'];
     return types[Math.floor(Math.random() * types.length)];
   }
 
@@ -327,7 +325,7 @@ export function useRealtimeSubscription(channel: string, handler: EventHandler) 
 
   useEffect(() => {
     const realtime = RealtimeService.getInstance();
-    
+
     if (!realtime.isConnectionActive()) {
       realtime.connect();
     }

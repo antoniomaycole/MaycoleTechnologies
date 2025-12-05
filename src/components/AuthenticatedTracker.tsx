@@ -11,15 +11,7 @@ import { ProfessionalTrackerApp } from './ProfessionalTrackerApp';
 import { realtimeService, useRealtimeSubscription } from '../lib/realtime';
 import { RealtimeEvent } from '../types/database';
 import { toast } from 'sonner';
-import { 
-  Bell, 
-  Wifi, 
-  WifiOff, 
-  Activity,
-  Package,
-  TrendingUp,
-  AlertTriangle
-} from 'lucide-react';
+import { Bell, Wifi, WifiOff, Activity, Package, TrendingUp, AlertTriangle } from 'lucide-react';
 import { Badge } from './ui/badge';
 
 interface AuthenticatedTrackerProps {
@@ -59,7 +51,7 @@ export function AuthenticatedTracker({ onBack }: AuthenticatedTrackerProps) {
 
   // Subscribe to all real-time events
   const handleRealtimeEvent = (event: RealtimeEvent) => {
-    setRealtimeEvents(prev => [...prev.slice(-9), event]);
+    setRealtimeEvents((prev) => [...prev.slice(-9), event]);
 
     // Show toast notification for important events
     switch (event.type) {
@@ -135,9 +127,7 @@ export function AuthenticatedTracker({ onBack }: AuthenticatedTrackerProps) {
           <h1 className="text-3xl mb-4">
             Welcome to MaycoleTracker<sup className="text-xs">™</sup>
           </h1>
-          <p className="text-gray-400 mb-8">
-            AI-Native Inventory Intelligence Platform
-          </p>
+          <p className="text-gray-400 mb-8">AI-Native Inventory Intelligence Platform</p>
           <p className="text-gray-500 text-sm mb-8">
             Please sign in to access your inventory management dashboard with real-time updates.
           </p>

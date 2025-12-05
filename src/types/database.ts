@@ -120,13 +120,13 @@ export interface StockMovement {
   createdAt: string;
 }
 
-export type MovementType = 
-  | 'purchase' 
-  | 'sale' 
-  | 'adjustment' 
-  | 'transfer' 
-  | 'return' 
-  | 'damaged' 
+export type MovementType =
+  | 'purchase'
+  | 'sale'
+  | 'adjustment'
+  | 'transfer'
+  | 'return'
+  | 'damaged'
   | 'expired';
 
 export interface StockAdjustment {
@@ -143,12 +143,12 @@ export interface StockAdjustment {
   createdAt: string;
 }
 
-export type AdjustmentReason = 
-  | 'count-correction' 
-  | 'damaged' 
-  | 'expired' 
-  | 'lost' 
-  | 'found' 
+export type AdjustmentReason =
+  | 'count-correction'
+  | 'damaged'
+  | 'expired'
+  | 'lost'
+  | 'found'
   | 'other';
 
 // ==================== ORDERS & PURCHASES ====================
@@ -173,13 +173,13 @@ export interface PurchaseOrder {
   updatedAt: string;
 }
 
-export type OrderStatus = 
-  | 'draft' 
-  | 'pending' 
-  | 'approved' 
-  | 'ordered' 
-  | 'shipped' 
-  | 'received' 
+export type OrderStatus =
+  | 'draft'
+  | 'pending'
+  | 'approved'
+  | 'ordered'
+  | 'shipped'
+  | 'received'
   | 'cancelled';
 
 export interface PurchaseOrderItem {
@@ -282,12 +282,12 @@ export interface StockAlert {
   resolvedAt?: string;
 }
 
-export type AlertType = 
-  | 'low-stock' 
-  | 'out-of-stock' 
-  | 'expired' 
-  | 'expiring-soon' 
-  | 'reorder-point' 
+export type AlertType =
+  | 'low-stock'
+  | 'out-of-stock'
+  | 'expired'
+  | 'expiring-soon'
+  | 'reorder-point'
   | 'overstocked';
 
 export type AlertSeverity = 'info' | 'warning' | 'critical';
@@ -307,14 +307,7 @@ export interface AuditLog {
   timestamp: string;
 }
 
-export type AuditAction = 
-  | 'create' 
-  | 'update' 
-  | 'delete' 
-  | 'view' 
-  | 'export' 
-  | 'login' 
-  | 'logout';
+export type AuditAction = 'create' | 'update' | 'delete' | 'view' | 'export' | 'login' | 'logout';
 
 export interface Report {
   id: string;
@@ -328,14 +321,14 @@ export interface Report {
   format: ReportFormat;
 }
 
-export type ReportType = 
-  | 'inventory-valuation' 
-  | 'stock-movement' 
-  | 'sales-summary' 
-  | 'purchase-summary' 
-  | 'supplier-performance' 
-  | 'low-stock-report' 
-  | 'expired-items' 
+export type ReportType =
+  | 'inventory-valuation'
+  | 'stock-movement'
+  | 'sales-summary'
+  | 'purchase-summary'
+  | 'supplier-performance'
+  | 'low-stock-report'
+  | 'expired-items'
   | 'audit-trail';
 
 export type ReportFormat = 'pdf' | 'excel' | 'csv' | 'json';
@@ -355,11 +348,11 @@ export interface Notification {
   readAt?: string;
 }
 
-export type NotificationType = 
-  | 'stock-alert' 
-  | 'order-update' 
-  | 'system' 
-  | 'approval-required' 
+export type NotificationType =
+  | 'stock-alert'
+  | 'order-update'
+  | 'system'
+  | 'approval-required'
   | 'threshold-reached';
 
 // ==================== REAL-TIME EVENTS ====================
@@ -373,12 +366,12 @@ export interface RealtimeEvent {
   organizationId: string;
 }
 
-export type RealtimeEventType = 
-  | 'inventory-updated' 
-  | 'order-created' 
-  | 'order-updated' 
-  | 'stock-movement' 
-  | 'alert-created' 
+export type RealtimeEventType =
+  | 'inventory-updated'
+  | 'order-created'
+  | 'order-updated'
+  | 'stock-movement'
+  | 'alert-created'
   | 'user-activity';
 
 // ==================== API RESPONSES ====================

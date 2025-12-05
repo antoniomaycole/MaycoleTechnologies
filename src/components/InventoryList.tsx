@@ -9,28 +9,22 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from './ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { api } from '../lib/api';
 import { useRealtimeSubscription, RealtimeNotifier } from '../lib/realtime';
 import { Product, Category } from '../types/database';
-import { 
-  Package, 
-  Search, 
-  Plus, 
-  Edit, 
-  Trash2, 
+import {
+  Package,
+  Search,
+  Plus,
+  Edit,
+  Trash2,
   AlertTriangle,
   TrendingUp,
   TrendingDown,
   RefreshCw,
   Loader2,
-  CheckCircle
+  CheckCircle,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -50,17 +44,20 @@ export function InventoryList() {
   // Subscribe to real-time inventory updates
   useRealtimeSubscription('inventory-updated', (event) => {
     const { productId, newQuantity } = event.payload;
-    
-    setProducts(prev => 
-      prev.map(p => 
-        p.id === productId 
-          ? { 
-              ...p, 
+
+    setProducts((prev) =>
+      prev.map((p) =>
+        p.id === productId
+          ? {
+              ...p,
               quantity: newQuantity,
-              status: newQuantity === 0 ? 'out-of-stock' : 
-                     newQuantity <= p.minStockLevel ? 'low-stock' : 
-                     'active'
-            } 
+              status:
+                newQuantity === 0
+                  ? 'out-of-stock'
+                  : newQuantity <= p.minStockLevel
+                    ? 'low-stock'
+                    : 'active',
+            }
           : p
       )
     );
@@ -84,9 +81,10 @@ export function InventoryList() {
   };
 
   // Filter products
-  const filteredProducts = products.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         product.sku.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.sku.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || product.categoryId === selectedCategory;
     const matchesStatus = selectedStatus === 'all' || product.status === selectedStatus;
     return matchesSearch && matchesCategory && matchesStatus;
@@ -95,13 +93,13 @@ export function InventoryList() {
   // Simulate stock adjustment
   const adjustStock = async (product: Product, change: number) => {
     const newQuantity = Math.max(0, product.quantity + change);
-    
+
     try {
       await api.updateProduct(product.id, { quantity: newQuantity });
-      
+
       // Trigger real-time update
       RealtimeNotifier.notifyInventoryUpdate(product.id, product.quantity, newQuantity);
-      
+
       toast.success(`Updated ${product.name}`, {
         description: `Stock: ${product.quantity} → ${newQuantity}`,
         icon: <CheckCircle className="w-4 h-4" />,
@@ -113,11 +111,16 @@ export function InventoryList() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'border-green-500/30 text-green-400 bg-green-500/10';
-      case 'low-stock': return 'border-orange-500/30 text-orange-400 bg-orange-500/10';
-      case 'out-of-stock': return 'border-red-500/30 text-red-400 bg-red-500/10';
-      case 'discontinued': return 'border-gray-500/30 text-gray-400 bg-gray-500/10';
-      default: return 'border-blue-500/30 text-blue-400 bg-blue-500/10';
+      case 'active':
+        return 'border-green-500/30 text-green-400 bg-green-500/10';
+      case 'low-stock':
+        return 'border-orange-500/30 text-orange-400 bg-orange-500/10';
+      case 'out-of-stock':
+        return 'border-red-500/30 text-red-400 bg-red-500/10';
+      case 'discontinued':
+        return 'border-gray-500/30 text-gray-400 bg-gray-500/10';
+      default:
+        return 'border-blue-500/30 text-blue-400 bg-blue-500/10';
     }
   };
 
@@ -169,7 +172,7 @@ export function InventoryList() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Categories</SelectItem>
-                {categories.map(cat => (
+                {categories.map((cat) => (
                   <SelectItem key={cat.id} value={cat.id}>
                     {cat.name}
                   </SelectItem>
@@ -192,11 +195,7 @@ export function InventoryList() {
             </Select>
 
             {/* Refresh */}
-            <Button 
-              variant="outline" 
-              onClick={loadData}
-              className="border-gray-700"
-            >
+            <Button variant="outline" onClick={loadData} className="border-gray-700">
               <RefreshCw className="w-4 h-4 mr-2" />
               Refresh
             </Button>
@@ -223,14 +222,11 @@ export function InventoryList() {
                       <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center">
                         <Package className="w-6 h-6 text-blue-500" />
                       </div>
-                      
+
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <h3 className="font-medium">{product.name}</h3>
-                          <Badge 
-                            variant="outline" 
-                            className={getStatusColor(product.status)}
-                          >
+                          <Badge variant="outline" className={getStatusColor(product.status)}>
                             {product.status.replace('-', ' ')}
                           </Badge>
                         </div>
@@ -256,12 +252,8 @@ export function InventoryList() {
 
                       {/* Min/Max */}
                       <div className="text-center">
-                        <p className="text-sm text-gray-400 mb-1">
-                          Min: {product.minStockLevel}
-                        </p>
-                        <p className="text-sm text-gray-400">
-                          Max: {product.maxStockLevel}
-                        </p>
+                        <p className="text-sm text-gray-400 mb-1">Min: {product.minStockLevel}</p>
+                        <p className="text-sm text-gray-400">Max: {product.maxStockLevel}</p>
                       </div>
 
                       {/* Stock Adjustment */}
@@ -317,7 +309,8 @@ export function InventoryList() {
                       <div className="flex items-center gap-2 text-orange-400 text-sm">
                         <AlertTriangle className="w-4 h-4" />
                         <span>
-                          Stock level is below minimum threshold. Reorder point: {product.reorderPoint}
+                          Stock level is below minimum threshold. Reorder point:{' '}
+                          {product.reorderPoint}
                         </span>
                       </div>
                     </motion.div>

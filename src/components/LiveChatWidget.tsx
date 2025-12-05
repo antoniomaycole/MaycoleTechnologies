@@ -14,8 +14,8 @@ export function LiveChatWidget() {
       id: 1,
       type: 'bot' as const,
       text: "Hi! 👋 I'm the MaycoleTechnologies™ AI assistant. How can I help you today?",
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    },
   ]);
 
   const handleSend = () => {
@@ -26,9 +26,9 @@ export function LiveChatWidget() {
       id: messages.length + 1,
       type: 'user' as const,
       text: message,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
-    
+
     setMessages([...messages, userMessage]);
     setMessage('');
 
@@ -37,10 +37,10 @@ export function LiveChatWidget() {
       const botResponse = {
         id: messages.length + 2,
         type: 'bot' as const,
-        text: "Thanks for your message! A MaycoleTechnologies™ specialist will respond shortly. In the meantime, you can start a free 14-day trial of MaycoleTracker™ or MaycoleCheckBook™!",
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        text: 'Thanks for your message! A MaycoleTechnologies™ specialist will respond shortly. In the meantime, you can start a free 14-day trial of MaycoleTracker™ or MaycoleCheckBook™!',
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-      setMessages(prev => [...prev, botResponse]);
+      setMessages((prev) => [...prev, botResponse]);
     }, 1000);
   };
 
@@ -48,7 +48,7 @@ export function LiveChatWidget() {
     { label: 'Start Free Trial', icon: Zap },
     { label: 'Pricing Info', icon: MessageCircle },
     { label: 'Book Demo', icon: MessageCircle },
-    { label: 'Technical Support', icon: MessageCircle }
+    { label: 'Technical Support', icon: MessageCircle },
   ];
 
   return (
@@ -58,11 +58,11 @@ export function LiveChatWidget() {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ 
-              opacity: 1, 
-              y: 0, 
+            animate={{
+              opacity: 1,
+              y: 0,
               scale: 1,
-              height: isMinimized ? 60 : 500
+              height: isMinimized ? 60 : 500,
             }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, type: 'spring' }}
@@ -121,9 +121,11 @@ export function LiveChatWidget() {
                           }`}
                         >
                           <p className="text-sm">{msg.text}</p>
-                          <p className={`text-xs mt-1 ${
-                            msg.type === 'user' ? 'text-white/70' : 'text-gray-500'
-                          }`}>
+                          <p
+                            className={`text-xs mt-1 ${
+                              msg.type === 'user' ? 'text-white/70' : 'text-gray-500'
+                            }`}
+                          >
                             {msg.time}
                           </p>
                         </div>
@@ -193,7 +195,7 @@ export function LiveChatWidget() {
             className="fixed bottom-8 right-28 z-50 w-16 h-16 bg-gradient-to-r from-maycole-green to-maycole-gold rounded-full shadow-2xl flex items-center justify-center group"
           >
             <MessageCircle className="w-7 h-7 text-white" />
-            
+
             {/* Notification Badge */}
             <motion.div
               initial={{ scale: 0 }}
@@ -208,12 +210,12 @@ export function LiveChatWidget() {
               className="absolute inset-0 bg-gradient-to-r from-maycole-green to-maycole-gold rounded-full"
               animate={{
                 scale: [1, 1.3, 1],
-                opacity: [0.5, 0, 0.5]
+                opacity: [0.5, 0, 0.5],
               }}
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                ease: 'easeInOut'
+                ease: 'easeInOut',
               }}
             />
           </motion.button>

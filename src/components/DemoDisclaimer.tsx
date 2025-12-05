@@ -5,17 +5,21 @@ import { Button } from './ui/button';
 
 export function DemoDisclaimer() {
   const [isVisible, setIsVisible] = useState(true);
-  
+
   // Safe check for demo mode - with multiple fallbacks
   let isDemoMode = false;
   try {
-    if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_DEMO_MODE === 'true') {
+    if (
+      typeof import.meta !== 'undefined' &&
+      import.meta.env &&
+      import.meta.env.VITE_DEMO_MODE === 'true'
+    ) {
       isDemoMode = true;
     }
   } catch (e) {
     // Silently fail - demo mode will be false
   }
-  
+
   if (!isDemoMode || !isVisible) {
     return null;
   }

@@ -10,15 +10,52 @@ import { EnhancedDashboard } from './EnhancedDashboard';
 import { EnhancedAnalytics } from './EnhancedAnalytics';
 import { EnhancedSettings } from './EnhancedSettings';
 import { InventoryList } from './InventoryList';
-import { 
-  FileText, Mic, QrCode, AlertTriangle, Settings, BarChart3, 
-  Users, Moon, Sun, Bell, Wifi, Shield, Star, Crown, 
-  Search, Filter, Download, Upload, Zap, Database,
-  Play, Pause, Volume2, VolumeX, Package, TrendingUp,
-  DollarSign, Truck, CheckCircle, Calendar, Clock,
-  ArrowUpRight, ArrowDownRight, Home, Activity,
-  Scan, FileBarChart, UserCheck, Layers, Target,
-  Globe, Smartphone, Monitor, Lock, Brain
+import {
+  FileText,
+  Mic,
+  QrCode,
+  AlertTriangle,
+  Settings,
+  BarChart3,
+  Users,
+  Moon,
+  Sun,
+  Bell,
+  Wifi,
+  Shield,
+  Star,
+  Crown,
+  Search,
+  Filter,
+  Download,
+  Upload,
+  Zap,
+  Database,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Package,
+  TrendingUp,
+  DollarSign,
+  Truck,
+  CheckCircle,
+  Calendar,
+  Clock,
+  ArrowUpRight,
+  ArrowDownRight,
+  Home,
+  Activity,
+  Scan,
+  FileBarChart,
+  UserCheck,
+  Layers,
+  Target,
+  Globe,
+  Smartphone,
+  Monitor,
+  Lock,
+  Brain,
 } from 'lucide-react';
 
 interface ProfessionalTrackerAppProps {
@@ -66,12 +103,12 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
             break;
         }
       }
-      
+
       if (e.key === ' ') {
         e.preventDefault();
         toggleVoice();
       }
-      
+
       if (e.key === 'Escape') {
         e.preventDefault();
         setCurrentView('launcher');
@@ -84,16 +121,16 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
 
   const handleLaunchApp = async () => {
     setLoading(true);
-    
+
     // Simulate app launch
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     setLoading(false);
     setCurrentView('dashboard');
-    
+
     toast.success('MaycoleTracker™ Launched Successfully!', {
       description: 'Welcome to AI-Native Inventory Intelligence',
-      icon: <Zap className="w-4 h-4" />
+      icon: <Zap className="w-4 h-4" />,
     });
   };
 
@@ -101,7 +138,7 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
     setVoiceActive(!voiceActive);
     toast.info(voiceActive ? 'Voice Control Disabled' : 'Voice Control Activated', {
       description: voiceActive ? 'Click to speak' : 'Listening for commands...',
-      icon: <Mic className="w-4 h-4" />
+      icon: <Mic className="w-4 h-4" />,
     });
   };
 
@@ -109,15 +146,15 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
     setScannerActive(true);
     toast.info('Barcode Scanner Activated', {
       description: 'Point camera at barcode to scan',
-      icon: <QrCode className="w-4 h-4" />
+      icon: <QrCode className="w-4 h-4" />,
     });
-    
+
     // Simulate scan
     setTimeout(() => {
       setScannerActive(false);
       toast.success('Item Scanned Successfully!', {
         description: 'Product added to inventory',
-        icon: <CheckCircle className="w-4 h-4" />
+        icon: <CheckCircle className="w-4 h-4" />,
       });
     }, 3000);
   };
@@ -128,18 +165,24 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
       emergencyMode ? 'Emergency Mode Disabled' : 'Emergency Mode Activated',
       {
         description: emergencyMode ? 'Normal operations restored' : 'Priority alerts enabled',
-        icon: <AlertTriangle className="w-4 h-4" />
+        icon: <AlertTriangle className="w-4 h-4" />,
       }
     );
   };
 
   // Purple-themed MaycoleTracker Icon Component
-  const MaycoleTrackerIcon = ({ size = 'md', animated = false }: { size?: 'sm' | 'md' | 'lg' | 'xl', animated?: boolean }) => {
+  const MaycoleTrackerIcon = ({
+    size = 'md',
+    animated = false,
+  }: {
+    size?: 'sm' | 'md' | 'lg' | 'xl';
+    animated?: boolean;
+  }) => {
     const sizeMap = {
       sm: { container: 50, circle: 50, crossH: 30, crossV: 2.5, dot: 5, offsetCorner: 15 },
       md: { container: 60, circle: 60, crossH: 36, crossV: 3, dot: 6, offsetCorner: 18 },
       lg: { container: 80, circle: 80, crossH: 48, crossV: 4, dot: 8, offsetCorner: 24 },
-      xl: { container: 140, circle: 140, crossH: 84, crossV: 7, dot: 14, offsetCorner: 42 }
+      xl: { container: 140, circle: 140, crossH: 84, crossV: 7, dot: 14, offsetCorner: 42 },
     };
 
     const dims = sizeMap[size];
@@ -148,20 +191,20 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
     return (
       <motion.div
         animate={animated ? { rotate: 360 } : {}}
-        transition={animated ? { duration: 8, repeat: Infinity, ease: "linear" } : {}}
+        transition={animated ? { duration: 8, repeat: Infinity, ease: 'linear' } : {}}
         className="relative"
         // eslint-disable-next-line react/no-unknown-property
         style={{ width: dims.container, height: dims.container }}
       >
         {/* Purple gradient circle */}
         {/* eslint-disable-next-line react/no-unknown-property */}
-        <div 
+        <div
           className="absolute rounded-full shadow-2xl"
           style={{
             width: dims.circle,
             height: dims.circle,
             background: 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #C084FC 100%)',
-            boxShadow: '0 0 30px rgba(139, 92, 246, 0.4), inset 0 0 20px rgba(168, 85, 247, 0.3)'
+            boxShadow: '0 0 30px rgba(139, 92, 246, 0.4), inset 0 0 20px rgba(168, 85, 247, 0.3)',
           }}
         />
 
@@ -169,69 +212,69 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
         <div className="absolute inset-0 flex items-center justify-center">
           {/* Horizontal line */}
           {/* eslint-disable-next-line react/no-unknown-property */}
-          <div 
+          <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
               width: dims.crossH,
               height: dims.crossV,
-              boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)'
+              boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)',
             }}
           />
-          
+
           {/* Vertical line */}
           {/* eslint-disable-next-line react/no-unknown-property */}
-          <div 
+          <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
               width: dims.crossV,
               height: dims.crossH,
-              boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)'
+              boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)',
             }}
           />
 
           {/* Four corner dots */}
           {/* eslint-disable-next-line react/no-unknown-property */}
-          <div 
+          <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
               width: dims.dot * 2,
               height: dims.dot * 2,
               top: dims.offsetCorner,
               left: dims.offsetCorner,
-              boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)'
+              boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)',
             }}
           />
           {/* eslint-disable-next-line react/no-unknown-property */}
-          <div 
+          <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
               width: dims.dot * 2,
               height: dims.dot * 2,
               top: dims.offsetCorner,
               right: dims.offsetCorner,
-              boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)'
+              boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)',
             }}
           />
           {/* eslint-disable-next-line react/no-unknown-property */}
-          <div 
+          <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
               width: dims.dot * 2,
               height: dims.dot * 2,
               bottom: dims.offsetCorner,
               left: dims.offsetCorner,
-              boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)'
+              boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)',
             }}
           />
           {/* eslint-disable-next-line react/no-unknown-property */}
-          <div 
+          <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
               width: dims.dot * 2,
               height: dims.dot * 2,
               bottom: dims.offsetCorner,
               right: dims.offsetCorner,
-              boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)'
+              boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)',
             }}
           />
         </div>
@@ -243,16 +286,16 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
             style={{
               background: 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #C084FC 100%)',
               filter: 'blur(20px)',
-              opacity: 0.6
+              opacity: 0.6,
             }}
             animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.6, 0.8, 0.6]
+              opacity: [0.6, 0.8, 0.6],
             }}
             transition={{
               duration: 3,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           />
         )}
@@ -261,18 +304,28 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
   };
 
   // WILD Document Icon with Purple Theme
-  const WildDocumentIcon = ({ size = 100, animated = true }: { size?: number, animated?: boolean }) => (
+  const WildDocumentIcon = ({
+    size = 100,
+    animated = true,
+  }: {
+    size?: number;
+    animated?: boolean;
+  }) => (
     <motion.div
       className="relative mx-auto"
       style={{ width: size, height: size * 1.2 }}
-      animate={animated ? {
-        rotate: [0, 5, -5, 0],
-        scale: [1, 1.05, 1]
-      } : {}}
+      animate={
+        animated
+          ? {
+              rotate: [0, 5, -5, 0],
+              scale: [1, 1.05, 1],
+            }
+          : {}
+      }
       transition={{
         duration: 4,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: 'easeInOut',
       }}
     >
       {/* Document Stack */}
@@ -280,7 +333,7 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
         {/* Background documents */}
         <div className="absolute top-2 left-2 w-16 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg shadow-lg transform rotate-12 opacity-60" />
         <div className="absolute top-1 left-1 w-16 h-20 bg-gradient-to-br from-purple-300 to-purple-500 rounded-lg shadow-lg transform rotate-6 opacity-80" />
-        
+
         {/* Main document */}
         <div className="relative w-16 h-20 bg-gradient-to-br from-white to-purple-50 rounded-lg shadow-xl border border-purple-200">
           {/* Document lines */}
@@ -290,38 +343,46 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
             <div className="h-0.5 bg-purple-400 rounded w-1/2" />
             <div className="h-0.5 bg-purple-400 rounded w-5/6" />
           </div>
-          
+
           {/* WILD badge */}
           <div className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
             WILD
           </div>
         </div>
-        
+
         {/* Floating elements */}
         <motion.div
           className="absolute -top-3 -left-3 w-6 h-6 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full shadow-lg"
-          animate={animated ? {
-            y: [0, -10, 0],
-            rotate: [0, 180, 360]
-          } : {}}
+          animate={
+            animated
+              ? {
+                  y: [0, -10, 0],
+                  rotate: [0, 180, 360],
+                }
+              : {}
+          }
           transition={{
             duration: 3,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
-        
+
         <motion.div
           className="absolute -bottom-2 -right-3 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg"
-          animate={animated ? {
-            x: [0, 8, 0],
-            scale: [1, 1.2, 1]
-          } : {}}
+          animate={
+            animated
+              ? {
+                  x: [0, 8, 0],
+                  scale: [1, 1.2, 1],
+                }
+              : {}
+          }
           transition={{
             duration: 2.5,
             repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5
+            ease: 'easeInOut',
+            delay: 0.5,
           }}
         />
       </div>
@@ -333,7 +394,6 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-purple-900 text-white">
         <div className="relative min-h-screen flex flex-col items-center justify-center p-8">
-          
           {/* Purple Background Effects */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-purple-400/10" />
@@ -342,12 +402,12 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
               animate={{
                 x: [0, 100, 0],
                 y: [0, -50, 0],
-                scale: [1, 1.2, 1]
+                scale: [1, 1.2, 1],
               }}
               transition={{
                 duration: 8,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: 'easeInOut',
               }}
             />
             <motion.div
@@ -355,15 +415,15 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
               animate={{
                 x: [0, -100, 0],
                 y: [0, 50, 0],
-                scale: [1.2, 1, 1.2]
+                scale: [1.2, 1, 1.2],
               }}
               transition={{
                 duration: 10,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: 'easeInOut',
               }}
             />
-            
+
             {/* Floating particles */}
             {[...Array(20)].map((_, i) => (
               <motion.div
@@ -375,24 +435,23 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
                 }}
                 animate={{
                   y: [0, -20, 0],
-                  opacity: [0.3, 0.8, 0.3]
+                  opacity: [0.3, 0.8, 0.3],
                 }}
                 transition={{
                   duration: 3 + Math.random() * 2,
                   repeat: Infinity,
-                  delay: Math.random() * 2
+                  delay: Math.random() * 2,
                 }}
               />
             ))}
           </div>
 
           <div className="relative z-10 text-center">
-            
             {/* MaycoleTracker Icon */}
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
               className="mb-8"
             >
               <MaycoleTrackerIcon size="xl" animated={false} />
@@ -425,21 +484,23 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-wrap items-center justify-center gap-4 mb-12"
             >
-              <Badge className={`flex items-center gap-2 px-3 py-2 ${isOnline ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30'}`}>
+              <Badge
+                className={`flex items-center gap-2 px-3 py-2 ${isOnline ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30'}`}
+              >
                 {isOnline ? <Wifi className="w-4 h-4" /> : <Globe className="w-4 h-4" />}
                 {isOnline ? 'Online' : 'Offline'}
               </Badge>
-              
+
               <Badge className="flex items-center gap-2 px-3 py-2 bg-purple-500/20 text-purple-300 border-purple-500/30">
                 <Crown className="w-4 h-4" />
                 Professional Plan
               </Badge>
-              
+
               <Badge className="flex items-center gap-2 px-3 py-2 bg-purple-600/20 text-purple-400 border-purple-600/30">
                 <Shield className="w-4 h-4" />
                 Enterprise Security
               </Badge>
-              
+
               {notifications > 0 && (
                 <Badge className="flex items-center gap-2 px-3 py-2 bg-red-500/20 text-red-400 border-red-500/30">
                   <Bell className="w-4 h-4" />
@@ -464,7 +525,7 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
                   {loading ? (
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                     >
                       <Zap className="w-6 h-6" />
                     </motion.div>
@@ -473,17 +534,17 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
                   )}
                   {loading ? 'Launching...' : 'Launch App'}
                 </div>
-                
+
                 {/* Animated background effect */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                   animate={{
-                    x: ['-100%', '100%']
+                    x: ['-100%', '100%'],
                   }}
                   transition={{
                     duration: 2,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: 'easeInOut',
                   }}
                 />
               </Button>
@@ -504,7 +565,7 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
                 <Mic className="w-4 h-4 mr-2" />
                 Voice Control
               </Button>
-              
+
               <Button
                 onClick={activateScanner}
                 variant="outline"
@@ -514,7 +575,7 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
                 <QrCode className="w-4 h-4 mr-2" />
                 {scannerActive ? 'Scanning...' : 'Barcode Scanner'}
               </Button>
-              
+
               <Button
                 onClick={toggleEmergency}
                 variant="outline"
@@ -523,7 +584,7 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
                 <AlertTriangle className="w-4 h-4 mr-2" />
                 Emergency Mode
               </Button>
-              
+
               <ReadmeModal />
             </motion.div>
 

@@ -30,17 +30,14 @@ class ApiClient {
   /**
    * Make authenticated API request
    */
-  private async request<T>(
-    endpoint: string,
-    options: RequestInit = {}
-  ): Promise<ApiResponse<T>> {
+  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
     const session = AuthService.getSession();
     if (!session) {
       throw new Error('Not authenticated');
     }
 
     // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 700));
+    await new Promise((resolve) => setTimeout(resolve, 300 + Math.random() * 700));
 
     // In production, make actual fetch call:
     // const response = await fetch(`${this.baseUrl}${endpoint}`, {
@@ -64,28 +61,27 @@ class ApiClient {
 
   async getProducts(filters?: ProductFilters): Promise<PaginatedResponse<Product>> {
     await this.request('/products', { method: 'GET' });
-    
+
     let products = this.getMockProducts();
 
     // Apply filters
     if (filters?.search) {
       const search = filters.search.toLowerCase();
       products = products.filter(
-        p => p.name.toLowerCase().includes(search) || 
-             p.sku.toLowerCase().includes(search)
+        (p) => p.name.toLowerCase().includes(search) || p.sku.toLowerCase().includes(search)
       );
     }
 
     if (filters?.categoryId) {
-      products = products.filter(p => p.categoryId === filters.categoryId);
+      products = products.filter((p) => p.categoryId === filters.categoryId);
     }
 
     if (filters?.status) {
-      products = products.filter(p => p.status === filters.status);
+      products = products.filter((p) => p.status === filters.status);
     }
 
     if (filters?.lowStock) {
-      products = products.filter(p => p.quantity <= p.minStockLevel);
+      products = products.filter((p) => p.quantity <= p.minStockLevel);
     }
 
     // Sorting
@@ -112,13 +108,13 @@ class ApiClient {
   async getProduct(id: string): Promise<Product> {
     await this.request(`/products/${id}`, { method: 'GET' });
     const products = this.getMockProducts();
-    const product = products.find(p => p.id === id);
+    const product = products.find((p) => p.id === id);
     if (!product) throw new Error('Product not found');
     return product;
   }
 
   async createProduct(data: Partial<Product>): Promise<Product> {
-    await this.request('/products', { 
+    await this.request('/products', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -149,7 +145,7 @@ class ApiClient {
   }
 
   async updateProduct(id: string, data: Partial<Product>): Promise<Product> {
-    await this.request(`/products/${id}`, { 
+    await this.request(`/products/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     });
@@ -174,7 +170,7 @@ class ApiClient {
   }
 
   async createCategory(data: Partial<Category>): Promise<Category> {
-    await this.request('/categories', { 
+    await this.request('/categories', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -199,13 +195,13 @@ class ApiClient {
   async getSupplier(id: string): Promise<Supplier> {
     await this.request(`/suppliers/${id}`, { method: 'GET' });
     const suppliers = this.getMockSuppliers();
-    const supplier = suppliers.find(s => s.id === id);
+    const supplier = suppliers.find((s) => s.id === id);
     if (!supplier) throw new Error('Supplier not found');
     return supplier;
   }
 
   async createSupplier(data: Partial<Supplier>): Promise<Supplier> {
-    await this.request('/suppliers', { 
+    await this.request('/suppliers', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -236,13 +232,16 @@ class ApiClient {
 
   // ==================== STOCK MOVEMENTS ====================
 
-  async getStockMovements(filters?: { productId?: string; dateRange?: DateRangeFilter }): Promise<StockMovement[]> {
+  async getStockMovements(filters?: {
+    productId?: string;
+    dateRange?: DateRangeFilter;
+  }): Promise<StockMovement[]> {
     await this.request('/stock-movements', { method: 'GET' });
     return this.getMockStockMovements();
   }
 
   async createStockMovement(data: Partial<StockMovement>): Promise<StockMovement> {
-    await this.request('/stock-movements', { 
+    await this.request('/stock-movements', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -275,11 +274,11 @@ class ApiClient {
 
   async getInventoryMetrics(): Promise<InventoryMetrics> {
     await this.request('/analytics/inventory', { method: 'GET' });
-    
+
     const products = this.getMockProducts();
-    const totalValue = products.reduce((sum, p) => sum + (p.quantity * p.unitCost), 0);
-    const lowStockItems = products.filter(p => p.quantity <= p.minStockLevel).length;
-    const outOfStockItems = products.filter(p => p.quantity === 0).length;
+    const totalValue = products.reduce((sum, p) => sum + p.quantity * p.unitCost, 0);
+    const lowStockItems = products.filter((p) => p.quantity <= p.minStockLevel).length;
+    const outOfStockItems = products.filter((p) => p.quantity === 0).length;
 
     return {
       totalProducts: products.length,
@@ -293,9 +292,9 @@ class ApiClient {
 
   async getSalesMetrics(dateRange?: DateRangeFilter): Promise<SalesMetrics> {
     await this.request('/analytics/sales', { method: 'GET' });
-    
+
     return {
-      totalRevenue: 156780.50,
+      totalRevenue: 156780.5,
       totalOrders: 342,
       averageOrderValue: 458.42,
       topSellingProducts: [
@@ -619,7 +618,7 @@ class ApiClient {
   private generateRevenueTrend(): Array<{ date: string; value: number }> {
     const trend = [];
     const now = new Date();
-    
+
     for (let i = 29; i >= 0; i--) {
       const date = new Date(now);
       date.setDate(date.getDate() - i);
@@ -628,7 +627,7 @@ class ApiClient {
         value: Math.floor(3000 + Math.random() * 5000),
       });
     }
-    
+
     return trend;
   }
 
@@ -638,7 +637,9 @@ class ApiClient {
 
   private generateSKU(): string {
     const prefix = 'PRD';
-    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    const random = Math.floor(Math.random() * 10000)
+      .toString()
+      .padStart(4, '0');
     return `${prefix}-${random}`;
   }
 }

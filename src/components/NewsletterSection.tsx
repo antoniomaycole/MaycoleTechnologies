@@ -8,18 +8,18 @@ export function NewsletterSection() {
     {
       icon: Download,
       title: 'Free eBook',
-      description: 'The Ultimate Guide to Inventory Management'
+      description: 'The Ultimate Guide to Inventory Management',
     },
     {
       icon: BookOpen,
       title: 'Best Practices',
-      description: 'AI-Powered Financial Tracking for 2025'
+      description: 'AI-Powered Financial Tracking for 2025',
     },
     {
       icon: TrendingUp,
       title: 'ROI Calculator',
-      description: 'Calculate Your Potential Savings'
-    }
+      description: 'Calculate Your Potential Savings',
+    },
   ];
 
   return (
@@ -27,10 +27,13 @@ export function NewsletterSection() {
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         {/* eslint-disable-next-line react/no-unknown-property */}
-        <div className="absolute inset-0 bg-no-repeat" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, #1e7f3e 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }}></div>
+        <div
+          className="absolute inset-0 bg-no-repeat"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, #1e7f3e 1px, transparent 0)`,
+            backgroundSize: '40px 40px',
+          }}
+        ></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -55,7 +58,8 @@ export function NewsletterSection() {
                       Get Expert Insights Delivered
                     </h2>
                     <p className="text-white/90 mb-8 text-lg">
-                      Join 10,000+ professionals receiving exclusive tips, industry insights, and product updates.
+                      Join 10,000+ professionals receiving exclusive tips, industry insights, and
+                      product updates.
                     </p>
 
                     {/* Lead Magnets */}
@@ -94,7 +98,8 @@ export function NewsletterSection() {
                           ))}
                         </div>
                         <p className="text-sm text-white/90">
-                          <span className="font-semibold">10,000+</span> subscribers already learning
+                          <span className="font-semibold">10,000+</span> subscribers already
+                          learning
                         </p>
                       </div>
                     </div>

@@ -8,9 +8,29 @@ export interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
 }
 
+// Extended type declarations for PWA APIs
 declare global {
   interface WindowEventMap {
     beforeinstallprompt: BeforeInstallPromptEvent;
+  }
+
+  interface Navigator {
+    getBattery?: () => Promise<{
+      level: number;
+      charging: boolean;
+      chargingTime: number;
+      dischargingTime: number;
+    }>;
+  }
+
+  interface ServiceWorkerRegistration {
+    sync?: {
+      register(tag: string): Promise<void>;
+    };
+  }
+
+  interface ScreenOrientation {
+    lock?: (orientation: string) => Promise<void>;
   }
 }
 
@@ -54,7 +74,7 @@ export async function showInstallPrompt(): Promise<boolean> {
   try {
     await deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    
+
     if (outcome === 'accepted') {
       console.log('[PWA] User accepted install prompt');
       deferredPrompt = null;
@@ -240,7 +260,7 @@ export async function getStorageQuota(): Promise<{
     const estimate = await navigator.storage.estimate();
     const usage = estimate.usage || 0;
     const quota = estimate.quota || 0;
-    
+
     return {
       usage,
       quota,
@@ -306,9 +326,12 @@ export async function registerBackgroundSync(tag: string): Promise<boolean> {
 
   try {
     const registration = await navigator.serviceWorker.ready;
-    await registration.sync.register(tag);
-    console.log('[PWA] Background sync registered:', tag);
-    return true;
+    if (registration.sync) {
+      await registration.sync.register(tag);
+      console.log('[PWA] Background sync registered:', tag);
+      return true;
+    }
+    return false;
   } catch (error) {
     console.error('[PWA] Background sync error:', error);
     return false;
@@ -353,7 +376,8 @@ export function getNetworkInfo(): {
   rtt: number;
   saveData: boolean;
 } | null {
-  const connection = (navigator as any).connection ||
+  const connection =
+    (navigator as any).connection ||
     (navigator as any).mozConnection ||
     (navigator as any).webkitConnection;
 

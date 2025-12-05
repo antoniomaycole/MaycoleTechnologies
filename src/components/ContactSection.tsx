@@ -15,14 +15,14 @@ export function ContactSection() {
     lastName: '',
     email: '',
     company: '',
-    message: ''
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     // Validation
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
       toast.error('Please fill in all required fields');
@@ -33,7 +33,7 @@ export function ContactSection() {
 
     try {
       const result = await sendContactEmail(formData);
-      
+
       if (result.success) {
         toast.success(result.message);
         setIsSubmitted(true);
@@ -44,7 +44,7 @@ export function ContactSection() {
             lastName: '',
             email: '',
             company: '',
-            message: ''
+            message: '',
           });
           setIsSubmitted(false);
         }, 3000);
@@ -59,38 +59,38 @@ export function ContactSection() {
   };
 
   const handleChange = (field: keyof ContactFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const contactInfo = [
     {
-      iconName: "Globe" as const,
-      title: "Website",
-      value: "maycoletechnologies.com",
-      link: "https://maycoletechnologies.com",
-      platform: "web"
+      iconName: 'Globe' as const,
+      title: 'Website',
+      value: 'maycoletechnologies.com',
+      link: 'https://maycoletechnologies.com',
+      platform: 'web',
     },
     {
-      iconName: "Mail" as const,
-      title: "Email",
-      value: "help@maycoletechnologies.com",
-      link: "mailto:help@maycoletechnologies.com",
-      platform: "web"
+      iconName: 'Mail' as const,
+      title: 'Email',
+      value: 'help@maycoletechnologies.com',
+      link: 'mailto:help@maycoletechnologies.com',
+      platform: 'web',
     },
     {
-      iconName: "Phone" as const,
-      title: "Phone",
-      value: "(213) 312-7814",
-      link: "tel:+12133127814",
-      platform: "mobile"
+      iconName: 'Phone' as const,
+      title: 'Phone',
+      value: '(213) 312-7814',
+      link: 'tel:+12133127814',
+      platform: 'mobile',
     },
     {
-      iconName: "MapPin" as const,
-      title: "Location",
-      value: "Global Remote Team",
-      link: "#",
-      platform: "web"
-    }
+      iconName: 'MapPin' as const,
+      title: 'Location',
+      value: 'Global Remote Team',
+      link: '#',
+      platform: 'web',
+    },
   ];
 
   return (
@@ -107,8 +107,8 @@ export function ContactSection() {
             Let's Build Something Amazing
           </h2>
           <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            Ready to transform your ideas into reality? Get in touch with our team 
-            and let's discuss how we can help change lives through technology.
+            Ready to transform your ideas into reality? Get in touch with our team and let's discuss
+            how we can help change lives through technology.
           </p>
         </motion.div>
 
@@ -128,52 +128,48 @@ export function ContactSection() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block mb-2">First Name</label>
-                    <Input 
-                      placeholder="John" 
-                      value={formData.firstName} 
+                    <Input
+                      placeholder="John"
+                      value={formData.firstName}
                       onChange={(e) => handleChange('firstName', e.target.value)}
                     />
                   </div>
                   <div>
                     <label className="block mb-2">Last Name</label>
-                    <Input 
-                      placeholder="Doe" 
-                      value={formData.lastName} 
+                    <Input
+                      placeholder="Doe"
+                      value={formData.lastName}
                       onChange={(e) => handleChange('lastName', e.target.value)}
                     />
                   </div>
                 </div>
                 <div>
                   <label className="block mb-2">Email</label>
-                  <Input 
-                    type="email" 
-                    placeholder="john@example.com" 
-                    value={formData.email} 
+                  <Input
+                    type="email"
+                    placeholder="john@example.com"
+                    value={formData.email}
                     onChange={(e) => handleChange('email', e.target.value)}
                   />
                 </div>
                 <div>
                   <label className="block mb-2">Company</label>
-                  <Input 
-                    placeholder="Your Company" 
-                    value={formData.company} 
+                  <Input
+                    placeholder="Your Company"
+                    value={formData.company}
                     onChange={(e) => handleChange('company', e.target.value)}
                   />
                 </div>
                 <div>
                   <label className="block mb-2">Message</label>
-                  <Textarea 
+                  <Textarea
                     placeholder="Tell us about your project..."
                     className="min-h-[120px]"
-                    value={formData.message} 
+                    value={formData.message}
                     onChange={(e) => handleChange('message', e.target.value)}
                   />
                 </div>
-                <Button 
-                  className="w-full group"
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                >
+                <Button className="w-full group" onClick={handleSubmit} disabled={isSubmitting}>
                   {isSubmitting ? (
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                   ) : isSubmitted ? (
@@ -198,8 +194,8 @@ export function ContactSection() {
             <div>
               <h3 className="text-2xl font-semibold mb-6">Get in touch</h3>
               <p className="text-gray-300 mb-8">
-                We're here to help you succeed. Reach out to us through any of these channels, 
-                and we'll get back to you within 24 hours.
+                We're here to help you succeed. Reach out to us through any of these channels, and
+                we'll get back to you within 24 hours.
               </p>
             </div>
 
@@ -215,7 +211,7 @@ export function ContactSection() {
                     viewport={{ once: true }}
                     className="flex items-center space-x-4 p-4 rounded-lg hover:bg-secondary/50 transition-colors group"
                   >
-                    <IconButton 
+                    <IconButton
                       iconName={info.iconName}
                       size="lg"
                       variant="default"
@@ -234,7 +230,8 @@ export function ContactSection() {
             <div className="mt-8 p-6 bg-gradient-to-r from-primary/5 to-blue-500/5 rounded-xl border">
               <h4 className="font-semibold mb-2">Ready to start your project?</h4>
               <p className="text-gray-300 mb-4">
-                Schedule a free consultation to discuss your requirements and get a detailed proposal.
+                Schedule a free consultation to discuss your requirements and get a detailed
+                proposal.
               </p>
               <Button variant="outline">Schedule Consultation</Button>
             </div>

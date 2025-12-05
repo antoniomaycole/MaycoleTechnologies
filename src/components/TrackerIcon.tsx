@@ -7,11 +7,11 @@ interface TrackerIconProps {
   className?: string;
 }
 
-export function TrackerIcon({ 
-  size = 48, 
+export function TrackerIcon({
+  size = 48,
   animated = false,
   interactive = false,
-  className = "" 
+  className = '',
 }: TrackerIconProps) {
   return (
     <motion.svg
@@ -36,9 +36,9 @@ export function TrackerIcon({
         fill="none"
         initial={animated ? { pathLength: 0 } : {}}
         animate={animated ? { pathLength: 1 } : {}}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
+        transition={{ duration: 1.5, ease: 'easeInOut' }}
       />
-      
+
       {/* Inner Circle */}
       <motion.circle
         cx="50"
@@ -50,9 +50,9 @@ export function TrackerIcon({
         opacity="0.6"
         initial={animated ? { pathLength: 0 } : {}}
         animate={animated ? { pathLength: 1 } : {}}
-        transition={{ duration: 1.2, delay: 0.2, ease: "easeInOut" }}
+        transition={{ duration: 1.2, delay: 0.2, ease: 'easeInOut' }}
       />
-      
+
       {/* Center Dot */}
       <motion.circle
         cx="50"
@@ -63,7 +63,7 @@ export function TrackerIcon({
         animate={animated ? { scale: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.5 }}
       />
-      
+
       {/* Tracking Lines */}
       {[0, 60, 120, 180, 240, 300].map((angle, index) => {
         const radian = (angle * Math.PI) / 180;
@@ -71,7 +71,7 @@ export function TrackerIcon({
         const y1 = 50 + 20 * Math.sin(radian);
         const x2 = 50 + 35 * Math.cos(radian);
         const y2 = 50 + 35 * Math.sin(radian);
-        
+
         return (
           <motion.line
             key={angle}
@@ -84,15 +84,15 @@ export function TrackerIcon({
             strokeLinecap="round"
             initial={animated ? { pathLength: 0, opacity: 0 } : {}}
             animate={animated ? { pathLength: 1, opacity: 1 } : {}}
-            transition={{ 
-              duration: 0.4, 
+            transition={{
+              duration: 0.4,
               delay: 0.6 + index * 0.1,
-              ease: "easeOut"
+              ease: 'easeOut',
             }}
           />
         );
       })}
-      
+
       {/* Barcode-style accent */}
       <motion.g
         initial={animated ? { opacity: 0, y: 5 } : {}}
@@ -104,7 +104,7 @@ export function TrackerIcon({
         <rect x="50" y="70" width="1.5" height="8" fill="#3b82f6" rx="0.5" />
         <rect x="54" y="70" width="2" height="8" fill="#3b82f6" rx="1" />
       </motion.g>
-      
+
       {/* AI Brain accent */}
       <motion.g
         initial={animated ? { opacity: 0 } : {}}
@@ -119,7 +119,7 @@ export function TrackerIcon({
           strokeLinecap="round"
         />
       </motion.g>
-      
+
       {/* Gradient Definition */}
       <defs>
         <linearGradient id="trackerGradient" x1="0%" y1="0%" x2="100%" y2="100%">

@@ -182,12 +182,14 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
   }
 
   if (!isAuthenticated) {
-    return fallback || (
-      <div className="flex items-center justify-center min-h-screen bg-gray-950">
-        <div className="text-center">
-          <p className="text-gray-400">Please log in to continue</p>
+    return (
+      fallback || (
+        <div className="flex items-center justify-center min-h-screen bg-gray-950">
+          <div className="text-center">
+            <p className="text-gray-400">Please log in to continue</p>
+          </div>
         </div>
-      </div>
+      )
     );
   }
 

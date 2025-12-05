@@ -42,12 +42,10 @@ export function NotFound() {
                   404
                 </span>
               </h1>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Page Not Found
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Page Not Found</h2>
               <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                The page you're looking for doesn't exist or has been moved. 
-                Don't worry, we'll help you find what you need.
+                The page you're looking for doesn't exist or has been moved. Don't worry, we'll help
+                you find what you need.
               </p>
             </motion.div>
 
@@ -139,8 +137,8 @@ export function NotFound() {
                 <span className="bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-transparent font-semibold">
                   MaycoleTechnologies
                 </span>
-                <sup className="text-xs align-super">™</sup>
-                {' '}- Changing The Future One Product At A Time
+                <sup className="text-xs align-super">™</sup> - Changing The Future One Product At A
+                Time
               </p>
             </motion.div>
           </CardContent>

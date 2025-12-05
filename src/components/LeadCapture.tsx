@@ -49,7 +49,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
-      setFormState(prev => ({
+      setFormState((prev) => ({
         ...prev,
         [name]: value,
         error: null,
@@ -65,7 +65,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
 
       // Validation
       if (!formState.email.trim()) {
-        setFormState(prev => ({
+        setFormState((prev) => ({
           ...prev,
           error: 'Email is required',
         }));
@@ -73,14 +73,14 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
       }
 
       if (!validateEmail(formState.email)) {
-        setFormState(prev => ({
+        setFormState((prev) => ({
           ...prev,
           error: 'Please enter a valid email address',
         }));
         return;
       }
 
-      setFormState(prev => ({
+      setFormState((prev) => ({
         ...prev,
         isLoading: true,
         error: null,
@@ -113,7 +113,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
         analytics.trackFormSubmit('lead-capture', true);
 
         // Success state
-        setFormState(prev => ({
+        setFormState((prev) => ({
           ...prev,
           isLoading: false,
           isSuccess: true,
@@ -138,12 +138,11 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
       } catch (error) {
         // Track failed form submission
         analytics.trackFormSubmit('lead-capture', false);
-        analytics.trackError(
-          error instanceof Error ? error.message : 'Unknown error',
-          { source: 'lead-capture-submission' }
-        );
-        
-        setFormState(prev => ({
+        analytics.trackError(error instanceof Error ? error.message : 'Unknown error', {
+          source: 'lead-capture-submission',
+        });
+
+        setFormState((prev) => ({
           ...prev,
           isLoading: false,
           error: 'Failed to subscribe. Please try again.',
@@ -165,9 +164,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
             className
           )}
         >
-          <h3 className="text-2xl font-bold maycole-gradient-text mb-2">
-            Get Early Access
-          </h3>
+          <h3 className="text-2xl font-bold maycole-gradient-text mb-2">Get Early Access</h3>
           <p className="text-gray-600 mb-6">
             Join our community preparing to take over the world with Voice First Apps
           </p>
@@ -189,14 +186,11 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
               <Input
                 type="email"
                 name="email"
-                placeholder="your@email.com"
+                placeholder="help@maycoletechnologies.com"
                 value={formState.email}
                 onChange={handleInputChange}
                 disabled={formState.isLoading || formState.isSuccess}
-                className={cn(
-                  'w-full',
-                  formState.error && 'border-red-500'
-                )}
+                className={cn('w-full', formState.error && 'border-red-500')}
               />
               {formState.error && (
                 <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
@@ -251,10 +245,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className={cn(
-            'w-full max-w-2xl mx-auto',
-            className
-          )}
+          className={cn('w-full max-w-2xl mx-auto', className)}
         >
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
             <Input
@@ -273,10 +264,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
               value={formState.email}
               onChange={handleInputChange}
               disabled={formState.isLoading || formState.isSuccess}
-              className={cn(
-                'flex-1 min-w-0',
-                formState.error && 'border-red-500'
-              )}
+              className={cn('flex-1 min-w-0', formState.error && 'border-red-500')}
             />
             <Button
               type="submit"
@@ -292,9 +280,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
               )}
             </Button>
           </form>
-          {formState.error && (
-            <p className="text-red-500 text-sm mt-2">{formState.error}</p>
-          )}
+          {formState.error && <p className="text-red-500 text-sm mt-2">{formState.error}</p>}
         </motion.div>
       );
     }
@@ -302,10 +288,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
     // Compact variant - small footer form
     if (variant === 'compact') {
       return (
-        <motion.div
-          ref={ref}
-          className={cn('w-full', className)}
-        >
+        <motion.div ref={ref} className={cn('w-full', className)}>
           <form onSubmit={handleSubmit} className="flex gap-2">
             <Input
               type="email"
@@ -393,9 +376,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
                 disabled={formState.isLoading || formState.isSuccess}
                 className={formState.error ? 'border-red-500' : ''}
               />
-              {formState.error && (
-                <p className="text-red-500 text-sm mt-2">{formState.error}</p>
-              )}
+              {formState.error && <p className="text-red-500 text-sm mt-2">{formState.error}</p>}
             </div>
 
             {formState.isSuccess ? (

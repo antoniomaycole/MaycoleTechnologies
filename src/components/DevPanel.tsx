@@ -1,24 +1,24 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { 
-  Settings, 
-  X, 
-  Lock, 
-  Unlock, 
-  Save, 
-  Plus, 
-  Trash2, 
-  Edit, 
-  Check, 
-  FileText, 
-  Package, 
-  Link as LinkIcon, 
-  Image, 
-  Upload, 
-  Eye, 
-  Sparkles, 
+import {
+  Settings,
+  X,
+  Lock,
+  Unlock,
+  Save,
+  Plus,
+  Trash2,
+  Edit,
+  Check,
+  FileText,
+  Package,
+  Link as LinkIcon,
+  Image,
+  Upload,
+  Eye,
+  Sparkles,
   AlertCircle,
-  Key
+  Key,
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -39,7 +39,7 @@ const STORAGE_KEYS = {
   navLinks: 'dev_nav_links',
   images: 'dev_images',
   authenticated: 'dev_authenticated',
-  password: 'dev_panel_password'
+  password: 'dev_panel_password',
 };
 
 interface DevPanelProps {
@@ -81,26 +81,26 @@ export function DevPanel({ onClose }: DevPanelProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState<TabType>('content');
-  
+
   // Password Change State
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
   // Content State
   const [heroTitle, setHeroTitle] = useState('MaycoleTechnologies™');
   const [heroSubtitle, setHeroSubtitle] = useState('Changing The Future One Product At A Time');
   const [heroTagline, setHeroTagline] = useState('Premium enterprise solutions powered by AI');
   const [companyName, setCompanyName] = useState('MaycoleTechnologies');
-  
+
   // Products State
   const [products, setProducts] = useState<Product[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  
+
   // Links State
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
   const [navLinks, setNavLinks] = useState<NavLink[]>([]);
-  
+
   // Images State
   const [images, setImages] = useState<ImageAsset[]>([]);
   const [newImageUrl, setNewImageUrl] = useState('');
@@ -114,7 +114,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
     if (!storedPassword) {
       localStorage.setItem(STORAGE_KEYS.password, 'maycole2024');
     }
-    
+
     const authStatus = sessionStorage.getItem(STORAGE_KEYS.authenticated);
     if (authStatus === 'true') {
       setIsAuthenticated(true);
@@ -126,10 +126,14 @@ export function DevPanel({ onClose }: DevPanelProps) {
   const loadAllData = () => {
     // Load content
     setHeroTitle(localStorage.getItem(STORAGE_KEYS.heroTitle) || 'MaycoleTechnologies™');
-    setHeroSubtitle(localStorage.getItem(STORAGE_KEYS.heroSubtitle) || 'Changing The Future One Product At A Time');
-    setHeroTagline(localStorage.getItem(STORAGE_KEYS.heroTagline) || 'Premium enterprise solutions powered by AI');
+    setHeroSubtitle(
+      localStorage.getItem(STORAGE_KEYS.heroSubtitle) || 'Changing The Future One Product At A Time'
+    );
+    setHeroTagline(
+      localStorage.getItem(STORAGE_KEYS.heroTagline) || 'Premium enterprise solutions powered by AI'
+    );
     setCompanyName(localStorage.getItem(STORAGE_KEYS.companyName) || 'MaycoleTechnologies');
-    
+
     // Load products
     const savedProducts = localStorage.getItem(STORAGE_KEYS.products);
     if (savedProducts) {
@@ -142,23 +146,38 @@ export function DevPanel({ onClose }: DevPanelProps) {
           name: 'MaycoleCheckBook™',
           description: 'AI-powered digital checkbook register with automated expense tracking',
           price: '$29/month',
-          features: ['AI Agent "Manny"', 'Offline PWA Support', 'Real-time Sync', 'Smart Categories']
-        }
+          features: [
+            'AI Agent "Manny"',
+            'Offline PWA Support',
+            'Real-time Sync',
+            'Smart Categories',
+          ],
+        },
       ]);
     }
-    
+
     // Load social links
     const savedSocialLinks = localStorage.getItem(STORAGE_KEYS.socialLinks);
     if (savedSocialLinks) {
       setSocialLinks(JSON.parse(savedSocialLinks));
     } else {
       setSocialLinks([
-        { id: '1', name: 'Twitter', url: 'https://twitter.com/maycoletechnologies', icon: 'Twitter' },
-        { id: '2', name: 'LinkedIn', url: 'https://linkedin.com/company/maycoletechnologies', icon: 'LinkedIn' },
-        { id: '3', name: 'GitHub', url: 'https://github.com/maycoletechnologies', icon: 'Github' }
+        {
+          id: '1',
+          name: 'Twitter',
+          url: 'https://twitter.com/maycoletechnologies',
+          icon: 'Twitter',
+        },
+        {
+          id: '2',
+          name: 'LinkedIn',
+          url: 'https://linkedin.com/company/maycoletechnologies',
+          icon: 'LinkedIn',
+        },
+        { id: '3', name: 'GitHub', url: 'https://github.com/maycoletechnologies', icon: 'Github' },
       ]);
     }
-    
+
     // Load nav links
     const savedNavLinks = localStorage.getItem(STORAGE_KEYS.navLinks);
     if (savedNavLinks) {
@@ -170,10 +189,10 @@ export function DevPanel({ onClose }: DevPanelProps) {
         { id: '3', label: 'Services', href: '#services' },
         { id: '4', label: 'Products', href: '#products' },
         { id: '5', label: 'Technology', href: '#technologies' },
-        { id: '6', label: 'Contact', href: '#contact' }
+        { id: '6', label: 'Contact', href: '#contact' },
       ]);
     }
-    
+
     // Load images
     const savedImages = localStorage.getItem(STORAGE_KEYS.images);
     if (savedImages) {
@@ -185,12 +204,12 @@ export function DevPanel({ onClose }: DevPanelProps) {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const storedPassword = localStorage.getItem(STORAGE_KEYS.password);
-    
+
     if (!storedPassword) {
       toast.error('No password set. Please contact administrator.');
       return;
     }
-    
+
     if (password === storedPassword) {
       setIsAuthenticated(true);
       sessionStorage.setItem(STORAGE_KEYS.authenticated, 'true');
@@ -231,18 +250,18 @@ export function DevPanel({ onClose }: DevPanelProps) {
       name: 'New Product',
       description: 'Product description',
       price: '$0/month',
-      features: ['Feature 1', 'Feature 2']
+      features: ['Feature 1', 'Feature 2'],
     };
     setProducts([...products, newProduct]);
   };
 
   const deleteProduct = (id: string) => {
-    setProducts(products.filter(p => p.id !== id));
+    setProducts(products.filter((p) => p.id !== id));
     toast.success('Product deleted');
   };
 
   const updateProduct = (updatedProduct: Product) => {
-    setProducts(products.map(p => p.id === updatedProduct.id ? updatedProduct : p));
+    setProducts(products.map((p) => (p.id === updatedProduct.id ? updatedProduct : p)));
     setEditingProduct(null);
     toast.success('Product updated');
   };
@@ -259,34 +278,34 @@ export function DevPanel({ onClose }: DevPanelProps) {
       id: Date.now().toString(),
       name: 'New Link',
       url: 'https://',
-      icon: 'Link'
+      icon: 'Link',
     };
     setSocialLinks([...socialLinks, newLink]);
   };
 
   const deleteSocialLink = (id: string) => {
-    setSocialLinks(socialLinks.filter(l => l.id !== id));
+    setSocialLinks(socialLinks.filter((l) => l.id !== id));
   };
 
   const updateSocialLink = (id: string, field: keyof SocialLink, value: string) => {
-    setSocialLinks(socialLinks.map(l => l.id === id ? { ...l, [field]: value } : l));
+    setSocialLinks(socialLinks.map((l) => (l.id === id ? { ...l, [field]: value } : l)));
   };
 
   const addNavLink = () => {
     const newLink: NavLink = {
       id: Date.now().toString(),
       label: 'New Link',
-      href: '#section'
+      href: '#section',
     };
     setNavLinks([...navLinks, newLink]);
   };
 
   const deleteNavLink = (id: string) => {
-    setNavLinks(navLinks.filter(l => l.id !== id));
+    setNavLinks(navLinks.filter((l) => l.id !== id));
   };
 
   const updateNavLink = (id: string, field: keyof NavLink, value: string) => {
-    setNavLinks(navLinks.map(l => l.id === id ? { ...l, [field]: value } : l));
+    setNavLinks(navLinks.map((l) => (l.id === id ? { ...l, [field]: value } : l)));
   };
 
   // Images Management
@@ -300,14 +319,14 @@ export function DevPanel({ onClose }: DevPanelProps) {
       toast.error('Please provide image name and URL');
       return;
     }
-    
+
     const newImage: ImageAsset = {
       id: Date.now().toString(),
       name: newImageName,
       url: newImageUrl,
-      category: newImageCategory
+      category: newImageCategory,
     };
-    
+
     setImages([...images, newImage]);
     setNewImageUrl('');
     setNewImageName('');
@@ -316,45 +335,45 @@ export function DevPanel({ onClose }: DevPanelProps) {
   };
 
   const deleteImage = (id: string) => {
-    setImages(images.filter(img => img.id !== id));
+    setImages(images.filter((img) => img.id !== id));
     toast.success('Image deleted');
   };
 
   // Password Change
   const handlePasswordChange = () => {
     const storedPassword = localStorage.getItem(STORAGE_KEYS.password);
-    
+
     if (!storedPassword) {
       toast.error('No password is currently set. Please contact administrator.');
       return;
     }
-    
+
     // Validate current password
     if (currentPassword !== storedPassword) {
       toast.error('Current password is incorrect');
       return;
     }
-    
+
     // Validate new password
     if (!newPassword || newPassword.length < 6) {
       toast.error('New password must be at least 6 characters');
       return;
     }
-    
+
     // Validate password confirmation
     if (newPassword !== confirmPassword) {
       toast.error('New passwords do not match');
       return;
     }
-    
+
     // Save new password
     localStorage.setItem(STORAGE_KEYS.password, newPassword);
-    
+
     // Clear form
     setCurrentPassword('');
     setNewPassword('');
     setConfirmPassword('');
-    
+
     toast.success('Password changed successfully! 🔐');
   };
 
@@ -369,7 +388,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
       socialLinks: localStorage.getItem(STORAGE_KEYS.socialLinks),
       navLinks: localStorage.getItem(STORAGE_KEYS.navLinks),
       images: localStorage.getItem(STORAGE_KEYS.images),
-      exportDate: new Date().toISOString()
+      exportDate: new Date().toISOString(),
     };
 
     const dataStr = JSON.stringify(data, null, 2);
@@ -391,7 +410,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
     reader.onload = (event) => {
       try {
         const data = JSON.parse(event.target?.result as string);
-        
+
         // Import all data
         if (data.heroTitle) localStorage.setItem(STORAGE_KEYS.heroTitle, data.heroTitle);
         if (data.heroSubtitle) localStorage.setItem(STORAGE_KEYS.heroSubtitle, data.heroSubtitle);
@@ -433,7 +452,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
             <h2 className="text-2xl font-bold maycole-gradient-text mb-2">Dev Panel Access</h2>
             <p className="text-gray-600">Enter password to unlock developer tools</p>
           </div>
-          
+
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <Label htmlFor="dev-password">Password</Label>
@@ -447,7 +466,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                 autoFocus
               />
             </div>
-            
+
             <div className="flex gap-2">
               <Button type="submit" className="flex-1 maycole-btn-primary">
                 <Unlock className="w-4 h-4 mr-2" />
@@ -458,12 +477,13 @@ export function DevPanel({ onClose }: DevPanelProps) {
               </Button>
             </div>
           </form>
-          
+
           <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
             <div className="flex items-start gap-2">
               <AlertCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
               <p className="text-xs text-blue-800">
-                <strong>Note:</strong> Password must be set by administrator in localStorage.<br />
+                <strong>Note:</strong> Password must be set by administrator in localStorage.
+                <br />
                 Contact your administrator if you need access.
               </p>
             </div>
@@ -497,7 +517,9 @@ export function DevPanel({ onClose }: DevPanelProps) {
                 <Settings className="w-6 h-6" />
                 Developer Panel
               </h2>
-              <p className="text-sm text-gray-600 mt-1">Manage content, products, links, and media</p>
+              <p className="text-sm text-gray-600 mt-1">
+                Manage content, products, links, and media
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
@@ -513,7 +535,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
               </Button>
             </div>
           </div>
-          
+
           {/* Tabs */}
           <div className="flex gap-2 mt-4">
             <Button
@@ -584,7 +606,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       className="mt-1"
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="hero-title">Hero Title</Label>
                     <Input
@@ -594,7 +616,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       className="mt-1"
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="hero-subtitle">Hero Subtitle/Tagline</Label>
                     <Input
@@ -604,7 +626,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       className="mt-1"
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="hero-tagline">Hero Description</Label>
                     <Textarea
@@ -615,7 +637,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       rows={3}
                     />
                   </div>
-                  
+
                   <Button onClick={saveContent} className="maycole-btn-primary">
                     <Save className="w-4 h-4 mr-2" />
                     Save Content
@@ -649,31 +671,50 @@ export function DevPanel({ onClose }: DevPanelProps) {
                           <div className="space-y-3">
                             <Input
                               value={editingProduct.name}
-                              onChange={(e) => setEditingProduct({ ...editingProduct, name: e.target.value })}
+                              onChange={(e) =>
+                                setEditingProduct({ ...editingProduct, name: e.target.value })
+                              }
                               placeholder="Product Name"
                             />
                             <Textarea
                               value={editingProduct.description}
-                              onChange={(e) => setEditingProduct({ ...editingProduct, description: e.target.value })}
+                              onChange={(e) =>
+                                setEditingProduct({
+                                  ...editingProduct,
+                                  description: e.target.value,
+                                })
+                              }
                               placeholder="Description"
                               rows={2}
                             />
                             <Input
                               value={editingProduct.price}
-                              onChange={(e) => setEditingProduct({ ...editingProduct, price: e.target.value })}
+                              onChange={(e) =>
+                                setEditingProduct({ ...editingProduct, price: e.target.value })
+                              }
                               placeholder="Price"
                             />
                             <Input
                               value={editingProduct.imageUrl || ''}
-                              onChange={(e) => setEditingProduct({ ...editingProduct, imageUrl: e.target.value })}
+                              onChange={(e) =>
+                                setEditingProduct({ ...editingProduct, imageUrl: e.target.value })
+                              }
                               placeholder="Image URL (optional)"
                             />
                             <div className="flex gap-2">
-                              <Button onClick={() => updateProduct(editingProduct)} size="sm" className="maycole-btn-primary">
+                              <Button
+                                onClick={() => updateProduct(editingProduct)}
+                                size="sm"
+                                className="maycole-btn-primary"
+                              >
                                 <Check className="w-4 h-4 mr-2" />
                                 Save
                               </Button>
-                              <Button onClick={() => setEditingProduct(null)} size="sm" variant="outline">
+                              <Button
+                                onClick={() => setEditingProduct(null)}
+                                size="sm"
+                                variant="outline"
+                              >
                                 Cancel
                               </Button>
                             </div>
@@ -684,16 +725,29 @@ export function DevPanel({ onClose }: DevPanelProps) {
                               <div className="flex-1">
                                 <h3 className="font-bold text-lg">{product.name}</h3>
                                 <p className="text-sm text-gray-600 mt-1">{product.description}</p>
-                                <p className="text-maycole-green font-semibold mt-2">{product.price}</p>
+                                <p className="text-maycole-green font-semibold mt-2">
+                                  {product.price}
+                                </p>
                                 {product.imageUrl && (
-                                  <p className="text-xs text-gray-500 mt-1">Image: {product.imageUrl}</p>
+                                  <p className="text-xs text-gray-500 mt-1">
+                                    Image: {product.imageUrl}
+                                  </p>
                                 )}
                               </div>
                               <div className="flex gap-2">
-                                <Button onClick={() => setEditingProduct(product)} size="sm" variant="outline">
+                                <Button
+                                  onClick={() => setEditingProduct(product)}
+                                  size="sm"
+                                  variant="outline"
+                                >
                                   <Edit className="w-4 h-4" />
                                 </Button>
-                                <Button onClick={() => deleteProduct(product.id)} size="sm" variant="outline" className="text-red-600 hover:text-red-700">
+                                <Button
+                                  onClick={() => deleteProduct(product.id)}
+                                  size="sm"
+                                  variant="outline"
+                                  className="text-red-600 hover:text-red-700"
+                                >
                                   <Trash2 className="w-4 h-4" />
                                 </Button>
                               </div>
@@ -703,7 +757,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       </CardContent>
                     </Card>
                   ))}
-                  
+
                   <Button onClick={saveProducts} className="maycole-btn-primary">
                     <Save className="w-4 h-4 mr-2" />
                     Save All Products
@@ -745,7 +799,12 @@ export function DevPanel({ onClose }: DevPanelProps) {
                         placeholder="URL/Anchor"
                         className="flex-1"
                       />
-                      <Button onClick={() => deleteNavLink(link.id)} size="sm" variant="outline" className="text-red-600">
+                      <Button
+                        onClick={() => deleteNavLink(link.id)}
+                        size="sm"
+                        variant="outline"
+                        className="text-red-600"
+                      >
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
@@ -788,14 +847,19 @@ export function DevPanel({ onClose }: DevPanelProps) {
                         placeholder="Icon"
                         className="w-32"
                       />
-                      <Button onClick={() => deleteSocialLink(link.id)} size="sm" variant="outline" className="text-red-600">
+                      <Button
+                        onClick={() => deleteSocialLink(link.id)}
+                        size="sm"
+                        variant="outline"
+                        className="text-red-600"
+                      >
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
                   ))}
                 </CardContent>
               </Card>
-              
+
               <Button onClick={saveLinks} className="maycole-btn-primary">
                 <Save className="w-4 h-4 mr-2" />
                 Save All Links
@@ -809,7 +873,9 @@ export function DevPanel({ onClose }: DevPanelProps) {
               <Card>
                 <CardHeader>
                   <CardTitle>Upload New Image</CardTitle>
-                  <CardDescription>Add images by providing a URL (use Unsplash or image hosting service)</CardDescription>
+                  <CardDescription>
+                    Add images by providing a URL (use Unsplash or image hosting service)
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -834,7 +900,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       />
                     </div>
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="image-url">Image URL</Label>
                     <Input
@@ -845,7 +911,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       className="mt-1"
                     />
                   </div>
-                  
+
                   <Button onClick={addImage} className="maycole-btn-primary">
                     <Upload className="w-4 h-4 mr-2" />
                     Add Image
@@ -869,25 +935,28 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       {images.map((img) => (
                         <Card key={img.id} className="overflow-hidden">
                           <div className="aspect-video bg-gray-100 relative">
-                            <img 
-                              src={img.url} 
+                            <img
+                              src={img.url}
                               alt={img.name}
                               className="w-full h-full object-cover"
                               onError={(e) => {
-                                (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x300?text=Image+Error';
+                                (e.target as HTMLImageElement).src =
+                                  'https://via.placeholder.com/400x300?text=Image+Error';
                               }}
                             />
                           </div>
                           <CardContent className="p-3">
                             <p className="font-semibold text-sm truncate">{img.name}</p>
                             <p className="text-xs text-gray-500 mb-2">
-                              <Badge variant="outline" className="text-xs">{img.category}</Badge>
+                              <Badge variant="outline" className="text-xs">
+                                {img.category}
+                              </Badge>
                             </p>
                             <p className="text-xs text-gray-400 truncate mb-2">{img.url}</p>
-                            <Button 
-                              onClick={() => deleteImage(img.id)} 
-                              size="sm" 
-                              variant="outline" 
+                            <Button
+                              onClick={() => deleteImage(img.id)}
+                              size="sm"
+                              variant="outline"
                               className="w-full text-red-600 hover:text-red-700"
                             >
                               <Trash2 className="w-4 h-4 mr-2" />
@@ -898,7 +967,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       ))}
                     </div>
                   )}
-                  
+
                   {images.length > 0 && (
                     <Button onClick={saveImages} className="maycole-btn-primary mt-4">
                       <Save className="w-4 h-4 mr-2" />
@@ -930,7 +999,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       className="mt-1"
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="new-password">New Password</Label>
                     <Input
@@ -942,7 +1011,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       className="mt-1"
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="confirm-password">Confirm New Password</Label>
                     <Input
@@ -954,7 +1023,7 @@ export function DevPanel({ onClose }: DevPanelProps) {
                       className="mt-1"
                     />
                   </div>
-                  
+
                   <Button onClick={handlePasswordChange} className="maycole-btn-primary">
                     <Key className="w-4 h-4 mr-2" />
                     Change Password
@@ -978,7 +1047,11 @@ export function DevPanel({ onClose }: DevPanelProps) {
                 Export Backup
               </Button>
               <label htmlFor="import-data">
-                <Button variant="outline" size="sm" onClick={() => document.getElementById('import-data')?.click()}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => document.getElementById('import-data')?.click()}
+                >
                   <Upload className="w-4 h-4 mr-2 rotate-180" />
                   Import Backup
                 </Button>

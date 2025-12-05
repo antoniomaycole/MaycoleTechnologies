@@ -11,7 +11,7 @@ export function CookieConsent() {
     necessary: true, // Always true, can't be disabled
     functional: true,
     analytics: true,
-    marketing: true
+    marketing: true,
   });
 
   useEffect(() => {
@@ -24,32 +24,41 @@ export function CookieConsent() {
   }, []);
 
   const handleAcceptAll = () => {
-    localStorage.setItem('maycole-cookie-consent', JSON.stringify({
-      necessary: true,
-      functional: true,
-      analytics: true,
-      marketing: true,
-      timestamp: new Date().toISOString()
-    }));
+    localStorage.setItem(
+      'maycole-cookie-consent',
+      JSON.stringify({
+        necessary: true,
+        functional: true,
+        analytics: true,
+        marketing: true,
+        timestamp: new Date().toISOString(),
+      })
+    );
     setIsVisible(false);
   };
 
   const handleRejectAll = () => {
-    localStorage.setItem('maycole-cookie-consent', JSON.stringify({
-      necessary: true,
-      functional: false,
-      analytics: false,
-      marketing: false,
-      timestamp: new Date().toISOString()
-    }));
+    localStorage.setItem(
+      'maycole-cookie-consent',
+      JSON.stringify({
+        necessary: true,
+        functional: false,
+        analytics: false,
+        marketing: false,
+        timestamp: new Date().toISOString(),
+      })
+    );
     setIsVisible(false);
   };
 
   const handleSavePreferences = () => {
-    localStorage.setItem('maycole-cookie-consent', JSON.stringify({
-      ...preferences,
-      timestamp: new Date().toISOString()
-    }));
+    localStorage.setItem(
+      'maycole-cookie-consent',
+      JSON.stringify({
+        ...preferences,
+        timestamp: new Date().toISOString(),
+      })
+    );
     setIsVisible(false);
   };
 
@@ -58,26 +67,28 @@ export function CookieConsent() {
       id: 'necessary' as const,
       name: 'Necessary Cookies',
       description: 'Essential for the website to function properly. Cannot be disabled.',
-      required: true
+      required: true,
     },
     {
       id: 'functional' as const,
       name: 'Functional Cookies',
-      description: 'Enable enhanced functionality and personalization, such as remembering your preferences.',
-      required: false
+      description:
+        'Enable enhanced functionality and personalization, such as remembering your preferences.',
+      required: false,
     },
     {
       id: 'analytics' as const,
       name: 'Analytics Cookies',
-      description: 'Help us understand how visitors interact with our website by collecting and reporting information.',
-      required: false
+      description:
+        'Help us understand how visitors interact with our website by collecting and reporting information.',
+      required: false,
     },
     {
       id: 'marketing' as const,
       name: 'Marketing Cookies',
       description: 'Used to track visitors across websites to display relevant advertisements.',
-      required: false
-    }
+      required: false,
+    },
   ];
 
   return (
@@ -115,8 +126,9 @@ export function CookieConsent() {
                           We Value Your Privacy
                         </h3>
                         <p className="text-sm text-gray-600 leading-relaxed">
-                          We use cookies to enhance your browsing experience, analyze site traffic, and provide personalized content. 
-                          By clicking "Accept All", you consent to our use of cookies.
+                          We use cookies to enhance your browsing experience, analyze site traffic,
+                          and provide personalized content. By clicking "Accept All", you consent to
+                          our use of cookies.
                         </p>
                       </div>
                       <button
@@ -197,10 +209,12 @@ export function CookieConsent() {
                                 </div>
                               ) : (
                                 <button
-                                  onClick={() => setPreferences(prev => ({
-                                    ...prev,
-                                    [type.id]: !prev[type.id]
-                                  }))}
+                                  onClick={() =>
+                                    setPreferences((prev) => ({
+                                      ...prev,
+                                      [type.id]: !prev[type.id],
+                                    }))
+                                  }
                                   aria-label={`Toggle ${type.name}`}
                                   className={`relative w-12 h-6 rounded-full transition-colors duration-200 ${
                                     preferences[type.id]

@@ -12,9 +12,19 @@ import { Alert, AlertDescription } from './ui/alert';
 import { Progress } from './ui/progress';
 import { useAuth } from '../contexts/AuthContext';
 import { PasswordValidator, EmailValidator } from '../lib/auth';
-import { 
-  X, Mail, Lock, User, Building, Phone, Eye, EyeOff, 
-  CheckCircle, AlertCircle, Loader2, Shield 
+import {
+  X,
+  Mail,
+  Lock,
+  User,
+  Building,
+  Phone,
+  Eye,
+  EyeOff,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+  Shield,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -59,7 +69,7 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
   // Handle password change
   const handlePasswordChange = (value: string) => {
     setPassword(value);
-    
+
     if (mode === 'signup') {
       const validation = PasswordValidator.validate(value);
       setPasswordError(validation.errors.join(', '));
@@ -128,11 +138,11 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
     setIsLoading(true);
 
     try {
-      await signup({ 
-        email, 
-        password, 
-        firstName, 
-        lastName, 
+      await signup({
+        email,
+        password,
+        firstName,
+        lastName,
         organizationName,
         phone: phone || undefined,
       });
@@ -163,18 +173,24 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
   // Get password strength color
   const getPasswordStrengthColor = () => {
     switch (passwordStrength) {
-      case 'weak': return 'bg-red-500';
-      case 'medium': return 'bg-yellow-500';
-      case 'strong': return 'bg-green-500';
+      case 'weak':
+        return 'bg-red-500';
+      case 'medium':
+        return 'bg-yellow-500';
+      case 'strong':
+        return 'bg-green-500';
     }
   };
 
   // Get password strength percentage
   const getPasswordStrengthPercentage = () => {
     switch (passwordStrength) {
-      case 'weak': return 33;
-      case 'medium': return 66;
-      case 'strong': return 100;
+      case 'weak':
+        return 33;
+      case 'medium':
+        return 66;
+      case 'strong':
+        return 100;
     }
   };
 
@@ -213,10 +229,9 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
                 {mode === 'login' ? 'Welcome Back' : 'Create Account'}
               </h2>
               <p className="text-gray-400 text-sm">
-                {mode === 'login' 
+                {mode === 'login'
                   ? 'Sign in to access MaycoleTracker™'
-                  : 'Get started with MaycoleTracker™'
-                }
+                  : 'Get started with MaycoleTracker™'}
               </p>
             </div>
 
@@ -351,8 +366,8 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
                 {mode === 'signup' && password && (
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <Progress 
-                        value={getPasswordStrengthPercentage()} 
+                      <Progress
+                        value={getPasswordStrengthPercentage()}
                         className={`h-1 ${getPasswordStrengthColor()}`}
                       />
                       <span className="text-xs text-gray-400 capitalize">{passwordStrength}</span>
@@ -373,10 +388,7 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
                     />
                     Remember me
                   </label>
-                  <button
-                    type="button"
-                    className="text-sm text-blue-400 hover:text-blue-300"
-                  >
+                  <button type="button" className="text-sm text-blue-400 hover:text-blue-300">
                     Forgot password?
                   </button>
                 </div>
@@ -392,8 +404,10 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                     {mode === 'login' ? 'Signing in...' : 'Creating account...'}
                   </>
+                ) : mode === 'login' ? (
+                  'Sign In'
                 ) : (
-                  mode === 'login' ? 'Sign In' : 'Create Account'
+                  'Create Account'
                 )}
               </Button>
             </form>
@@ -401,8 +415,7 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
             {/* Switch mode */}
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-400">
-                {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}
-                {' '}
+                {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
                 <button
                   type="button"
                   onClick={switchMode}

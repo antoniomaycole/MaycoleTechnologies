@@ -11,6 +11,7 @@ node_modules/
 
 # Build output
 dist/
+build/
 dist-ssr/
 *.local
 
@@ -31,8 +32,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Dependencies
-package-lock.json
+# Dependencies - Keep lock files for reproducible builds
+# package-lock.json  # KEEP for reproducible builds
 yarn.lock
 pnpm-lock.yaml
 

@@ -3,18 +3,18 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { 
-  BookOpen, 
-  X, 
-  Brain, 
-  Shield, 
-  TrendingUp, 
+import {
+  BookOpen,
+  X,
+  Brain,
+  Shield,
+  TrendingUp,
   Zap,
   Mic,
   Scan,
   BarChart3,
   Calendar,
-  Sparkles
+  Sparkles,
 } from 'lucide-react';
 
 export function ReadmeModal() {
@@ -48,7 +48,7 @@ export function ReadmeModal() {
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
-              transition={{ duration: 0.3, type: "spring", damping: 25, stiffness: 300 }}
+              transition={{ duration: 0.3, type: 'spring', damping: 25, stiffness: 300 }}
               className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
@@ -72,7 +72,7 @@ export function ReadmeModal() {
                       </span>
                       <span className="text-purple-400 ml-2 text-lg">— v1.0.0</span>
                     </CardTitle>
-                    
+
                     <div className="flex flex-wrap items-center gap-3 mb-4">
                       <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
                         <Calendar className="w-3 h-3 mr-1" />
@@ -102,7 +102,7 @@ export function ReadmeModal() {
                       <Brain className="w-5 h-5 mr-2" />
                       🧠 What This App Does
                     </h3>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-4 hover:bg-purple-900/40 transition-colors">
                         <div className="flex items-center mb-2">
@@ -111,7 +111,7 @@ export function ReadmeModal() {
                         </div>
                         <p className="text-purple-300/80 text-sm">Track inventory in real time</p>
                       </div>
-                      
+
                       <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-4 hover:bg-purple-900/40 transition-colors">
                         <div className="flex items-center mb-2">
                           <TrendingUp className="w-4 h-4 text-purple-400 mr-2" />
@@ -119,15 +119,17 @@ export function ReadmeModal() {
                         </div>
                         <p className="text-purple-300/80 text-sm">Visualize usage and trends</p>
                       </div>
-                      
+
                       <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-4 hover:bg-purple-900/40 transition-colors">
                         <div className="flex items-center mb-2">
                           <Scan className="w-4 h-4 text-purple-400 mr-2" />
                           <span className="font-medium text-purple-200">Scanner</span>
                         </div>
-                        <p className="text-purple-300/80 text-sm">Use native camera for barcode input</p>
+                        <p className="text-purple-300/80 text-sm">
+                          Use native camera for barcode input
+                        </p>
                       </div>
-                      
+
                       <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-4 hover:bg-purple-900/40 transition-colors">
                         <div className="flex items-center mb-2">
                           <Mic className="w-4 h-4 text-purple-400 mr-2" />
@@ -135,13 +137,15 @@ export function ReadmeModal() {
                         </div>
                         <p className="text-purple-300/80 text-sm">Voice-activated logging</p>
                       </div>
-                      
+
                       <div className="md:col-span-2 bg-gradient-to-r from-purple-900/30 to-purple-800/30 border border-purple-500/20 rounded-lg p-4 hover:bg-purple-900/40 transition-colors">
                         <div className="flex items-center mb-2">
                           <Zap className="w-4 h-4 text-purple-400 mr-2" />
                           <span className="font-medium text-purple-200">Premium Dashboard</span>
                         </div>
-                        <p className="text-purple-300/80 text-sm">Founder-grade insights with AI-powered analytics</p>
+                        <p className="text-purple-300/80 text-sm">
+                          Founder-grade insights with AI-powered analytics
+                        </p>
                       </div>
                     </div>
                   </motion.div>
@@ -157,13 +161,16 @@ export function ReadmeModal() {
                       <Shield className="w-5 h-5 mr-2" />
                       🔐 IP Protection
                     </h3>
-                    
+
                     <div className="bg-gradient-to-r from-purple-900/40 to-purple-800/40 border border-purple-500/30 rounded-lg p-6">
                       <p className="text-purple-200 leading-relaxed">
-                        All logic is <strong className="text-purple-100">timestamped</strong>, <strong className="text-purple-100">branded</strong>, and <strong className="text-purple-100">modular</strong>. 
-                        No placeholder code. No rogue assets. Every component reflects the 
-                        <span className="text-purple-300 font-semibold"> MAYCOLE Method™</span> philosophy 
-                        of enterprise-grade development with complete intellectual property protection.
+                        All logic is <strong className="text-purple-100">timestamped</strong>,{' '}
+                        <strong className="text-purple-100">branded</strong>, and{' '}
+                        <strong className="text-purple-100">modular</strong>. No placeholder code.
+                        No rogue assets. Every component reflects the
+                        <span className="text-purple-300 font-semibold"> MAYCOLE Method™</span>{' '}
+                        philosophy of enterprise-grade development with complete intellectual
+                        property protection.
                       </p>
                     </div>
                   </motion.div>
@@ -178,14 +185,16 @@ export function ReadmeModal() {
                       <TrendingUp className="w-5 h-5 mr-2" />
                       📈 Scaling Vision
                     </h3>
-                    
+
                     <div className="bg-gradient-to-br from-purple-900/40 via-purple-800/30 to-purple-900/40 border border-purple-500/30 rounded-lg p-6">
                       <p className="text-purple-200 leading-relaxed mb-4">
-                        This module is part of a larger ecosystem—<strong className="text-purple-100">GroupHome™</strong>, 
-                        <strong className="text-purple-100"> FaithTech™</strong>, <strong className="text-purple-100">MusicOps™</strong>—each 
-                        built with teachability and legacy in mind.
+                        This module is part of a larger ecosystem—
+                        <strong className="text-purple-100">GroupHome™</strong>,
+                        <strong className="text-purple-100"> FaithTech™</strong>,{' '}
+                        <strong className="text-purple-100">MusicOps™</strong>—each built with
+                        teachability and legacy in mind.
                       </p>
-                      
+
                       <div className="flex flex-wrap gap-2 mt-4">
                         <Badge className="bg-purple-600/20 text-purple-300 border-purple-500/30">
                           <Sparkles className="w-3 h-3 mr-1" />
@@ -208,8 +217,9 @@ export function ReadmeModal() {
                 <div className="px-8 py-4 border-t border-purple-500/20 bg-purple-950/50">
                   <div className="flex items-center justify-between">
                     <p className="text-sm text-purple-400">
-                      © 2025 <span className="text-purple-300 font-medium">MaycoleTechnologies™</span> 
-                      <span className="mx-2">•</span> 
+                      © 2025{' '}
+                      <span className="text-purple-300 font-medium">MaycoleTechnologies™</span>
+                      <span className="mx-2">•</span>
                       Built with <span className="text-purple-300">MAYCOLE Method™</span>
                     </p>
                     <Button

@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Download, AlertCircle, Wifi, WifiOff } from 'lucide-react';
-import { isInstallPromptAvailable, showInstallPrompt, isStandaloneMode, isOnline, onOnlineStatusChange } from '../lib/pwa';
+import {
+  isInstallPromptAvailable,
+  showInstallPrompt,
+  isStandaloneMode,
+  onOnlineStatusChange,
+} from '../lib/pwa';
 
 /**
  * PWA Install Prompt Component
@@ -104,16 +109,16 @@ export function PWAFeaturesStatus() {
   useEffect(() => {
     // Check service worker
     const hasServiceWorker = 'serviceWorker' in navigator;
-    
+
     // Check notifications
     const canNotify = 'Notification' in window;
-    
+
     // Check installable
     const isInstallable = isInstallPromptAvailable();
-    
+
     // Check standalone
     const isStandalone = isStandaloneMode();
-    
+
     // Check online
     const isOnlineNow = navigator.onLine;
 
@@ -126,7 +131,7 @@ export function PWAFeaturesStatus() {
     });
 
     const unsubscribe = onOnlineStatusChange((online) => {
-      setFeatures(prev => ({ ...prev, online }));
+      setFeatures((prev) => ({ ...prev, online }));
     });
 
     return unsubscribe;
@@ -140,33 +145,43 @@ export function PWAFeaturesStatus() {
       </h3>
       <ul className="space-y-2 text-sm">
         <li className="flex items-center gap-2">
-          <span className={`w-2 h-2 rounded-full ${features.serviceWorker ? 'bg-green-500' : 'bg-red-500'}`} />
+          <span
+            className={`w-2 h-2 rounded-full ${features.serviceWorker ? 'bg-green-500' : 'bg-red-500'}`}
+          />
           <span className="text-gray-700">
             Service Worker: {features.serviceWorker ? '✓ Enabled' : '✗ Disabled'}
           </span>
         </li>
         <li className="flex items-center gap-2">
-          <span className={`w-2 h-2 rounded-full ${features.notification ? 'bg-green-500' : 'bg-red-500'}`} />
+          <span
+            className={`w-2 h-2 rounded-full ${features.notification ? 'bg-green-500' : 'bg-red-500'}`}
+          />
           <span className="text-gray-700">
             Notifications: {features.notification ? '✓ Enabled' : '✗ Disabled'}
           </span>
         </li>
         <li className="flex items-center gap-2">
-          <span className={`w-2 h-2 rounded-full ${features.installable ? 'bg-green-500' : 'bg-gray-400'}`} />
+          <span
+            className={`w-2 h-2 rounded-full ${features.installable ? 'bg-green-500' : 'bg-gray-400'}`}
+          />
           <span className="text-gray-700">
-            Installable: {features.installable ? '✓ Yes' : (features.standalone ? '✓ Already Installed' : '✗ No')}
+            Installable:{' '}
+            {features.installable ? '✓ Yes' : features.standalone ? '✓ Already Installed' : '✗ No'}
           </span>
         </li>
         <li className="flex items-center gap-2">
-          <span className={`w-2 h-2 rounded-full ${features.online ? 'bg-green-500' : 'bg-red-500'}`} />
+          <span
+            className={`w-2 h-2 rounded-full ${features.online ? 'bg-green-500' : 'bg-red-500'}`}
+          />
           <span className="text-gray-700">
-            Network: {features.online ? (
+            Network:{' '}
+            {features.online ? (
               <>
-              <Wifi className="inline ml-1" size={14} /> Online
+                <Wifi className="inline ml-1" size={14} /> Online
               </>
             ) : (
               <>
-              <WifiOff className="inline ml-1" size={14} /> Offline
+                <WifiOff className="inline ml-1" size={14} /> Offline
               </>
             )}
           </span>

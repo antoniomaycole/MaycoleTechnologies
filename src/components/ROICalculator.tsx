@@ -16,7 +16,9 @@ export function ROICalculator() {
   const monthlySavings = (parseFloat(currentMonthlyCost) - parseFloat(withMaycole)).toFixed(0);
   const annualSavings = (parseFloat(monthlySavings) * 12).toFixed(0);
   const errorCostReduction = (parseFloat(currentMonthlyCost) * (errorRate / 100) * 0.94).toFixed(0); // 94% error reduction
-  const totalMonthlySavings = (parseFloat(monthlySavings) + parseFloat(errorCostReduction)).toFixed(0);
+  const totalMonthlySavings = (parseFloat(monthlySavings) + parseFloat(errorCostReduction)).toFixed(
+    0
+  );
   const totalAnnualSavings = (parseFloat(totalMonthlySavings) * 12).toFixed(0);
   const subscriptionCost = 99; // Professional plan
   const netMonthlySavings = (parseFloat(totalMonthlySavings) - subscriptionCost).toFixed(0);
@@ -44,7 +46,9 @@ export function ROICalculator() {
             </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            See how much you can save with <span className="maycole-gradient-text">MaycoleTechnologies</span><span className="maycole-trademark">™</span> solutions
+            See how much you can save with{' '}
+            <span className="maycole-gradient-text">MaycoleTechnologies</span>
+            <span className="maycole-trademark">™</span> solutions
           </p>
         </motion.div>
 
@@ -62,7 +66,9 @@ export function ROICalculator() {
                   <Users className="w-6 h-6 text-maycole-green" />
                   Your Current Operations
                 </h3>
-                <p className="text-gray-600 mt-2">Enter your current metrics to calculate potential savings</p>
+                <p className="text-gray-600 mt-2">
+                  Enter your current metrics to calculate potential savings
+                </p>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Number of Employees */}
@@ -105,7 +111,9 @@ export function ROICalculator() {
                     />
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">$15/hr</span>
-                      <span className="text-2xl font-bold text-maycole-green">${avgHourlyRate}</span>
+                      <span className="text-2xl font-bold text-maycole-green">
+                        ${avgHourlyRate}
+                      </span>
                       <span className="text-sm text-gray-600">$150/hr</span>
                     </div>
                   </div>
@@ -160,7 +168,8 @@ export function ROICalculator() {
                 {/* Info Box */}
                 <div className="bg-maycole-green/10 rounded-lg p-4 border border-maycole-green/20">
                   <p className="text-sm text-gray-700">
-                    <strong>Industry averages:</strong> Most companies spend 10-15 hours/week on manual tracking, with error rates of 10-20%.
+                    <strong>Industry averages:</strong> Most companies spend 10-15 hours/week on
+                    manual tracking, with error rates of 10-20%.
                   </p>
                 </div>
               </CardContent>
@@ -191,7 +200,9 @@ export function ROICalculator() {
                       <DollarSign className="w-5 h-5" />
                       <span className="text-sm font-medium">Monthly Savings</span>
                     </div>
-                    <div className="text-3xl font-bold">${parseInt(netMonthlySavings).toLocaleString()}</div>
+                    <div className="text-3xl font-bold">
+                      ${parseInt(netMonthlySavings).toLocaleString()}
+                    </div>
                   </div>
 
                   {/* Annual Savings */}
@@ -200,7 +211,9 @@ export function ROICalculator() {
                       <DollarSign className="w-5 h-5" />
                       <span className="text-sm font-medium">Annual Savings</span>
                     </div>
-                    <div className="text-3xl font-bold">${parseInt(netAnnualSavings).toLocaleString()}</div>
+                    <div className="text-3xl font-bold">
+                      ${parseInt(netAnnualSavings).toLocaleString()}
+                    </div>
                   </div>
 
                   {/* ROI Percentage */}
@@ -225,11 +238,13 @@ export function ROICalculator() {
                 {/* Breakdown */}
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 space-y-4">
                   <h4 className="font-semibold text-lg mb-4">Savings Breakdown</h4>
-                  
+
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-white/90">Current Monthly Cost:</span>
-                      <span className="font-bold">${parseInt(currentMonthlyCost).toLocaleString()}</span>
+                      <span className="font-bold">
+                        ${parseInt(currentMonthlyCost).toLocaleString()}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-white/90">With MaycoleTechnologies™:</span>
@@ -237,11 +252,15 @@ export function ROICalculator() {
                     </div>
                     <div className="flex justify-between items-center pt-3 border-t border-white/20">
                       <span className="text-white/90">Time Savings (75%):</span>
-                      <span className="font-bold text-green-300">+${parseInt(monthlySavings).toLocaleString()}/mo</span>
+                      <span className="font-bold text-green-300">
+                        +${parseInt(monthlySavings).toLocaleString()}/mo
+                      </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-white/90">Error Reduction (94%):</span>
-                      <span className="font-bold text-green-300">+${parseInt(errorCostReduction).toLocaleString()}/mo</span>
+                      <span className="font-bold text-green-300">
+                        +${parseInt(errorCostReduction).toLocaleString()}/mo
+                      </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-white/90">Subscription Cost:</span>
@@ -249,7 +268,9 @@ export function ROICalculator() {
                     </div>
                     <div className="flex justify-between items-center pt-3 border-t border-white/20 text-lg">
                       <span className="font-semibold">Net Monthly Savings:</span>
-                      <span className="font-bold text-2xl">${parseInt(netMonthlySavings).toLocaleString()}</span>
+                      <span className="font-bold text-2xl">
+                        ${parseInt(netMonthlySavings).toLocaleString()}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -260,7 +281,7 @@ export function ROICalculator() {
                     'Reduce manual work by 75%',
                     'Eliminate 94% of errors',
                     'Real-time insights & analytics',
-                    'Scalable as you grow'
+                    'Scalable as you grow',
                   ].map((benefit, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <CheckCircle className="w-5 h-5 flex-shrink-0" />
@@ -295,7 +316,8 @@ export function ROICalculator() {
           className="text-center mt-12"
         >
           <p className="text-sm text-gray-600">
-            * Calculations based on industry averages and actual customer results. Individual results may vary.
+            * Calculations based on industry averages and actual customer results. Individual
+            results may vary.
           </p>
         </motion.div>
       </div>

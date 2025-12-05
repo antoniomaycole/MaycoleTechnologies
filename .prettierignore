@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+.next
+coverage
+*.log
+
+# Files with TypeScript/JSX patterns that Prettier has difficulty with
+src/lib/image-optimization.ts
+src/lib/accessibility.ts
+
+# Auto-generated or config files
+.git
+.env*

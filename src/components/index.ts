@@ -1,6 +1,6 @@
 /**
  * MaycoleTechnologies™ Component Index
- * 
+ *
  * Central export file for all components to improve import organization
  * and enable better tree-shaking in production builds.
  */
@@ -13,6 +13,7 @@ export { TickerTape } from './TickerTape';
 
 // Logo & Branding
 export { AtomicLogo } from './AtomicLogo';
+export { StillBrandLogo, BrandIcon } from './StillBrandLogo';
 
 // Page Sections
 export { HeroSection } from './HeroSection';
@@ -25,6 +26,13 @@ export { EnhancedPaymentSection } from './EnhancedPaymentSection';
 export { ContactSection } from './ContactSection';
 export { MainSections } from './MainSections';
 export { LeadCapture } from './LeadCapture';
+
+// Merchandise Store Components
+export { MerchandiseSection } from './MerchandiseSection';
+export { MerchandiseCart } from './MerchandiseCart';
+export { MerchandiseCheckout } from './MerchandiseCheckout';
+export { StorePage } from './StorePage';
+export { MerchandiseBrandDisplay } from './MerchandiseBrandDisplay';
 
 // UI Components (re-export from shadcn/ui)
 export { Button } from './ui/button';
@@ -41,28 +49,63 @@ export { Toaster } from './ui/sonner';
 export { toast } from 'sonner';
 
 // Form Components
-export { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
+export {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form';
 export { Checkbox } from './ui/checkbox';
 
 // Layout & Navigation
-export { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from './ui/navigation-menu';
-export { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
+export {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from './ui/navigation-menu';
+export {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from './ui/sheet';
 
 // Data Display
-export { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from './ui/table';
 export { Progress } from './ui/progress';
 export { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 // Utility Components
 export { ImageWithFallback } from './ImageWithFallback';
-export { PWAInstallPrompt, PWAStatusIndicator, PWAFeaturesStatus, PWAUpdatePrompt } from './PWAComponents';
+export {
+  PWAInstallPrompt,
+  PWAStatusIndicator,
+  PWAFeaturesStatus,
+  PWAUpdatePrompt,
+} from './PWAComponents';
 
 // Types and Utilities
 export type { ComponentProps } from 'react';
 
 /**
  * Component Categories for Better Organization:
- * 
+ *
  * Layout: Header, Footer, TickerTape, MainSections
  * Sections: Hero, About, Services, Products, Technologies, Payment, Contact
  * Branding: AtomicLogo

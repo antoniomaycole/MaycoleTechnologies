@@ -49,7 +49,7 @@ export class AuthService {
    */
   static async login(credentials: LoginCredentials): Promise<AuthSession> {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Mock authentication - in production, this would call your backend
     if (credentials.email === 'demo@maycoletech.com' && credentials.password === 'demo123') {
@@ -60,8 +60,8 @@ export class AuthService {
 
     // Check if user exists in local storage (for demo purposes)
     const users = this.getStoredUsers();
-    const user = users.find(u => u.email === credentials.email);
-    
+    const user = users.find((u) => u.email === credentials.email);
+
     if (!user) {
       throw new Error('Invalid email or password');
     }
@@ -77,11 +77,11 @@ export class AuthService {
    */
   static async signup(credentials: SignupCredentials): Promise<AuthSession> {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     // Check if email already exists
     const users = this.getStoredUsers();
-    if (users.find(u => u.email === credentials.email)) {
+    if (users.find((u) => u.email === credentials.email)) {
       throw new Error('Email already registered');
     }
 
@@ -150,7 +150,7 @@ export class AuthService {
       if (!stored) return null;
 
       const session: AuthSession = JSON.parse(stored);
-      
+
       // Check if session expired
       const expiry = localStorage.getItem(SESSION_EXPIRY_KEY);
       if (expiry && new Date(expiry) < new Date()) {
@@ -182,7 +182,7 @@ export class AuthService {
     }
 
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     const newSession: AuthSession = {
       ...session,
@@ -204,7 +204,7 @@ export class AuthService {
     }
 
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise((resolve) => setTimeout(resolve, 800));
 
     const updatedUser: User = {
       ...session.user,
@@ -218,10 +218,10 @@ export class AuthService {
     };
 
     this.storeSession(newSession, true);
-    
+
     // Update in stored users
     const users = this.getStoredUsers();
-    const index = users.findIndex(u => u.id === updatedUser.id);
+    const index = users.findIndex((u) => u.id === updatedUser.id);
     if (index !== -1) {
       users[index] = updatedUser;
       this.storeUsers(users);
@@ -240,7 +240,7 @@ export class AuthService {
     }
 
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // In production, verify current password and hash new password
     // For demo, just simulate success
@@ -393,7 +393,7 @@ export class PasswordValidator {
 
   static getStrength(password: string): 'weak' | 'medium' | 'strong' {
     const validation = this.validate(password);
-    
+
     if (password.length < 8) return 'weak';
     if (validation.errors.length > 2) return 'weak';
     if (validation.errors.length > 0) return 'medium';

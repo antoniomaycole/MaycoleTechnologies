@@ -3,75 +3,75 @@ import { Shield, Lock, Eye, Database, UserCheck, Mail } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 
 export function PrivacyPolicy() {
-  const lastUpdated = "December 1, 2025";
+  const lastUpdated = 'December 1, 2025';
 
   const sections = [
     {
       icon: Database,
-      title: "Information We Collect",
+      title: 'Information We Collect',
       content: [
-        "Personal Information: Name, email address, phone number, company name when you fill out forms or create an account",
-        "Usage Data: IP address, browser type, device information, pages visited, time spent on pages",
-        "Cookies: We use cookies to enhance your experience. See our Cookie Policy for details",
-        "Payment Information: Credit card details are processed securely through Stripe and never stored on our servers",
-      ]
+        'Personal Information: Name, email address, phone number, company name when you fill out forms or create an account',
+        'Usage Data: IP address, browser type, device information, pages visited, time spent on pages',
+        'Cookies: We use cookies to enhance your experience. See our Cookie Policy for details',
+        'Payment Information: Credit card details are processed securely through Stripe and never stored on our servers',
+      ],
     },
     {
       icon: Lock,
-      title: "How We Use Your Information",
+      title: 'How We Use Your Information',
       content: [
-        "To provide and maintain our services, including MaycoleTracker™",
-        "To notify you about changes to our services or important updates",
-        "To provide customer support and respond to your inquiries",
-        "To monitor usage and improve our services",
-        "To detect, prevent, and address technical issues and fraudulent activity",
-        "To send marketing communications (with your consent, which you can withdraw at any time)",
-      ]
+        'To provide and maintain our services, including MaycoleTracker™',
+        'To notify you about changes to our services or important updates',
+        'To provide customer support and respond to your inquiries',
+        'To monitor usage and improve our services',
+        'To detect, prevent, and address technical issues and fraudulent activity',
+        'To send marketing communications (with your consent, which you can withdraw at any time)',
+      ],
     },
     {
       icon: Eye,
-      title: "Information Sharing",
+      title: 'Information Sharing',
       content: [
-        "We do NOT sell your personal information to third parties",
-        "Service Providers: We share data with trusted partners (Stripe for payments, SendGrid for emails, etc.) who help us operate our services",
-        "Legal Requirements: We may disclose information if required by law or to protect our rights",
-        "Business Transfers: In the event of a merger or acquisition, your information may be transferred",
-      ]
+        'We do NOT sell your personal information to third parties',
+        'Service Providers: We share data with trusted partners (Stripe for payments, SendGrid for emails, etc.) who help us operate our services',
+        'Legal Requirements: We may disclose information if required by law or to protect our rights',
+        'Business Transfers: In the event of a merger or acquisition, your information may be transferred',
+      ],
     },
     {
       icon: Shield,
-      title: "Data Security",
+      title: 'Data Security',
       content: [
-        "We implement industry-standard security measures to protect your data",
-        "SSL/TLS encryption for all data transmission",
-        "Regular security audits and vulnerability assessments",
-        "Limited access to personal information on a need-to-know basis",
-        "However, no method of transmission over the Internet is 100% secure",
-      ]
+        'We implement industry-standard security measures to protect your data',
+        'SSL/TLS encryption for all data transmission',
+        'Regular security audits and vulnerability assessments',
+        'Limited access to personal information on a need-to-know basis',
+        'However, no method of transmission over the Internet is 100% secure',
+      ],
     },
     {
       icon: UserCheck,
-      title: "Your Rights (GDPR & CCPA)",
+      title: 'Your Rights (GDPR & CCPA)',
       content: [
-        "Access: Request a copy of your personal data",
-        "Rectification: Request correction of inaccurate data",
-        "Erasure: Request deletion of your data (\"right to be forgotten\")",
-        "Portability: Request transfer of your data to another service",
-        "Objection: Object to processing of your data for marketing purposes",
-        "Withdraw Consent: Opt-out of communications at any time",
-        "To exercise these rights, contact us at privacy@maycoletechnologies.com",
-      ]
+        'Access: Request a copy of your personal data',
+        'Rectification: Request correction of inaccurate data',
+        'Erasure: Request deletion of your data ("right to be forgotten")',
+        'Portability: Request transfer of your data to another service',
+        'Objection: Object to processing of your data for marketing purposes',
+        'Withdraw Consent: Opt-out of communications at any time',
+        'To exercise these rights, contact us at privacy@maycoletechnologies.com',
+      ],
     },
     {
       icon: Mail,
-      title: "Cookies & Tracking",
+      title: 'Cookies & Tracking',
       content: [
-        "Essential Cookies: Required for site functionality",
-        "Analytics Cookies: Help us understand how visitors use our site",
-        "Marketing Cookies: Used to deliver relevant advertisements",
-        "You can control cookies through your browser settings",
-        "See our detailed Cookie Policy for more information",
-      ]
+        'Essential Cookies: Required for site functionality',
+        'Analytics Cookies: Help us understand how visitors use our site',
+        'Marketing Cookies: Used to deliver relevant advertisements',
+        'You can control cookies through your browser settings',
+        'See our detailed Cookie Policy for more information',
+      ],
     },
   ];
 
@@ -92,12 +92,10 @@ export function PrivacyPolicy() {
           </h1>
           <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-4">
             Your privacy is important to us. This policy explains how MaycoleTechnologies
-            <sup className="text-xs align-super">™</sup> collects, 
-            uses, and protects your personal information.
+            <sup className="text-xs align-super">™</sup> collects, uses, and protects your personal
+            information.
           </p>
-          <p className="text-sm text-gray-400">
-            Last Updated: {lastUpdated}
-          </p>
+          <p className="text-sm text-gray-400">Last Updated: {lastUpdated}</p>
         </motion.div>
 
         {/* Important Notice */}
@@ -112,15 +110,16 @@ export function PrivacyPolicy() {
               <div className="flex items-start gap-4">
                 <Shield className="w-8 h-8 text-yellow-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-xl font-semibold mb-2 text-yellow-600">
-                    Important Notice
-                  </h3>
+                  <h3 className="text-xl font-semibold mb-2 text-yellow-600">Important Notice</h3>
                   <p className="text-gray-300">
-                    <strong>MaycoleTechnologies™ is NOT designed for collecting Personally Identifiable 
-                    Information (PII) or securing highly sensitive data.</strong> Our platform is intended 
-                    for inventory management and business operations. Do not store sensitive personal information, 
-                    medical records, financial account details, or other highly confidential data in our system. 
-                    For questions about data security, contact us at security@maycoletechnologies.com.
+                    <strong>
+                      MaycoleTechnologies™ is NOT designed for collecting Personally Identifiable
+                      Information (PII) or securing highly sensitive data.
+                    </strong>{' '}
+                    Our platform is intended for inventory management and business operations. Do
+                    not store sensitive personal information, medical records, financial account
+                    details, or other highly confidential data in our system. For questions about
+                    data security, contact us at security@maycoletechnologies.com.
                   </p>
                 </div>
               </div>
@@ -173,9 +172,10 @@ export function PrivacyPolicy() {
             <CardContent className="p-8">
               <h2 className="text-2xl font-semibold mb-4">Data Retention</h2>
               <p className="text-gray-300 mb-4">
-                We retain your personal information only for as long as necessary to provide our services 
-                and comply with legal obligations. When you delete your account, we will delete or anonymize 
-                your personal data within 30 days, except where we are legally required to retain it.
+                We retain your personal information only for as long as necessary to provide our
+                services and comply with legal obligations. When you delete your account, we will
+                delete or anonymize your personal data within 30 days, except where we are legally
+                required to retain it.
               </p>
             </CardContent>
           </Card>
@@ -184,9 +184,10 @@ export function PrivacyPolicy() {
             <CardContent className="p-8">
               <h2 className="text-2xl font-semibold mb-4">Children's Privacy</h2>
               <p className="text-gray-300 mb-4">
-                Our services are not intended for children under the age of 13 (or 16 in the EU). 
-                We do not knowingly collect personal information from children. If you believe we have 
-                collected information from a child, please contact us immediately at privacy@maycoletechnologies.com.
+                Our services are not intended for children under the age of 13 (or 16 in the EU). We
+                do not knowingly collect personal information from children. If you believe we have
+                collected information from a child, please contact us immediately at
+                privacy@maycoletechnologies.com.
               </p>
             </CardContent>
           </Card>
@@ -195,9 +196,10 @@ export function PrivacyPolicy() {
             <CardContent className="p-8">
               <h2 className="text-2xl font-semibold mb-4">International Data Transfers</h2>
               <p className="text-gray-300 mb-4">
-                Your information may be transferred to and processed in countries other than your country 
-                of residence. These countries may have different data protection laws. We ensure appropriate 
-                safeguards are in place to protect your information in accordance with this Privacy Policy.
+                Your information may be transferred to and processed in countries other than your
+                country of residence. These countries may have different data protection laws. We
+                ensure appropriate safeguards are in place to protect your information in accordance
+                with this Privacy Policy.
               </p>
             </CardContent>
           </Card>
@@ -206,9 +208,9 @@ export function PrivacyPolicy() {
             <CardContent className="p-8">
               <h2 className="text-2xl font-semibold mb-4">Changes to This Policy</h2>
               <p className="text-gray-300 mb-4">
-                We may update this Privacy Policy from time to time. We will notify you of any changes by 
-                posting the new policy on this page and updating the "Last Updated" date. You are advised 
-                to review this Privacy Policy periodically for any changes.
+                We may update this Privacy Policy from time to time. We will notify you of any
+                changes by posting the new policy on this page and updating the "Last Updated" date.
+                You are advised to review this Privacy Policy periodically for any changes.
               </p>
             </CardContent>
           </Card>
@@ -217,14 +219,22 @@ export function PrivacyPolicy() {
             <CardContent className="p-8">
               <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
               <p className="text-gray-300 leading-relaxed">
-                If you have any questions about this Privacy Policy or how we handle your data, 
+                If you have any questions about this Privacy Policy or how we handle your data,
                 please don't hesitate to contact us:
               </p>
               <div className="space-y-2 text-gray-300">
-                <p><strong>General Support:</strong> help@maycoletechnologies.com</p>
-                <p><strong>Privacy Inquiries:</strong> privacy@maycoletechnologies.com</p>
-                <p><strong>Phone:</strong> (213) 312-7814</p>
-                <p><strong>Address:</strong> MaycoleTechnologies™, Global Remote Team</p>
+                <p>
+                  <strong>General Support:</strong> help@maycoletechnologies.com
+                </p>
+                <p>
+                  <strong>Privacy Inquiries:</strong> privacy@maycoletechnologies.com
+                </p>
+                <p>
+                  <strong>Phone:</strong> (213) 312-7814
+                </p>
+                <p>
+                  <strong>Address:</strong> MaycoleTechnologies™, Global Remote Team
+                </p>
               </div>
             </CardContent>
           </Card>

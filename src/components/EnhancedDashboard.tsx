@@ -13,17 +13,17 @@ import { useAuth } from '../contexts/AuthContext';
 import { api } from '../lib/api';
 import { useRealtimeSubscription } from '../lib/realtime';
 import { InventoryMetrics, SalesMetrics, Product, StockAlert } from '../types/database';
-import { 
-  Package, 
-  TrendingUp, 
-  AlertTriangle, 
+import {
+  Package,
+  TrendingUp,
+  AlertTriangle,
   DollarSign,
   Truck,
   BarChart3,
   ArrowUpRight,
   ArrowDownRight,
   RefreshCw,
-  Loader2
+  Loader2,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -60,7 +60,7 @@ export function EnhancedDashboard() {
       isResolved: false,
       createdAt: event.timestamp,
     };
-    setAlerts(prev => [newAlert, ...prev]);
+    setAlerts((prev) => [newAlert, ...prev]);
   });
 
   const loadDashboardData = async () => {
@@ -118,7 +118,7 @@ export function EnhancedDashboard() {
       change: '+12%',
       trend: 'up' as const,
       icon: Package,
-      color: 'text-blue-600'
+      color: 'text-blue-600',
     },
     {
       title: 'Inventory Value',
@@ -126,7 +126,7 @@ export function EnhancedDashboard() {
       change: '+8%',
       trend: 'up' as const,
       icon: DollarSign,
-      color: 'text-green-600'
+      color: 'text-green-600',
     },
     {
       title: 'Low Stock Items',
@@ -134,7 +134,7 @@ export function EnhancedDashboard() {
       change: '-5%',
       trend: 'down' as const,
       icon: AlertTriangle,
-      color: 'text-orange-500'
+      color: 'text-orange-500',
     },
     {
       title: 'Out of Stock',
@@ -142,20 +142,15 @@ export function EnhancedDashboard() {
       change: '-15%',
       trend: 'down' as const,
       icon: Package,
-      color: 'text-red-500'
-    }
+      color: 'text-red-500',
+    },
   ];
 
   return (
     <div className="min-h-screen bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
         {/* Dashboard Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl mb-2 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
@@ -245,9 +240,7 @@ export function EnhancedDashboard() {
                           <Badge variant="outline" className="border-orange-500/30 text-orange-400">
                             {product.quantity} left
                           </Badge>
-                          <p className="text-xs text-gray-400 mt-1">
-                            Min: {product.minStockLevel}
-                          </p>
+                          <p className="text-xs text-gray-400 mt-1">Min: {product.minStockLevel}</p>
                         </div>
                       </div>
                     ))}
@@ -282,8 +275,8 @@ export function EnhancedDashboard() {
                           alert.severity === 'critical'
                             ? 'bg-red-500/10 border-red-500/30'
                             : alert.severity === 'warning'
-                            ? 'bg-orange-500/10 border-orange-500/30'
-                            : 'bg-blue-500/10 border-blue-500/30'
+                              ? 'bg-orange-500/10 border-orange-500/30'
+                              : 'bg-blue-500/10 border-blue-500/30'
                         }`}
                       >
                         <div className="flex items-start justify-between">
@@ -299,8 +292,8 @@ export function EnhancedDashboard() {
                               alert.severity === 'critical'
                                 ? 'border-red-500/30 text-red-400'
                                 : alert.severity === 'warning'
-                                ? 'border-orange-500/30 text-orange-400'
-                                : 'border-blue-500/30 text-blue-400'
+                                  ? 'border-orange-500/30 text-orange-400'
+                                  : 'border-blue-500/30 text-blue-400'
                             }`}
                           >
                             {alert.severity}

@@ -8,11 +8,7 @@ import { config } from './config';
 // Extend Window interface for gtag
 declare global {
   interface Window {
-    gtag?: (
-      command: string,
-      targetId: string,
-      config?: Record<string, any>
-    ) => void;
+    gtag?: (command: string, targetId: string, config?: Record<string, any>) => void;
     dataLayer?: any[];
   }
 }
@@ -72,10 +68,7 @@ export const trackPageView = (path: string, title?: string): void => {
 /**
  * Track custom event
  */
-export const trackEvent = (
-  eventName: string,
-  eventParams?: Record<string, any>
-): void => {
+export const trackEvent = (eventName: string, eventParams?: Record<string, any>): void => {
   if (!isAnalyticsEnabled() || !window.gtag) return;
 
   window.gtag('event', eventName, eventParams);
@@ -143,11 +136,13 @@ export const trackProductInterest = (productName: string): void => {
  */
 export const trackFreeTrialStart = (): void => {
   trackEvent('begin_checkout', {
-    items: [{
-      item_name: 'MaycoleTracker Free Trial',
-      item_category: 'Software',
-      price: 0,
-    }],
+    items: [
+      {
+        item_name: 'MaycoleTracker Free Trial',
+        item_category: 'Software',
+        price: 0,
+      },
+    ],
   });
 };
 
@@ -221,10 +216,12 @@ export const trackROICalculator = (
  */
 export const trackPricingView = (planName: string): void => {
   trackEvent('view_item', {
-    items: [{
-      item_name: planName,
-      item_category: 'Subscription',
-    }],
+    items: [
+      {
+        item_name: planName,
+        item_category: 'Subscription',
+      },
+    ],
   });
 };
 
@@ -311,7 +308,10 @@ export const initScrollTracking = (): void => {
 
     Object.keys(scrollTracked).forEach((threshold) => {
       const thresholdNum = parseInt(threshold);
-      if (scrollPercentage >= thresholdNum && !scrollTracked[thresholdNum as keyof typeof scrollTracked]) {
+      if (
+        scrollPercentage >= thresholdNum &&
+        !scrollTracked[thresholdNum as keyof typeof scrollTracked]
+      ) {
         trackScrollDepth(thresholdNum);
         scrollTracked[thresholdNum as keyof typeof scrollTracked] = true;
       }

@@ -14,17 +14,20 @@ Thank you for your interest in contributing to **MaycoleTechnologies™**! This 
 ### Development Setup
 
 1. **Fork and Clone**
+
    ```bash
    git clone https://github.com/your-username/maycole-technologies-website.git
    cd maycole-technologies-website
    ```
 
 2. **Install Dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start Development Server**
+
    ```bash
    npm run dev
    ```
@@ -49,24 +52,28 @@ Thank you for your interest in contributing to **MaycoleTechnologies™**! This 
 ### Code Standards
 
 #### TypeScript
+
 - Use strict typing - avoid `any` types
 - Prefer explicit return types for functions
 - Use proper interface definitions
 - Follow naming conventions: PascalCase for components, camelCase for variables
 
 #### React Components
+
 - One component per file
 - Use functional components with hooks
 - Proper props typing with interfaces
 - Follow component naming: `ComponentName.tsx`
 
 #### Styling
+
 - Use Tailwind CSS utilities
 - Follow design system in `styles/globals.css`
 - **IMPORTANT**: Don't override font sizes/weights without specific request
 - Use brand color utilities: `.text-maycole-green`, `.text-maycole-gold`
 
 ### File Organization
+
 ```
 components/
 ├── ui/              # shadcn/ui components (don't modify)
@@ -77,17 +84,20 @@ components/
 ## 🔧 Development Workflow
 
 ### 1. Create Feature Branch
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
 ### 2. Make Changes
+
 - Follow coding standards
 - Test thoroughly
 - Maintain brand guidelines
 - Ensure responsive design
 
 ### 3. Test Your Changes
+
 ```bash
 npm run lint          # Check for linting issues
 npm run lint:fix      # Auto-fix linting issues
@@ -95,12 +105,14 @@ npm run build         # Ensure build works
 ```
 
 ### 4. Commit Changes
+
 ```bash
 git add .
 git commit -m "feat: add new feature description"
 ```
 
 #### Commit Message Format
+
 ```
 type(scope): description
 
@@ -115,6 +127,7 @@ Types:
 ```
 
 ### 5. Push and Create PR
+
 ```bash
 git push origin feature/your-feature-name
 ```
@@ -124,44 +137,56 @@ Then create a Pull Request on GitHub.
 ## 🎨 Design Guidelines
 
 ### Component Design
+
 - **Professional**: Oracle/Apple level quality
 - **Consistent**: Use established patterns
 - **Responsive**: Mobile-first approach
 - **Accessible**: WCAG 2.1 AA compliance
 
 ### Animation Standards
+
 - Use Motion React for animations
 - Smooth, professional transitions
 - Performance-conscious implementations
 - Subtle, not distracting
 
 ### Color Usage
+
 ```css
 /* Company name - always green */
-.maycole-company-name { color: #1e7f3e; }
+.maycole-company-name {
+  color: #1e7f3e;
+}
 
 /* Tagline - always gold */
-.maycole-tagline { color: #ffd700; }
+.maycole-tagline {
+  color: #ffd700;
+}
 
 /* Gradients for headers */
-.maycole-gradient-text { /* green to gold gradient */ }
+.maycole-gradient-text {
+  /* green to gold gradient */
+}
 ```
 
 ## 🚫 What NOT to Do
 
 ### Brand Violations
+
 - ❌ Don't change company name formatting
 - ❌ Don't remove trademark symbols
 - ❌ Don't use different colors for brand elements
 - ❌ Don't compromise professional quality
 
 ### Code Violations
+
 - ❌ Don't use `any` types
 - ❌ Don't override typography without purpose
 - ❌ Don't break responsive design
 - ❌ Don't ignore accessibility
 
 ### Performance Issues
+
 - ❌ Don't add large dependencies without justification
 - ❌ Don't block the main thread
 - ❌ Don't add unoptimized images
@@ -170,6 +195,7 @@ Then create a Pull Request on GitHub.
 ## 📝 Pull Request Guidelines
 
 ### PR Checklist
+
 - [ ] Code follows style guidelines
 - [ ] All tests pass (`npm run lint`, `npm run build`)
 - [ ] Changes are responsive across devices
@@ -178,26 +204,32 @@ Then create a Pull Request on GitHub.
 - [ ] No performance regressions
 
 ### PR Description Template
+
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Testing
+
 - [ ] Tested on desktop
 - [ ] Tested on mobile
 - [ ] Cross-browser tested
 - [ ] Performance tested
 
 ## Screenshots
+
 [Add screenshots for UI changes]
 
 ## Checklist
+
 - [ ] Code follows guidelines
 - [ ] Self-review completed
 - [ ] Brand consistency maintained
@@ -206,11 +238,13 @@ Brief description of changes
 ## 🐛 Bug Reports
 
 ### Bug Report Template
+
 ```markdown
 **Bug Description**
 Clear description of the bug
 
 **Steps to Reproduce**
+
 1. Go to '...'
 2. Click on '...'
 3. See error
@@ -222,6 +256,7 @@ What should happen
 If applicable
 
 **Environment**
+
 - Browser: [e.g. Chrome 120]
 - Device: [e.g. iPhone 12]
 - OS: [e.g. iOS 16]
@@ -230,6 +265,7 @@ If applicable
 ## 💡 Feature Requests
 
 ### Feature Request Template
+
 ```markdown
 **Feature Description**
 Clear description of the proposed feature
@@ -261,6 +297,7 @@ Any other relevant information
 ## 🏆 Recognition
 
 Contributors will be recognized in:
+
 - GitHub contributors list
 - Release notes (for significant contributions)
 - Documentation credits

@@ -2,15 +2,7 @@ import { motion } from 'motion/react';
 import { MaycoleTrackerIconButton } from './MaycoleTrackerButton';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { 
-  LayoutDashboard, 
-  Package, 
-  BarChart3, 
-  Settings, 
-  Bell,
-  Search,
-  User
-} from 'lucide-react';
+import { LayoutDashboard, Package, BarChart3, Settings, Bell, Search, User } from 'lucide-react';
 
 interface TrackerHeaderProps {
   currentView: 'dashboard' | 'inventory' | 'analytics' | 'settings';
@@ -26,7 +18,7 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
   ] as const;
 
   return (
-    <motion.header 
+    <motion.header
       className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-lg border-b border-maycole-green/20"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -34,15 +26,14 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          
           {/* Brand Logo Section */}
-          <motion.div 
+          <motion.div
             className="flex items-center space-x-4"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
-            <MaycoleTrackerIconButton 
-              size="lg" 
+            <MaycoleTrackerIconButton
+              size="lg"
               animated={false}
               onClick={() => onViewChange('dashboard')}
               className="cursor-pointer"
@@ -53,13 +44,14 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
                   MaycoleTracker
                   <sup className="maycole-trademark">™</sup>
                 </h1>
-                <Badge variant="outline" className="border-maycole-green text-maycole-green text-xs">
+                <Badge
+                  variant="outline"
+                  className="border-maycole-green text-maycole-green text-xs"
+                >
                   Enterprise
                 </Badge>
               </div>
-              <p className="maycole-tagline text-xs">
-                Advanced Inventory Management System
-              </p>
+              <p className="maycole-tagline text-xs">Advanced Inventory Management System</p>
             </div>
           </motion.div>
 
@@ -68,16 +60,17 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = currentView === item.id;
-              
+
               return (
                 <motion.button
                   key={item.id}
                   onClick={() => onViewChange(item.id as any)}
                   className={`
                     relative flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-200
-                    ${isActive 
-                      ? 'bg-maycole-green text-white shadow-lg' 
-                      : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+                    ${
+                      isActive
+                        ? 'bg-maycole-green text-white shadow-lg'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
                     }
                   `}
                   whileHover={{ scale: 1.05 }}
@@ -85,7 +78,7 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
                 >
                   <Icon className="w-4 h-4" />
                   <span className="text-sm">{item.label}</span>
-                  
+
                   {/* Active indicator */}
                   {isActive && (
                     <motion.div
@@ -101,10 +94,9 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-3">
-            
             {/* Search Button */}
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="sm"
               className="text-gray-300 hover:text-white hover:bg-gray-800/50 p-2"
             >
@@ -113,8 +105,8 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
             </Button>
 
             {/* Notifications */}
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="sm"
               className="text-gray-300 hover:text-white hover:bg-gray-800/50 p-2 relative"
             >
@@ -126,8 +118,8 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
             </Button>
 
             {/* User Profile */}
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="sm"
               className="text-gray-300 hover:text-white hover:bg-gray-800/50 p-2"
             >
@@ -137,14 +129,14 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
 
             {/* Emergency Stock Alert */}
             <motion.div
-              animate={{ 
+              animate={{
                 scale: [1, 1.05, 1],
-                opacity: [0.8, 1, 0.8]
+                opacity: [0.8, 1, 0.8],
               }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
               }}
             >
               <Badge variant="destructive" className="text-xs font-medium">
@@ -155,11 +147,7 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
 
           {/* Mobile menu button - simplified for now */}
           <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-gray-300 hover:text-white"
-            >
+            <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
               <Package className="w-5 h-5" />
             </Button>
           </div>
@@ -172,17 +160,14 @@ export function TrackerHeader({ currentView, onViewChange }: TrackerHeaderProps)
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentView === item.id;
-            
+
             return (
               <button
                 key={item.id}
                 onClick={() => onViewChange(item.id as any)}
                 className={`
                   flex flex-col items-center space-y-1 p-2 rounded-lg font-medium transition-all duration-200
-                  ${isActive 
-                    ? 'text-maycole-green' 
-                    : 'text-gray-400 hover:text-white'
-                  }
+                  ${isActive ? 'text-maycole-green' : 'text-gray-400 hover:text-white'}
                 `}
               >
                 <Icon className="w-4 h-4" />

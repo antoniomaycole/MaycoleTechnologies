@@ -9,12 +9,14 @@ This document outlines the complete Stripe payment integration for MaycoleTechno
 ### Components
 
 1. **`src/lib/stripe.ts`** - Payment processing library
+
    - Handles Stripe initialization and API communication
    - Manages checkout sessions, payment intents, and subscriptions
    - Integrates with AnalyticsTracker for payment event logging
    - Pricing tier management and formatting utilities
 
 2. **`src/components/EnhancedPaymentSection.tsx`** - Payment UI
+
    - Displays three pricing tiers (Trial, Professional, Enterprise)
    - Handles user email input and plan selection
    - Manages checkout flow and redirects to Stripe
@@ -29,6 +31,7 @@ This document outlines the complete Stripe payment integration for MaycoleTechno
 ### Pricing Tiers
 
 #### Free Trial
+
 - **Price**: $0
 - **Duration**: 30 days
 - **Features**:
@@ -38,6 +41,7 @@ This document outlines the complete Stripe payment integration for MaycoleTechno
   - Basic analytics
 
 #### Professional
+
 - **Price**: $99/month
 - **Duration**: Monthly or Annual (with 20% discount)
 - **Features**:
@@ -51,6 +55,7 @@ This document outlines the complete Stripe payment integration for MaycoleTechno
   - API access
 
 #### Enterprise
+
 - **Price**: $299/month
 - **Duration**: Monthly or Annual (with 20% discount)
 - **Features**:
@@ -76,6 +81,7 @@ This document outlines the complete Stripe payment integration for MaycoleTechno
 ### 2. Create Products and Prices
 
 #### Professional Monthly
+
 1. Go to **Products** in Stripe Dashboard
 2. Click **Add product**
 3. Name: "Tracker Professional Monthly"
@@ -83,16 +89,19 @@ This document outlines the complete Stripe payment integration for MaycoleTechno
 5. Copy the Price ID (starts with `price_`)
 
 #### Professional Annual
+
 1. Same as above but set for Annual billing
 2. Price: $948.00 (20% discount from $1,188)
 3. Copy the Price ID
 
 #### Enterprise Monthly
+
 1. Name: "Tracker Enterprise Monthly"
 2. Price: $299.00 USD, Monthly billing
 3. Copy the Price ID
 
 #### Enterprise Annual
+
 1. Name: "Tracker Enterprise Annual"
 2. Price: $2,388.00 (20% discount from $2,988)
 3. Copy the Price ID
@@ -153,23 +162,15 @@ export function PricingPage() {
 ### Custom Payment Handling
 
 ```tsx
-import { 
-  createCheckoutSession, 
-  PRICING_TIERS 
-} from '@/lib/stripe';
+import { createCheckoutSession, PRICING_TIERS } from '@/lib/stripe';
 import { getAnalytics } from '@/lib/analytics-tracker';
 
 async function handlePayment(tierId: string, email: string) {
   const tier = PRICING_TIERS[tierId];
-  
+
   if (tier.stripePriceId) {
-    const session = await createCheckoutSession(
-      tier.stripePriceId,
-      email,
-      '/success',
-      '/pricing'
-    );
-    
+    const session = await createCheckoutSession(tier.stripePriceId, email, '/success', '/pricing');
+
     // Redirect to Stripe checkout
     window.location.href = session.url;
   }
@@ -196,7 +197,9 @@ All payment events are automatically tracked:
 ### Required Endpoints
 
 #### POST `/api/payments/intent`
+
 Create a payment intent for one-time purchases
+
 ```json
 {
   "amount": 9900,
@@ -209,6 +212,7 @@ Create a payment intent for one-time purchases
 ```
 
 Response:
+
 ```json
 {
   "clientSecret": "pi_xxx_secret_xxx",
@@ -220,7 +224,9 @@ Response:
 ```
 
 #### POST `/api/payments/checkout-session`
+
 Create a checkout session for subscriptions
+
 ```json
 {
   "priceId": "price_xxx",
@@ -231,6 +237,7 @@ Create a checkout session for subscriptions
 ```
 
 Response:
+
 ```json
 {
   "id": "cs_xxx",
@@ -240,12 +247,15 @@ Response:
 ```
 
 #### GET `/api/payments/subscription`
+
 Get customer subscription status
+
 ```
 ?customerId=cus_xxx or ?customerId=user@example.com
 ```
 
 Response:
+
 ```json
 {
   "id": "sub_xxx",
@@ -257,7 +267,9 @@ Response:
 ```
 
 #### POST `/api/payments/subscription/cancel`
+
 Cancel a subscription
+
 ```json
 {
   "subscriptionId": "sub_xxx",
@@ -266,12 +278,15 @@ Cancel a subscription
 ```
 
 #### GET `/api/payments/validate-session`
+
 Validate payment completion on success page
+
 ```
 ?sessionId=cs_xxx
 ```
 
 Response:
+
 ```json
 {
   "success": true,
@@ -281,7 +296,9 @@ Response:
 ```
 
 #### POST `/webhooks/stripe`
+
 Stripe webhook handler - processes payment events
+
 - Updates customer subscription status
 - Sends confirmation emails
 - Updates user permissions
@@ -294,16 +311,19 @@ Stripe webhook handler - processes payment events
 Use these card numbers in test mode:
 
 **Successful Payment**
+
 - Card: 4242 4242 4242 4242
 - Expiry: Any future date
 - CVC: Any 3 digits
 
 **Requires Authentication**
+
 - Card: 4000 0025 0000 3155
 - Expiry: Any future date
 - CVC: Any 3 digits
 
 **Declined Card**
+
 - Card: 5555 5555 5555 4444
 - Expiry: Any future date
 - CVC: Any 3 digits
@@ -334,16 +354,16 @@ analytics.trackEvent('payment', 'checkout_start', { priceId: 'price_xxx' });
 analytics.trackEvent('payment', 'checkout_redirect', { sessionId: 'cs_xxx' });
 
 // Payment result
-analytics.trackEvent('payment', 'success', { 
-  intentId: 'pi_xxx', 
+analytics.trackEvent('payment', 'success', {
+  intentId: 'pi_xxx',
   amount: 9900,
-  status: 'succeeded'
+  status: 'succeeded',
 });
 
 // Errors
-analytics.trackError('Card declined', { 
+analytics.trackError('Card declined', {
   context: 'payment-confirmation',
-  code: 'card_declined'
+  code: 'card_declined',
 });
 
 // Subscription management
@@ -354,20 +374,24 @@ analytics.trackEvent('payment', 'subscription_cancelled', { subscriptionId: 'sub
 ## Security Considerations
 
 1. **API Keys**
+
    - Never expose Secret Key in frontend code
    - Use `.env.local` file (added to `.gitignore`)
    - Rotate keys regularly in production
 
 2. **HTTPS Only**
+
    - All payment operations require HTTPS
    - Ensure Vercel deployment uses HTTPS
 
 3. **PCI Compliance**
+
    - Never handle raw card data
    - Use Stripe Elements or Stripe.js
    - Use Stripe-hosted checkout for maximum security
 
 4. **Webhook Verification**
+
    - Verify webhook signatures on backend
    - Use `STRIPE_WEBHOOK_SECRET` to validate requests
    - Never trust webhook data without verification
@@ -383,6 +407,7 @@ analytics.trackEvent('payment', 'subscription_cancelled', { subscriptionId: 'sub
 
 1. Go to Vercel project settings
 2. Add environment variables:
+
    ```
    VITE_STRIPE_PUBLIC_KEY
    VITE_STRIPE_PRICE_PROFESSIONAL_MONTHLY
@@ -395,6 +420,7 @@ analytics.trackEvent('payment', 'subscription_cancelled', { subscriptionId: 'sub
    ```
 
 3. Update backend endpoints:
+
    - Development: `http://localhost:3000/api`
    - Production: `https://your-api.com`
 
@@ -403,22 +429,26 @@ analytics.trackEvent('payment', 'subscription_cancelled', { subscriptionId: 'sub
 ## Troubleshooting
 
 ### "Stripe public key not configured"
+
 - Check `VITE_STRIPE_PUBLIC_KEY` in `.env.local`
 - Ensure key starts with `pk_`
 - Verify it's not expired in Stripe Dashboard
 
 ### "Failed to create checkout session"
+
 - Verify backend `/api/payments/checkout-session` is working
 - Check `VITE_API_BASE_URL` configuration
 - Review backend logs for errors
 
 ### "Payment declined" error
+
 - For test mode: Use test card numbers listed above
 - For production: Card number format is invalid
 - Verify card is not expired
 - Check billing address matches card
 
 ### Webhook events not received
+
 - Verify endpoint URL in Stripe Dashboard
 - Check webhook secret in environment variables
 - Ensure backend is publicly accessible
@@ -427,16 +457,19 @@ analytics.trackEvent('payment', 'subscription_cancelled', { subscriptionId: 'sub
 ## Future Enhancements
 
 1. **Payment Plans**
+
    - Custom billing cycles
    - Discount codes and promotional pricing
    - Volume discounts for enterprise
 
 2. **Subscription Management**
+
    - Customer billing portal
    - Self-service plan upgrades/downgrades
    - Payment method updates
 
 3. **Advanced Analytics**
+
    - Conversion rate optimization
    - Customer lifetime value tracking
    - Churn prediction
@@ -457,6 +490,7 @@ analytics.trackEvent('payment', 'subscription_cancelled', { subscriptionId: 'sub
 ## Support
 
 For questions or issues:
+
 1. Check Stripe documentation: https://stripe.com/docs
 2. Review webhook logs in Stripe Dashboard
 3. Check application logs on Vercel

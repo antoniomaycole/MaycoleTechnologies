@@ -21,23 +21,25 @@ export interface NewsletterFormData {
 /**
  * Send contact form email via SendGrid
  */
-export async function sendContactEmail(data: ContactFormData): Promise<{ success: boolean; message: string }> {
+export async function sendContactEmail(
+  data: ContactFormData
+): Promise<{ success: boolean; message: string }> {
   // Check if SendGrid is configured
   const sendgridKey = config.sendgrid.apiKey;
-  
+
   if (!sendgridKey) {
     console.warn('SendGrid API key not configured. Email not sent.');
     // In demo mode, simulate success
     if (config.demo.enabled) {
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
       return {
         success: true,
-        message: 'Demo mode: Email simulated successfully'
+        message: 'Demo mode: Email simulated successfully',
       };
     }
     return {
       success: false,
-      message: 'Email service not configured'
+      message: 'Email service not configured',
     };
   }
 
@@ -47,49 +49,53 @@ export async function sendContactEmail(data: ContactFormData): Promise<{ success
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${sendgridKey}`
+        Authorization: `Bearer ${sendgridKey}`,
       },
       body: JSON.stringify({
-        personalizations: [{
-          to: [{ email: config.contact.email }],
-          subject: `Contact Form: ${data.company || 'New Inquiry'}`
-        }],
+        personalizations: [
+          {
+            to: [{ email: config.contact.email }],
+            subject: `Contact Form: ${data.company || 'New Inquiry'}`,
+          },
+        ],
         from: {
           email: config.sendgrid.fromEmail,
-          name: 'MaycoleTechnologies™ Website'
+          name: 'MaycoleTechnologies™ Website',
         },
-        content: [{
-          type: 'text/html',
-          value: `
+        content: [
+          {
+            type: 'text/html',
+            value: `
             <h2>New Contact Form Submission</h2>
             <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
             <p><strong>Email:</strong> ${data.email}</p>
             <p><strong>Company:</strong> ${data.company}</p>
             <p><strong>Message:</strong></p>
             <p>${data.message}</p>
-          `
-        }]
-      })
+          `,
+          },
+        ],
+      }),
     });
 
     if (response.ok) {
       return {
         success: true,
-        message: 'Email sent successfully!'
+        message: 'Email sent successfully!',
       };
     } else {
       const error = await response.json();
       console.error('SendGrid error:', error);
       return {
         success: false,
-        message: 'Failed to send email. Please try again.'
+        message: 'Failed to send email. Please try again.',
       };
     }
   } catch (error) {
     console.error('Email sending error:', error);
     return {
       success: false,
-      message: 'An error occurred. Please try again later.'
+      message: 'An error occurred. Please try again later.',
     };
   }
 }
@@ -97,7 +103,9 @@ export async function sendContactEmail(data: ContactFormData): Promise<{ success
 /**
  * Subscribe to newsletter via Mailchimp
  */
-export async function subscribeToNewsletter(data: NewsletterFormData): Promise<{ success: boolean; message: string }> {
+export async function subscribeToNewsletter(
+  data: NewsletterFormData
+): Promise<{ success: boolean; message: string }> {
   // Check if Mailchimp is configured
   const mailchimpKey = config.mailchimp.apiKey;
   const audienceId = config.mailchimp.audienceId;
@@ -107,15 +115,15 @@ export async function subscribeToNewsletter(data: NewsletterFormData): Promise<{
     console.warn('Mailchimp not configured. Newsletter subscription not sent.');
     // In demo mode, simulate success
     if (config.demo.enabled) {
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
       return {
         success: true,
-        message: 'Demo mode: Subscription simulated successfully'
+        message: 'Demo mode: Subscription simulated successfully',
       };
     }
     return {
       success: false,
-      message: 'Newsletter service not configured'
+      message: 'Newsletter service not configured',
     };
   }
 
@@ -127,47 +135,47 @@ export async function subscribeToNewsletter(data: NewsletterFormData): Promise<{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Basic ${btoa(`anystring:${mailchimpKey}`)}`
+          Authorization: `Basic ${btoa(`anystring:${mailchimpKey}`)}`,
         },
         body: JSON.stringify({
           email_address: data.email,
           status: 'subscribed',
           merge_fields: {
             FNAME: data.name?.split(' ')[0] || '',
-            LNAME: data.name?.split(' ').slice(1).join(' ') || ''
+            LNAME: data.name?.split(' ').slice(1).join(' ') || '',
           },
-          tags: ['Website Signup']
-        })
+          tags: ['Website Signup'],
+        }),
       }
     );
 
     if (response.ok) {
       return {
         success: true,
-        message: 'Successfully subscribed to newsletter!'
+        message: 'Successfully subscribed to newsletter!',
       };
     } else {
       const error = await response.json();
-      
+
       // Check if already subscribed
       if (error.title === 'Member Exists') {
         return {
           success: true,
-          message: 'You are already subscribed!'
+          message: 'You are already subscribed!',
         };
       }
-      
+
       console.error('Mailchimp error:', error);
       return {
         success: false,
-        message: 'Failed to subscribe. Please try again.'
+        message: 'Failed to subscribe. Please try again.',
       };
     }
   } catch (error) {
     console.error('Newsletter subscription error:', error);
     return {
       success: false,
-      message: 'An error occurred. Please try again later.'
+      message: 'An error occurred. Please try again later.',
     };
   }
 }
@@ -176,36 +184,39 @@ export async function subscribeToNewsletter(data: NewsletterFormData): Promise<{
  * Alternative: Use Netlify Forms (no API key needed)
  * Just add data-netlify="true" to your form HTML
  */
-export async function sendViaNetlifyForms(formName: string, data: Record<string, any>): Promise<{ success: boolean; message: string }> {
+export async function sendViaNetlifyForms(
+  formName: string,
+  data: Record<string, any>
+): Promise<{ success: boolean; message: string }> {
   try {
     const formData = new FormData();
     formData.append('form-name', formName);
-    
-    Object.keys(data).forEach(key => {
+
+    Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
 
     const response = await fetch('/', {
       method: 'POST',
-      body: formData
+      body: formData,
     });
 
     if (response.ok) {
       return {
         success: true,
-        message: 'Form submitted successfully!'
+        message: 'Form submitted successfully!',
       };
     } else {
       return {
         success: false,
-        message: 'Failed to submit form. Please try again.'
+        message: 'Failed to submit form. Please try again.',
       };
     }
   } catch (error) {
     console.error('Netlify form error:', error);
     return {
       success: false,
-      message: 'An error occurred. Please try again later.'
+      message: 'An error occurred. Please try again later.',
     };
   }
 }

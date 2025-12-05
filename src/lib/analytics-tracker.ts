@@ -1,6 +1,6 @@
 /**
  * Analytics Tracking System
- * 
+ *
  * Tracks every click, interaction, and page view
  * Provides visitor metrics without requiring email capture
  * Records user behavior patterns for conversion optimization
@@ -9,7 +9,15 @@
 import { useEffect, useCallback, useRef } from 'react';
 
 interface AnalyticsEvent {
-  type: 'click' | 'view' | 'scroll' | 'form_start' | 'form_submit' | 'error' | 'engagement' | 'payment';
+  type:
+    | 'click'
+    | 'view'
+    | 'scroll'
+    | 'form_start'
+    | 'form_submit'
+    | 'error'
+    | 'engagement'
+    | 'payment';
   target: string;
   section?: string;
   timestamp: number;
@@ -115,44 +123,48 @@ class AnalyticsTracker {
   }
 
   private setupClickTracking(): void {
-    document.addEventListener('click', (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      const clickTarget = this.getElementIdentifier(target);
+    document.addEventListener(
+      'click',
+      (event: MouseEvent) => {
+        const target = event.target as HTMLElement;
+        const clickTarget = this.getElementIdentifier(target);
 
-      if (clickTarget) {
-        this.trackEvent('click', clickTarget, {
-          x: event.clientX,
-          y: event.clientY,
-          elementType: target.tagName,
-          elementClass: target.className,
-          elementId: target.id,
-          text: this.truncateText(target.textContent || '', 100),
-        });
-      }
-    }, true); // Use capture phase to catch all clicks
+        if (clickTarget) {
+          this.trackEvent('click', clickTarget, {
+            x: event.clientX,
+            y: event.clientY,
+            elementType: target.tagName,
+            elementClass: target.className,
+            elementId: target.id,
+            text: this.truncateText(target.textContent || '', 100),
+          });
+        }
+      },
+      true
+    ); // Use capture phase to catch all clicks
   }
 
   private setupScrollTracking(): void {
     let scrollTimeout: NodeJS.Timeout | null = null;
 
     window.addEventListener('scroll', () => {
-      const scrollPercentage = this.getScrollDepth();
+      this.scrollDepth = this.getScrollDepth();
 
-      if (scrollPercentage > this.maxScrollDepth) {
-        this.maxScrollDepth = scrollPercentage;
+      if (this.scrollDepth > this.maxScrollDepth) {
+        this.maxScrollDepth = this.scrollDepth;
 
         // Track milestones: 25%, 50%, 75%, 100%
         if (
-          scrollPercentage >= 25 ||
-          scrollPercentage >= 50 ||
-          scrollPercentage >= 75 ||
-          scrollPercentage >= 100
+          this.scrollDepth >= 25 ||
+          this.scrollDepth >= 50 ||
+          this.scrollDepth >= 75 ||
+          this.scrollDepth >= 100
         ) {
           if (scrollTimeout) clearTimeout(scrollTimeout);
           scrollTimeout = setTimeout(() => {
             this.trackEvent('scroll', 'page', {
-              depth: scrollPercentage,
-              milestone: Math.floor(scrollPercentage / 25) * 25,
+              depth: this.scrollDepth,
+              milestone: Math.floor(this.scrollDepth / 25) * 25,
             });
           }, 500); // Debounce
         }
@@ -181,7 +193,7 @@ class AnalyticsTracker {
   private getElementIdentifier(element: HTMLElement): string {
     // Try to get unique identifier
     if (element.id) return `#${element.id}`;
-    if (element.name) return `[name="${element.name}"]`;
+    if ((element as HTMLInputElement).name) return `[name="${(element as HTMLInputElement).name}"]`;
 
     // Build selector from class or tag
     let selector = element.tagName.toLowerCase();
@@ -296,13 +308,11 @@ class AnalyticsTracker {
       localStorage.setItem(key, data);
 
       // Keep only last 100 event batches
-      const allKeys = Object.keys(localStorage).filter(key =>
+      const allKeys = Object.keys(localStorage).filter((key) =>
         key.startsWith('analytics_events_')
       );
       if (allKeys.length > 100) {
-        allKeys.slice(0, allKeys.length - 100).forEach(key =>
-          localStorage.removeItem(key)
-        );
+        allKeys.slice(0, allKeys.length - 100).forEach((key) => localStorage.removeItem(key));
       }
     } catch (error) {
       console.error('Failed to store events locally:', error);
@@ -393,13 +403,12 @@ export function useAnalytics() {
     };
   }, []);
 
-  const trackEvent = useCallback((
-    type: AnalyticsEvent['type'],
-    target: string,
-    metadata?: Record<string, any>
-  ) => {
-    trackerRef.current?.trackEvent(type, target, metadata);
-  }, []);
+  const trackEvent = useCallback(
+    (type: AnalyticsEvent['type'], target: string, metadata?: Record<string, any>) => {
+      trackerRef.current?.trackEvent(type, target, metadata);
+    },
+    []
+  );
 
   const trackFormStart = useCallback((formName: string) => {
     trackerRef.current?.trackFormStart(formName);

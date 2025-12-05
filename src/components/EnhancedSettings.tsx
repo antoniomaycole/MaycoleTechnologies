@@ -14,20 +14,20 @@ import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { useAuth } from '../contexts/AuthContext';
 import { AuthService } from '../lib/auth';
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  Building, 
-  Shield, 
-  Bell, 
+import {
+  User,
+  Mail,
+  Phone,
+  Building,
+  Shield,
+  Bell,
   Lock,
   Save,
   LogOut,
   Crown,
   Calendar,
   CheckCircle,
-  Loader2
+  Loader2,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -61,7 +61,7 @@ export function EnhancedSettings() {
         lastName,
         phone,
       });
-      
+
       toast.success('Profile Updated', {
         description: 'Your changes have been saved',
         icon: <CheckCircle className="w-4 h-4" />,
@@ -98,23 +98,15 @@ export function EnhancedSettings() {
   return (
     <div className="min-h-screen bg-gray-950">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <h1 className="text-3xl mb-2 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             Settings
           </h1>
-          <p className="text-gray-400">
-            Manage your account and application preferences
-          </p>
+          <p className="text-gray-400">Manage your account and application preferences</p>
         </motion.div>
 
         <div className="space-y-6">
-          
           {/* Account Information */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -164,9 +156,7 @@ export function EnhancedSettings() {
                       className="pl-10 bg-gray-800 border-gray-700 text-gray-500"
                     />
                   </div>
-                  <p className="text-xs text-gray-400">
-                    Email address cannot be changed
-                  </p>
+                  <p className="text-xs text-gray-400">Email address cannot be changed</p>
                 </div>
 
                 <div className="space-y-2">
@@ -219,9 +209,7 @@ export function EnhancedSettings() {
                   <Building className="w-5 h-5 text-blue-500" />
                   Organization
                 </CardTitle>
-                <CardDescription>
-                  Your organization and subscription details
-                </CardDescription>
+                <CardDescription>Your organization and subscription details</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -295,9 +283,7 @@ export function EnhancedSettings() {
                   <Bell className="w-5 h-5 text-blue-500" />
                   Preferences
                 </CardTitle>
-                <CardDescription>
-                  Configure your application settings
-                </CardDescription>
+                <CardDescription>Configure your application settings</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -307,10 +293,7 @@ export function EnhancedSettings() {
                       Receive email updates about inventory changes
                     </p>
                   </div>
-                  <Switch
-                    checked={emailNotifications}
-                    onCheckedChange={setEmailNotifications}
-                  />
+                  <Switch checked={emailNotifications} onCheckedChange={setEmailNotifications} />
                 </div>
 
                 <Separator className="bg-gray-800" />
@@ -322,10 +305,7 @@ export function EnhancedSettings() {
                       Enable voice commands for hands-free operation
                     </p>
                   </div>
-                  <Switch
-                    checked={voiceControl}
-                    onCheckedChange={setVoiceControl}
-                  />
+                  <Switch checked={voiceControl} onCheckedChange={setVoiceControl} />
                 </div>
 
                 <Separator className="bg-gray-800" />
@@ -337,10 +317,7 @@ export function EnhancedSettings() {
                       Enable barcode scanner for quick product lookup
                     </p>
                   </div>
-                  <Switch
-                    checked={barcodeScanning}
-                    onCheckedChange={setBarcodeScanning}
-                  />
+                  <Switch checked={barcodeScanning} onCheckedChange={setBarcodeScanning} />
                 </div>
               </CardContent>
             </Card>
@@ -358,9 +335,7 @@ export function EnhancedSettings() {
                   <Lock className="w-5 h-5 text-blue-500" />
                   Security
                 </CardTitle>
-                <CardDescription>
-                  Manage your account security settings
-                </CardDescription>
+                <CardDescription>Manage your account security settings</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -385,10 +360,7 @@ export function EnhancedSettings() {
                   <div>
                     <p className="mb-1">Last Login</p>
                     <p className="text-sm text-gray-400">
-                      {user?.lastLoginAt 
-                        ? new Date(user.lastLoginAt).toLocaleString()
-                        : 'Never'
-                      }
+                      {user?.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : 'Never'}
                     </p>
                   </div>
                 </div>
@@ -425,17 +397,13 @@ export function EnhancedSettings() {
             <Card className="bg-gray-900 border-red-500/30">
               <CardHeader>
                 <CardTitle className="text-red-400">Danger Zone</CardTitle>
-                <CardDescription>
-                  Irreversible account actions
-                </CardDescription>
+                <CardDescription>Irreversible account actions</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="mb-1">Logout</p>
-                    <p className="text-sm text-gray-400">
-                      Sign out of your account
-                    </p>
+                    <p className="text-sm text-gray-400">Sign out of your account</p>
                   </div>
                   <Button
                     variant="outline"
@@ -459,7 +427,6 @@ export function EnhancedSettings() {
               </CardContent>
             </Card>
           </motion.div>
-
         </div>
       </div>
     </div>

@@ -1,0 +1,113 @@
+{
+  "env": {
+    "VITE_API_BASE_URL": {
+      "value": "https://api.maycoletechnologies.com",
+      "description": "Base URL for API endpoints"
+    },
+    "VITE_DEMO_MODE": {
+      "value": "false",
+      "description": "Set to true for demo purposes (disables actual API calls)"
+    },
+    "VITE_ENABLE_ANALYTICS": {
+      "value": "true",
+      "description": "Enable analytics tracking"
+    },
+    "VITE_ENABLE_CLICK_TRACKING": {
+      "value": "true",
+      "description": "Enable click event tracking"
+    },
+    "VITE_GA_TRACKING_ID": {
+      "value": "G_YOUR_GOOGLE_ANALYTICS_ID",
+      "description": "Google Analytics 4 Measurement ID (format: G_XXXXXXXXXX)"
+    },
+    "VITE_CONTACT_EMAIL": {
+      "value": "help@maycoletechnologies.com",
+      "description": "Primary contact email address"
+    },
+    "VITE_STRIPE_PUBLIC_KEY": {
+      "value": "pk_live_YOUR_PUBLISHABLE_KEY",
+      "description": "Stripe Publishable Key (public, safe to expose). Get from: https://dashboard.stripe.com/apikeys"
+    },
+    "STRIPE_SECRET_KEY": {
+      "value": "sk_live_YOUR_SECRET_KEY",
+      "description": "Stripe Secret Key (PRIVATE - never expose client-side). Get from: https://dashboard.stripe.com/apikeys"
+    },
+    "VITE_STRIPE_PRICE_PROFESSIONAL_MONTHLY": {
+      "value": "price_XXXXXXXXXXXXX",
+      "description": "Stripe Price ID for Professional tier (monthly billing)"
+    },
+    "VITE_STRIPE_PRICE_PROFESSIONAL_YEARLY": {
+      "value": "price_XXXXXXXXXXXXX",
+      "description": "Stripe Price ID for Professional tier (annual billing with discount)"
+    },
+    "VITE_STRIPE_PRICE_ENTERPRISE_MONTHLY": {
+      "value": "price_XXXXXXXXXXXXX",
+      "description": "Stripe Price ID for Enterprise tier (monthly billing)"
+    },
+    "VITE_STRIPE_PRICE_ENTERPRISE_YEARLY": {
+      "value": "price_XXXXXXXXXXXXX",
+      "description": "Stripe Price ID for Enterprise tier (annual billing with discount)"
+    },
+    "STRIPE_WEBHOOK_SECRET": {
+      "value": "whsec_XXXXXXXXXXXXX",
+      "description": "Stripe Webhook Signing Secret. Get from: https://dashboard.stripe.com/webhooks"
+    },
+    "SENDGRID_API_KEY": {
+      "value": "SG.XXXXXXXXXXXXX",
+      "description": "SendGrid API Key. Get from: https://app.sendgrid.com/settings/api_keys"
+    },
+    "SENDGRID_FROM_EMAIL": {
+      "value": "noreply@maycoletechnologies.com",
+      "description": "Email address to send from (must be verified in SendGrid)"
+    },
+    "VITE_SENTRY_DSN": {
+      "value": "https://XXXXXXX@XXXXXX.ingest.sentry.io/XXXXXX",
+      "description": "Sentry error tracking DSN. Get from: https://sentry.io/settings/projects/"
+    },
+    "VITE_ENABLE_LIVE_CHAT": {
+      "value": "false",
+      "description": "Enable live chat widget (when implemented)"
+    },
+    "VITE_ENABLE_NEWSLETTER": {
+      "value": "true",
+      "description": "Enable newsletter signup functionality"
+    },
+    "VITE_ENABLE_PAYMENTS": {
+      "value": "true",
+      "description": "Enable Stripe payment processing"
+    }
+  },
+  "instructions": {
+    "setup": [
+      "1. Log in to Vercel: https://vercel.com/dashboard",
+      "2. Select your MaycoleTechnologies project",
+      "3. Click Settings > Environment Variables",
+      "4. Add each variable below using the 'Production' environment",
+      "5. For sensitive keys (STRIPE_SECRET_KEY, SENDGRID_API_KEY, STRIPE_WEBHOOK_SECRET):",
+      "   - Use Vercel's built-in encryption",
+      "   - Only expose to Production and Preview (not Development)",
+      "6. After adding variables, redeploy your project for changes to take effect"
+    ],
+    "get_stripe_keys": [
+      "1. Go to https://dashboard.stripe.com/apikeys",
+      "2. Copy 'Publishable key' → VITE_STRIPE_PUBLIC_KEY",
+      "3. Copy 'Secret key' → STRIPE_SECRET_KEY",
+      "4. Go to https://dashboard.stripe.com/webhooks",
+      "5. Create webhook for: https://yourdomain.com/api/webhooks/stripe",
+      "6. Copy webhook signing secret → STRIPE_WEBHOOK_SECRET"
+    ],
+    "get_sendgrid_keys": [
+      "1. Go to https://app.sendgrid.com/settings/api_keys",
+      "2. Click 'Create API Key'",
+      "3. Copy full API key → SENDGRID_API_KEY",
+      "4. Verify your domain: https://app.sendgrid.com/settings/sender_auth",
+      "5. Add noreply@maycoletechnologies.com as verified sender"
+    ],
+    "get_sentry_dsn": [
+      "1. Go to https://sentry.io/onboarding/ or create account",
+      "2. Select 'React' as platform",
+      "3. Copy the DSN shown in setup instructions",
+      "4. Format: https://[publicKey]@[host].ingest.sentry.io/[projectId]"
+    ]
+  }
+}

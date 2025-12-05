@@ -11,9 +11,9 @@ import { Button } from './ui/button';
 import { api } from '../lib/api';
 import { useRealtimeSubscription } from '../lib/realtime';
 import { SalesMetrics } from '../types/database';
-import { 
-  BarChart3, 
-  TrendingUp, 
+import {
+  BarChart3,
+  TrendingUp,
   TrendingDown,
   DollarSign,
   ShoppingCart,
@@ -24,7 +24,7 @@ import {
   RefreshCw,
   Loader2,
   ArrowUpRight,
-  ArrowDownRight
+  ArrowDownRight,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -73,7 +73,7 @@ export function EnhancedAnalytics() {
       change: '+18.2%',
       trend: 'up' as const,
       icon: DollarSign,
-      color: 'text-green-500'
+      color: 'text-green-500',
     },
     {
       title: 'Total Orders',
@@ -81,7 +81,7 @@ export function EnhancedAnalytics() {
       change: '+12.5%',
       trend: 'up' as const,
       icon: ShoppingCart,
-      color: 'text-blue-500'
+      color: 'text-blue-500',
     },
     {
       title: 'Avg Order Value',
@@ -89,7 +89,7 @@ export function EnhancedAnalytics() {
       change: '+4.1%',
       trend: 'up' as const,
       icon: TrendingUp,
-      color: 'text-purple-500'
+      color: 'text-purple-500',
     },
     {
       title: 'Conversion Rate',
@@ -97,20 +97,15 @@ export function EnhancedAnalytics() {
       change: '-2.3%',
       trend: 'down' as const,
       icon: Users,
-      color: 'text-orange-500'
-    }
+      color: 'text-orange-500',
+    },
   ];
 
   return (
     <div className="min-h-screen bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl mb-2 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
@@ -121,11 +116,7 @@ export function EnhancedAnalytics() {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                onClick={loadAnalytics}
-                className="border-gray-700"
-              >
+              <Button variant="outline" onClick={loadAnalytics} className="border-gray-700">
                 <RefreshCw className="w-4 h-4 mr-2" />
                 Refresh
               </Button>
@@ -151,9 +142,7 @@ export function EnhancedAnalytics() {
                 variant={selectedPeriod === period ? 'default' : 'outline'}
                 onClick={() => setSelectedPeriod(period)}
                 className={
-                  selectedPeriod === period
-                    ? 'bg-blue-600 hover:bg-blue-700'
-                    : 'border-gray-700'
+                  selectedPeriod === period ? 'bg-blue-600 hover:bg-blue-700' : 'border-gray-700'
                 }
               >
                 {period === '7d' && 'Last 7 Days'}
@@ -176,7 +165,9 @@ export function EnhancedAnalytics() {
               <Card className="bg-gray-900 border-gray-800 hover:border-blue-500/50 transition-colors">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center`}>
+                    <div
+                      className={`w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center`}
+                    >
                       <stat.icon className={`w-6 h-6 ${stat.color}`} />
                     </div>
                     <Badge
@@ -205,7 +196,6 @@ export function EnhancedAnalytics() {
 
         {/* Charts Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          
           {/* Revenue Trend */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -259,18 +249,14 @@ export function EnhancedAnalytics() {
                         </div>
                         <div>
                           <p className="font-medium">{product.productName}</p>
-                          <p className="text-sm text-gray-400">
-                            {product.totalSales} sales
-                          </p>
+                          <p className="text-sm text-gray-400">{product.totalSales} sales</p>
                         </div>
                       </div>
                       <div className="text-right">
                         <p className="font-medium text-green-400">
                           ${product.totalRevenue.toLocaleString()}
                         </p>
-                        <p className="text-sm text-gray-400">
-                          {product.quantity} units
-                        </p>
+                        <p className="text-sm text-gray-400">{product.quantity} units</p>
                       </div>
                     </div>
                   ))}
@@ -282,7 +268,6 @@ export function EnhancedAnalytics() {
 
         {/* Additional Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
           {/* Inventory Turnover */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -352,7 +337,6 @@ export function EnhancedAnalytics() {
             </Card>
           </motion.div>
         </div>
-
       </div>
     </div>
   );

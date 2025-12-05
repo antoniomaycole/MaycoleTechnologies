@@ -222,10 +222,10 @@ export async function createPaymentIntent(
     return data as PaymentIntent;
   } catch (error) {
     const analytics = getAnalytics();
-    analytics.trackError(
-      error instanceof Error ? error.message : 'Unknown error',
-      { context: 'payment-intent-creation', amount }
-    );
+    analytics.trackError(error instanceof Error ? error.message : 'Unknown error', {
+      context: 'payment-intent-creation',
+      amount,
+    });
     throw error;
   }
 }
@@ -273,10 +273,10 @@ export async function createCheckoutSession(
     return data as CheckoutSession;
   } catch (error) {
     const analytics = getAnalytics();
-    analytics.trackError(
-      error instanceof Error ? error.message : 'Unknown error',
-      { context: 'checkout-session-creation', priceId }
-    );
+    analytics.trackError(error instanceof Error ? error.message : 'Unknown error', {
+      context: 'checkout-session-creation',
+      priceId,
+    });
     throw error;
   }
 }
@@ -298,10 +298,10 @@ export async function redirectToCheckout(sessionId: string): Promise<void> {
     analytics.trackEvent('payment', 'checkout_redirect', { sessionId });
   } catch (error) {
     const analytics = getAnalytics();
-    analytics.trackError(
-      error instanceof Error ? error.message : 'Unknown error',
-      { context: 'checkout-redirect', sessionId }
-    );
+    analytics.trackError(error instanceof Error ? error.message : 'Unknown error', {
+      context: 'checkout-redirect',
+      sessionId,
+    });
     throw error;
   }
 }
@@ -348,10 +348,9 @@ export async function confirmPayment(
     return paymentIntent;
   } catch (error) {
     const analytics = getAnalytics();
-    analytics.trackError(
-      error instanceof Error ? error.message : 'Unknown error',
-      { context: 'payment-confirmation' }
-    );
+    analytics.trackError(error instanceof Error ? error.message : 'Unknown error', {
+      context: 'payment-confirmation',
+    });
     throw error;
   }
 }
@@ -360,9 +359,7 @@ export async function confirmPayment(
  * Get customer subscription status
  * @param customerId Stripe customer ID or email
  */
-export async function getSubscriptionStatus(
-  customerId: string
-): Promise<Subscription | null> {
+export async function getSubscriptionStatus(customerId: string): Promise<Subscription | null> {
   try {
     const response = await fetch(
       `${API_BASE_URL}/payments/subscription?customerId=${encodeURIComponent(customerId)}`,
@@ -380,10 +377,10 @@ export async function getSubscriptionStatus(
     return (await response.json()) as Subscription;
   } catch (error) {
     const analytics = getAnalytics();
-    analytics.trackError(
-      error instanceof Error ? error.message : 'Unknown error',
-      { context: 'get-subscription-status', customerId }
-    );
+    analytics.trackError(error instanceof Error ? error.message : 'Unknown error', {
+      context: 'get-subscription-status',
+      customerId,
+    });
     return null;
   }
 }
@@ -417,10 +414,10 @@ export async function cancelSubscription(subscriptionId: string): Promise<void> 
     });
   } catch (error) {
     const analytics = getAnalytics();
-    analytics.trackError(
-      error instanceof Error ? error.message : 'Unknown error',
-      { context: 'cancel-subscription', subscriptionId }
-    );
+    analytics.trackError(error instanceof Error ? error.message : 'Unknown error', {
+      context: 'cancel-subscription',
+      subscriptionId,
+    });
     throw error;
   }
 }
@@ -447,10 +444,10 @@ export async function validatePaymentSession(
     return data;
   } catch (error) {
     const analytics = getAnalytics();
-    analytics.trackError(
-      error instanceof Error ? error.message : 'Unknown error',
-      { context: 'validate-payment-session', sessionId }
-    );
+    analytics.trackError(error instanceof Error ? error.message : 'Unknown error', {
+      context: 'validate-payment-session',
+      sessionId,
+    });
     return { success: false };
   }
 }

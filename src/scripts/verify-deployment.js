@@ -2,7 +2,7 @@
 
 /**
  * MaycoleTechnologies™ Deployment Verification Script
- * 
+ *
  * Performs comprehensive pre-deployment checks to ensure the website
  * meets Oracle-level professional standards.
  */
@@ -45,11 +45,11 @@ const essentialFiles = [
   'styles/globals.css',
   'public/atomic-favicon.svg',
   'components/index.ts',
-  'components/MainSections.tsx'
+  'components/MainSections.tsx',
 ];
 
 console.log('📁 Checking Essential Files...');
-essentialFiles.forEach(file => {
+essentialFiles.forEach((file) => {
   if (fs.existsSync(file)) {
     logSuccess(`${file} exists`);
   } else {
@@ -66,22 +66,22 @@ const junkPatterns = [
   /.*\.tmp$/,
   /CLEANUP_.*\.md$/,
   /.*_TEMP\.md$/,
-  /TempCleanupApp\.tsx$/
+  /TempCleanupApp\.tsx$/,
 ];
 
 function checkDirectory(dir) {
   try {
     const items = fs.readdirSync(dir);
-    items.forEach(item => {
+    items.forEach((item) => {
       const fullPath = path.join(dir, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         if (item !== 'node_modules' && item !== '.git' && item !== 'dist') {
           checkDirectory(fullPath);
         }
       } else {
-        junkPatterns.forEach(pattern => {
+        junkPatterns.forEach((pattern) => {
           if (pattern.test(item)) {
             logWarning(`Junk file detected: ${fullPath}`);
           }
@@ -99,37 +99,30 @@ checkDirectory('.');
 console.log('\n📦 Checking Dependencies...');
 try {
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-  
-  const requiredDeps = [
-    'react',
-    'react-dom',
-    'motion',
-    'lucide-react',
-    'tailwindcss'
-  ];
-  
-  requiredDeps.forEach(dep => {
+
+  const requiredDeps = ['react', 'react-dom', 'motion', 'lucide-react', 'tailwindcss'];
+
+  requiredDeps.forEach((dep) => {
     if (packageJson.dependencies?.[dep] || packageJson.devDependencies?.[dep]) {
       logSuccess(`${dep} is installed`);
     } else {
       logError(`${dep} is missing from dependencies`);
     }
   });
-  
+
   // Check if brand information is correct
   if (packageJson.description?.includes('MaycoleTechnologies™')) {
     logSuccess('Package description includes brand name');
   } else {
     logWarning('Package description should include MaycoleTechnologies™');
   }
-  
+
   // Check if tagline is correct
   if (packageJson.description?.includes('Changing The Future One Product At A Time')) {
     logSuccess('Package description includes correct tagline');
   } else {
     logWarning('Package description should include "Changing The Future One Product At A Time"');
   }
-  
 } catch (error) {
   logError('Could not read package.json');
 }
@@ -138,19 +131,19 @@ try {
 console.log('\n🏗️  Checking App Structure...');
 try {
   const appContent = fs.readFileSync('App.tsx', 'utf8');
-  
+
   if (appContent.includes('MaycoleTechnologies') || appContent.includes('MainSections')) {
     logSuccess('App contains proper structure');
   } else {
     logWarning('App should contain MaycoleTechnologies branding or MainSections');
   }
-  
+
   if (appContent.includes('Header') && appContent.includes('Footer')) {
     logSuccess('App has proper layout structure');
   } else {
     logError('App missing Header or Footer components');
   }
-  
+
   if (appContent.includes('Toaster')) {
     logSuccess('Toast notifications are configured');
   } else {
@@ -162,7 +155,6 @@ try {
   } else {
     logWarning('App should use maycole-app-bg class for consistent styling');
   }
-  
 } catch (error) {
   logError('Could not read App.tsx');
 }
@@ -171,14 +163,14 @@ try {
 console.log('\n🎨 Checking Styles Configuration...');
 try {
   const cssContent = fs.readFileSync('styles/globals.css', 'utf8');
-  
+
   if (cssContent.includes('--maycole-green') && cssContent.includes('--maycole-gold')) {
     logSuccess('Brand colors are defined in CSS');
   } else {
     logError('Brand colors missing from CSS variables');
   }
-  
-  if (cssContent.includes('@import \'tailwindcss/base\'')) {
+
+  if (cssContent.includes("@import 'tailwindcss/base'")) {
     logSuccess('Tailwind CSS is properly imported');
   } else {
     logError('Tailwind CSS imports are missing');
@@ -189,7 +181,6 @@ try {
   } else {
     logWarning('Section background colors may not be properly configured');
   }
-  
 } catch (error) {
   logError('Could not read styles/globals.css');
 }
@@ -198,13 +189,12 @@ try {
 console.log('\n🧩 Checking Component Organization...');
 try {
   const componentsIndex = fs.readFileSync('components/index.ts', 'utf8');
-  
+
   if (componentsIndex.includes('MainSections') && componentsIndex.includes('AtomicLogo')) {
     logSuccess('Components are properly exported from index');
   } else {
     logWarning('Component exports could be improved in components/index.ts');
   }
-  
 } catch (error) {
   logWarning('components/index.ts not found - consider creating for better organization');
 }
@@ -228,13 +218,12 @@ console.log('\n📝 Checking TypeScript Configuration...');
 try {
   const tsconfigContent = fs.readFileSync('tsconfig.json', 'utf8');
   const tsconfig = JSON.parse(tsconfigContent);
-  
+
   if (tsconfig.compilerOptions?.strict) {
     logSuccess('TypeScript strict mode is enabled');
   } else {
     logWarning('Consider enabling TypeScript strict mode');
   }
-  
 } catch (error) {
   logError('Could not read tsconfig.json');
 }
@@ -242,7 +231,7 @@ try {
 // Check for proper file structure
 console.log('\n📂 Checking File Structure...');
 const requiredDirectories = ['components', 'styles', 'public'];
-requiredDirectories.forEach(dir => {
+requiredDirectories.forEach((dir) => {
   if (fs.existsSync(dir)) {
     logSuccess(`${dir}/ directory exists`);
   } else {
@@ -251,8 +240,14 @@ requiredDirectories.forEach(dir => {
 });
 
 // Check if misplaced config files exist
-const misplacedFiles = ['settings.json', 'launch.json', 'tasks.json', 'extensions.json', 'workflows/ci.yml'];
-misplacedFiles.forEach(file => {
+const misplacedFiles = [
+  'settings.json',
+  'launch.json',
+  'tasks.json',
+  'extensions.json',
+  'workflows/ci.yml',
+];
+misplacedFiles.forEach((file) => {
   if (fs.existsSync(file)) {
     logWarning(`Misplaced config file: ${file} (should be in .vscode/ or .github/)`);
   } else {

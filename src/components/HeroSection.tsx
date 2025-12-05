@@ -23,7 +23,7 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
           <div className="mt-6">
             <AtomicLogo size="lg" />
           </div>
-          
+
           <div className="space-y-4">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
             >
               MaycoleTechnologies<span className="maycole-trademark">™</span>
             </motion.h1>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
               Changing The Future One Product At A Time
             </motion.p>
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -59,7 +59,7 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
               <span className="text-gray-800 font-medium">Spring Logic</span>
             </div>
           </motion.div>
-          
+
           {/* Single MaycoleCheckBook Launch Button */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -68,12 +68,18 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
             className="flex flex-col items-center justify-center gap-6"
           >
             <Button
-              onClick={onLaunchTracker}
+              onClick={() => {
+                if (onLaunchTracker) {
+                  onLaunchTracker();
+                } else {
+                  console.warn('[HeroSection] onLaunchTracker prop not provided');
+                }
+              }}
               className="maycole-btn-primary px-8 py-4 text-lg font-medium group relative overflow-hidden"
             >
               <span>Launch MaycoleCheckBook™</span>
             </Button>
-            
+
             {/* Branded Icon Button Display */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -81,11 +87,7 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
               transition={{ duration: 0.8, delay: 1.2 }}
               className="mt-4"
             >
-              <BrandedIconButton 
-                size="lg" 
-                variant="default"
-                text="MaycoleTechnologies"
-              />
+              <BrandedIconButton size="lg" variant="default" text="MaycoleTechnologies" />
             </motion.div>
 
             {/* Lead Capture - Seamless Integration */}

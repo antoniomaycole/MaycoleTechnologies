@@ -8,29 +8,29 @@ export function MobileAppSection() {
     {
       icon: Zap,
       title: 'Real-Time Sync',
-      description: 'Instant data synchronization across all devices'
+      description: 'Instant data synchronization across all devices',
     },
     {
       icon: Shield,
       title: 'Offline Mode',
-      description: 'Work seamlessly even without internet'
+      description: 'Work seamlessly even without internet',
     },
     {
       icon: Bell,
       title: 'Push Notifications',
-      description: 'Stay updated with instant alerts'
+      description: 'Stay updated with instant alerts',
     },
     {
       icon: Cloud,
       title: 'Cloud Backup',
-      description: 'Automatic backup to secure cloud storage'
-    }
+      description: 'Automatic backup to secure cloud storage',
+    },
   ];
 
   const stats = [
     { value: '4.9', label: 'App Store Rating' },
     { value: '50K+', label: 'Downloads' },
-    { value: '99.9%', label: 'Uptime' }
+    { value: '99.9%', label: 'Uptime' },
   ];
 
   return (
@@ -46,7 +46,9 @@ export function MobileAppSection() {
           >
             <div className="inline-flex items-center gap-2 bg-maycole-green/10 px-4 py-2 rounded-full mb-6">
               <Smartphone className="w-4 h-4 text-maycole-green" />
-              <span className="text-sm font-semibold text-maycole-green">Mobile Apps Available</span>
+              <span className="text-sm font-semibold text-maycole-green">
+                Mobile Apps Available
+              </span>
             </div>
 
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -56,8 +58,9 @@ export function MobileAppSection() {
             </h2>
 
             <p className="text-lg text-gray-600 mb-8">
-              Access <span className="maycole-gradient-text">MaycoleTracker™</span> and <span className="maycole-gradient-text">MaycoleCheckBook™</span> anywhere, 
-              anytime with our powerful mobile applications for iOS and Android.
+              Access <span className="maycole-gradient-text">MaycoleTracker™</span> and{' '}
+              <span className="maycole-gradient-text">MaycoleCheckBook™</span> anywhere, anytime
+              with our powerful mobile applications for iOS and Android.
             </p>
 
             {/* Features Grid */}
@@ -106,7 +109,9 @@ export function MobileAppSection() {
                 <div key={index}>
                   <div className="flex items-center gap-1 mb-1">
                     <span className="text-2xl font-bold text-gray-900">{stat.value}</span>
-                    {stat.label.includes('Rating') && <Star className="w-5 h-5 text-maycole-gold fill-maycole-gold" />}
+                    {stat.label.includes('Rating') && (
+                      <Star className="w-5 h-5 text-maycole-gold fill-maycole-gold" />
+                    )}
                   </div>
                   <div className="text-sm text-gray-600">{stat.label}</div>
                 </div>
@@ -125,7 +130,7 @@ export function MobileAppSection() {
             <div className="relative">
               {/* Decorative Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-maycole-green/20 to-maycole-gold/20 rounded-[3rem] blur-3xl"></div>
-              
+
               {/* Phone Mockup */}
               <div className="relative">
                 <Card className="max-w-sm mx-auto overflow-hidden border-8 border-gray-900 rounded-[3rem] shadow-2xl">
@@ -170,10 +175,15 @@ export function MobileAppSection() {
                         <h4 className="font-semibold text-gray-900 mb-3">Recent Activity</h4>
                         <div className="space-y-3">
                           {[1, 2, 3].map((i) => (
-                            <div key={i} className="flex items-center gap-3 pb-3 border-b border-gray-100 last:border-0">
+                            <div
+                              key={i}
+                              className="flex items-center gap-3 pb-3 border-b border-gray-100 last:border-0"
+                            >
                               <div className="w-8 h-8 bg-gradient-to-br from-maycole-green to-maycole-gold rounded-lg"></div>
                               <div className="flex-1">
-                                <div className="text-sm font-medium text-gray-900">Item #{1000 + i}</div>
+                                <div className="text-sm font-medium text-gray-900">
+                                  Item #{1000 + i}
+                                </div>
                                 <div className="text-xs text-gray-500">Updated 2h ago</div>
                               </div>
                               <div className="text-xs font-semibold text-maycole-green">+50</div>
@@ -186,10 +196,16 @@ export function MobileAppSection() {
                       <div className="mt-6 bg-white rounded-xl p-4 shadow-sm flex items-center justify-around">
                         {['Home', 'Analytics', 'Scan', 'Reports', 'More'].map((item, i) => (
                           <div key={i} className="text-center">
-                            <div className={`w-8 h-8 mx-auto rounded-lg mb-1 ${
-                              i === 0 ? 'bg-gradient-to-br from-maycole-green to-maycole-gold' : 'bg-gray-200'
-                            }`}></div>
-                            <div className={`text-xs ${i === 0 ? 'text-maycole-green font-semibold' : 'text-gray-500'}`}>
+                            <div
+                              className={`w-8 h-8 mx-auto rounded-lg mb-1 ${
+                                i === 0
+                                  ? 'bg-gradient-to-br from-maycole-green to-maycole-gold'
+                                  : 'bg-gray-200'
+                              }`}
+                            ></div>
+                            <div
+                              className={`text-xs ${i === 0 ? 'text-maycole-green font-semibold' : 'text-gray-500'}`}
+                            >
                               {item}
                             </div>
                           </div>

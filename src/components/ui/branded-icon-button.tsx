@@ -35,7 +35,8 @@ export const BrandedIconButton = React.forwardRef<HTMLButtonElement, BrandedIcon
     const variantClasses = {
       default: 'bg-maycole-green text-white hover:bg-maycole-green/90 shadow-md hover:shadow-lg',
       primary: 'bg-maycole-blue text-white hover:bg-maycole-blue/90 shadow-md hover:shadow-lg',
-      secondary: 'bg-maycole-purple text-white hover:bg-maycole-purple/90 shadow-md hover:shadow-lg',
+      secondary:
+        'bg-maycole-purple text-white hover:bg-maycole-purple/90 shadow-md hover:shadow-lg',
       outline: 'border-2 border-maycole-green text-maycole-green hover:bg-maycole-green/10',
       ghost: 'text-maycole-green hover:bg-maycole-green/10',
     };

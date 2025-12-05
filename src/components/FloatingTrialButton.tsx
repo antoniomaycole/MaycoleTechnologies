@@ -53,37 +53,43 @@ export function FloatingTrialButton({ onLaunchTracker }: FloatingTrialButtonProp
 
             {/* Main Button */}
             <Button
-              onClick={onLaunchTracker}
+              onClick={() => {
+                if (onLaunchTracker) {
+                  onLaunchTracker();
+                } else {
+                  console.warn('[FloatingTrialButton] onLaunchTracker prop not provided');
+                }
+              }}
               className="maycole-btn-primary px-6 py-4 text-base font-semibold shadow-2xl flex items-center gap-2 group relative overflow-hidden"
             >
               {/* Animated Background */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent"
                 animate={{
-                  x: ['-100%', '100%']
+                  x: ['-100%', '100%'],
                 }}
                 transition={{
                   duration: 2,
                   repeat: Infinity,
-                  ease: 'linear'
+                  ease: 'linear',
                 }}
               />
-              
+
               {/* Content */}
               <Sparkles className="w-5 h-5 relative z-10" />
               <span className="relative z-10">Start Free Trial</span>
-              
+
               {/* Pulse Effect */}
               <motion.div
                 className="absolute inset-0 border-2 border-white/30 rounded-lg"
                 animate={{
                   scale: [1, 1.05, 1],
-                  opacity: [0.5, 0, 0.5]
+                  opacity: [0.5, 0, 0.5],
                 }}
                 transition={{
                   duration: 2,
                   repeat: Infinity,
-                  ease: 'easeInOut'
+                  ease: 'easeInOut',
                 }}
               />
             </Button>

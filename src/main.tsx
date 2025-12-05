@@ -1,123 +1,155 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import './styles/globals.css'
-import { initializeAnalytics, initScrollTracking } from './lib/analytics'
-import { initializeAnalytics as initializeClickTracking } from './lib/analytics-tracker'
-import { ErrorBoundary } from './components/ErrorBoundary'
-import { initPWA, isOnline, onOnlineStatusChange } from './lib/pwa'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
+import App from './App.tsx';
+import './index.css';
+import './styles/globals.css';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import {
+  initializeAllServices,
+  setupOnlineMonitoring,
+  setupPWAInstallPrompt,
+} from './lib/service-enforcer';
 
-// Initialize Google Analytics
-initializeAnalytics();
-initScrollTracking();
-
-// Initialize Click & Event Tracking
-initializeClickTracking({
-  enableRemoteTracking: true,
-  remoteEndpoint: '/api/analytics',
-  samplingRate: 1, // Track all events
+// Global error handler for uncaught promises (browser-compatible)
+window.addEventListener('unhandledrejection', (event) => {
+  console.warn('[UnhandledRejection]', event.reason);
 });
 
-// Initialize PWA features
-initPWA();
-
-// Monitor online/offline status
-const unsubscribe = onOnlineStatusChange((online) => {
-  if (online) {
-    console.log('[PWA] App is now online');
-  } else {
-    console.log('[PWA] App is now offline - using cached content');
-  }
+window.addEventListener('error', (event) => {
+  console.error('[GlobalError]', event.error);
 });
 
-// Service Worker Registration for PWA functionality
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', async () => {
-    try {
-      const registration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/'
-      });
-      
-      console.log('[PWA] Service Worker registered successfully:', registration.scope);
-      
-      // Handle service worker updates
-      registration.addEventListener('updatefound', () => {
-        const newWorker = registration.installing;
-        if (newWorker) {
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('[PWA] New version available! Please refresh.');
-              
-              // Optionally show update notification
-              if ('Notification' in window && Notification.permission === 'granted') {
-                new Notification('MaycoleTechnologies™ Update Available', {
-                  body: 'A new version is available. Refresh to update.',
-                  icon: '/icons/icon-192x192.png',
-                  tag: 'app-update'
-                });
-              }
-            }
-          });
-        }
-      });
-      
-      // Request notification permission for PWA features
-      if ('Notification' in window && Notification.permission === 'default') {
-        const permission = await Notification.requestPermission();
-        console.log('[PWA] Notification permission:', permission);
-      }
-      
-    } catch (error) {
-      console.error('[PWA] Service Worker registration failed:', error);
+// Setup PWA install prompt (non-blocking)
+setupPWAInstallPrompt();
+
+// Setup online status monitoring (non-blocking)
+const unsubscribeOnline = setupOnlineMonitoring();
+
+console.log('[App] Initial online status: ' + (navigator.onLine ? 'online' : 'offline'));
+
+/**
+ * Mount React app with enforced error handling
+ */
+const renderApp = () => {
+  try {
+    const rootElement = document.getElementById('root');
+
+    if (!rootElement) {
+      throw new Error('Root element (#root) not found in DOM');
     }
-  });
-}
 
-// PWA Install prompt handling
-let deferredPrompt: any;
+    console.log('[React] Mounting application...');
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  console.log('[PWA] Install prompt available');
-  
-  // Prevent the mini-infobar from appearing on mobile
-  e.preventDefault();
-  
-  // Stash the event so it can be triggered later
-  deferredPrompt = e;
-  
-  // Update UI to notify the user they can install the PWA
-  console.log('[PWA] App can be installed');
-});
+    createRoot(rootElement).render(
+      <StrictMode>
+        <HelmetProvider>
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
+        </HelmetProvider>
+      </StrictMode>
+    );
 
-// Handle PWA installation
-window.addEventListener('appinstalled', () => {
-  console.log('[PWA] App was installed successfully');
-  deferredPrompt = null;
-});
+    console.log('[React] ✓ Application mounted successfully');
 
-// Export install function for use in components
-(window as any).installPWA = async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log('[PWA] User response to install prompt:', outcome);
-    deferredPrompt = null;
+    // Initialize background services AFTER React mounts (non-blocking)
+    // This ensures the UI renders first, then services load
+    initializeAllServices()
+      .then((results) => {
+        const status = results.map((r) => `${r.service}: ${r.success ? '✓' : '✗'}`).join(', ');
+        console.log('[Services] Status:', status);
+      })
+      .catch((error) => {
+        console.warn('[Services] Initialization error:', error);
+      });
+  } catch (error) {
+    console.error('[React] Critical error - rendering error page:', error);
+    renderErrorPage(error);
   }
 };
 
-// Check initial online status
-console.log('[PWA] Initial online status:', isOnline());
+/**
+ * Render error page fallback
+ */
+const renderErrorPage = (error: any) => {
+  const rootElement = document.getElementById('root');
+  if (rootElement) {
+    rootElement.innerHTML = `
+      <div style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      ">
+        <div style="
+          text-align: center;
+          padding: 40px;
+          max-width: 600px;
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 12px;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        ">
+          <h1 style="
+            color: #dc2626;
+            margin: 0 0 16px 0;
+            font-size: 28px;
+          ">
+            Application Error
+          </h1>
+          <p style="
+            color: #666;
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            line-height: 1.5;
+          ">
+            The application failed to load. Please check the console for details.
+          </p>
+          <pre style="
+            background: #f3f4f6;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            text-align: left;
+            font-size: 13px;
+            color: #dc2626;
+            border-left: 4px solid #dc2626;
+            margin: 0 0 20px 0;
+          ">
+${String(error?.message || error)}
+          </pre>
+          <button onclick="location.reload()" style="
+            padding: 10px 24px;
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+          " onmouseover="this.style.background='#0284c7'" onmouseout="this.style.background='#0ea5e9'">
+            Reload Page
+          </button>
+        </div>
+      </div>
+    `;
+  }
+};
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
-  </StrictMode>,
-);
+// Mount app when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderApp);
+} else {
+  renderApp();
+}
 
 // Cleanup on unload
 window.addEventListener('beforeunload', () => {
-  unsubscribe();
+  unsubscribeOnline?.();
 });
+
+// Log successful initialization
+console.log('[App] Initialization complete');

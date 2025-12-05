@@ -8,43 +8,43 @@ const awards = [
     title: 'Best SaaS Product 2024',
     organization: 'Tech Innovation Awards',
     year: '2024',
-    color: 'from-yellow-400 to-yellow-600'
+    color: 'from-yellow-400 to-yellow-600',
   },
   {
     icon: Star,
     title: 'Top Rated Inventory Management',
     organization: 'G2 Software Reviews',
     year: '2024',
-    color: 'from-maycole-green to-green-600'
+    color: 'from-maycole-green to-green-600',
   },
   {
     icon: Award,
     title: 'Excellence in AI Innovation',
     organization: 'Enterprise Tech Summit',
     year: '2024',
-    color: 'from-blue-400 to-blue-600'
+    color: 'from-blue-400 to-blue-600',
   },
   {
     icon: Shield,
     title: 'SOC 2 Type II Certified',
     organization: 'Security Compliance',
     year: '2024',
-    color: 'from-purple-400 to-purple-600'
+    color: 'from-purple-400 to-purple-600',
   },
   {
     icon: TrendingUp,
     title: 'Fastest Growing Startup',
     organization: 'Business Excellence Awards',
     year: '2023',
-    color: 'from-red-400 to-red-600'
+    color: 'from-red-400 to-red-600',
   },
   {
     icon: Users,
     title: 'Customer Choice Award',
     organization: 'Capterra Reviews',
     year: '2024',
-    color: 'from-maycole-gold to-orange-600'
-  }
+    color: 'from-maycole-gold to-orange-600',
+  },
 ];
 
 const certifications = [
@@ -53,7 +53,7 @@ const certifications = [
   'GDPR Compliant',
   'WCAG 2.1 AA',
   'PCI DSS Level 1',
-  'HIPAA Ready'
+  'HIPAA Ready',
 ];
 
 export function AwardsSection() {
@@ -127,7 +127,9 @@ export function AwardsSection() {
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-6">
                 <Shield className="w-6 h-6 text-maycole-green" />
-                <h3 className="text-xl font-bold text-gray-900">Security & Compliance Certifications</h3>
+                <h3 className="text-xl font-bold text-gray-900">
+                  Security & Compliance Certifications
+                </h3>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {certifications.map((cert, index) => (
@@ -163,7 +165,7 @@ export function AwardsSection() {
               { value: '15+', label: 'Industry Awards' },
               { value: '6', label: 'Certifications' },
               { value: '4.9/5', label: 'Average Rating' },
-              { value: '500+', label: 'Enterprise Clients' }
+              { value: '500+', label: 'Enterprise Clients' },
             ].map((stat, index) => (
               <div key={index}>
                 <div className="text-4xl font-bold maycole-gradient-text mb-2 inline-block leading-tight pb-1">

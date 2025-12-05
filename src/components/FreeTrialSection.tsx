@@ -21,14 +21,14 @@ const trialFeatures: TrialFeature[] = [
   { text: 'Video training sessions' },
   { text: 'Data export anytime' },
   { text: 'Cancel anytime - no obligations' },
-  { text: 'Upgrade/downgrade flexibility' }
+  { text: 'Upgrade/downgrade flexibility' },
 ];
 
 const stats = [
   { icon: Clock, value: '14 Days', label: 'Free Trial' },
   { icon: Shield, value: '100%', label: 'Risk Free' },
   { icon: Zap, value: '2 Min', label: 'Setup Time' },
-  { icon: Gift, value: '$0', label: 'Cost to Start' }
+  { icon: Gift, value: '$0', label: 'Cost to Start' },
 ];
 
 interface FreeTrialSectionProps {
@@ -45,12 +45,12 @@ export function FreeTrialSection({ onLaunchTracker }: FreeTrialSectionProps) {
           animate={{
             x: [0, 100, 0],
             y: [0, -50, 0],
-            scale: [1, 1.2, 1]
+            scale: [1, 1.2, 1],
           }}
           transition={{
             duration: 10,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
         <motion.div
@@ -58,12 +58,12 @@ export function FreeTrialSection({ onLaunchTracker }: FreeTrialSectionProps) {
           animate={{
             x: [0, -100, 0],
             y: [0, 50, 0],
-            scale: [1.2, 1, 1.2]
+            scale: [1.2, 1, 1.2],
           }}
           transition={{
             duration: 12,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
       </div>
@@ -117,7 +117,10 @@ export function FreeTrialSection({ onLaunchTracker }: FreeTrialSectionProps) {
                     viewport={{ once: true }}
                     className="text-xl text-gray-700 mb-8"
                   >
-                    Experience the full power of <span className="maycole-gradient-text">MaycoleTechnologies</span><span className="maycole-trademark">™</span> with our 14-day free trial. No credit card required, no obligations.
+                    Experience the full power of{' '}
+                    <span className="maycole-gradient-text">MaycoleTechnologies</span>
+                    <span className="maycole-trademark">™</span> with our 14-day free trial. No
+                    credit card required, no obligations.
                   </motion.p>
 
                   {/* Stats */}
@@ -150,14 +153,26 @@ export function FreeTrialSection({ onLaunchTracker }: FreeTrialSectionProps) {
                     className="flex flex-col sm:flex-row gap-4"
                   >
                     <Button
-                      onClick={onLaunchTracker}
+                      onClick={() => {
+                        if (onLaunchTracker) {
+                          onLaunchTracker();
+                        } else {
+                          console.warn('[FreeTrialSection] onLaunchTracker prop not provided');
+                        }
+                      }}
                       className="maycole-btn-primary px-8 py-6 text-lg flex items-center justify-center gap-2 group"
                     >
                       <span>Try MaycoleTracker™ Free</span>
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Button>
                     <Button
-                      onClick={onLaunchTracker}
+                      onClick={() => {
+                        if (onLaunchTracker) {
+                          onLaunchTracker();
+                        } else {
+                          console.warn('[FreeTrialSection] onLaunchTracker prop not provided');
+                        }
+                      }}
                       className="bg-white border-2 border-maycole-green text-maycole-green px-8 py-6 text-lg hover:bg-maycole-green hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <span>Try MaycoleCheckBook™ Free</span>
@@ -195,22 +210,26 @@ export function FreeTrialSection({ onLaunchTracker }: FreeTrialSectionProps) {
                           key={index}
                           initial={{ opacity: 0, x: 20 }}
                           whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.4, delay: 0.5 + (index * 0.05) }}
+                          transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
                           viewport={{ once: true }}
                           className={`flex items-start gap-3 ${
-                            feature.highlight ? 'bg-white rounded-lg p-3 border border-maycole-green/20 shadow-sm' : ''
+                            feature.highlight
+                              ? 'bg-white rounded-lg p-3 border border-maycole-green/20 shadow-sm'
+                              : ''
                           }`}
                         >
-                          <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                            feature.highlight
-                              ? 'bg-gradient-to-br from-maycole-green to-maycole-gold'
-                              : 'bg-maycole-green'
-                          }`}>
+                          <div
+                            className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                              feature.highlight
+                                ? 'bg-gradient-to-br from-maycole-green to-maycole-gold'
+                                : 'bg-maycole-green'
+                            }`}
+                          >
                             <Check className="w-3 h-3 text-white" />
                           </div>
-                          <span className={`text-gray-700 ${
-                            feature.highlight ? 'font-semibold' : ''
-                          }`}>
+                          <span
+                            className={`text-gray-700 ${feature.highlight ? 'font-semibold' : ''}`}
+                          >
                             {feature.text}
                           </span>
                         </motion.div>
@@ -249,10 +268,11 @@ export function FreeTrialSection({ onLaunchTracker }: FreeTrialSectionProps) {
               <span>Instant Access</span>
             </div>
           </div>
-          
+
           <p className="text-sm text-gray-500 mt-6">
             Join over 500 companies already transforming their operations with{' '}
-            <span className="maycole-gradient-text">MaycoleTechnologies</span><span className="maycole-trademark">™</span>
+            <span className="maycole-gradient-text">MaycoleTechnologies</span>
+            <span className="maycole-trademark">™</span>
           </p>
         </motion.div>
 
@@ -270,7 +290,7 @@ export function FreeTrialSection({ onLaunchTracker }: FreeTrialSectionProps) {
                 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
                 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop',
                 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
-                'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop'
+                'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop',
               ].map((img, i) => (
                 <img
                   key={i}
@@ -282,7 +302,8 @@ export function FreeTrialSection({ onLaunchTracker }: FreeTrialSectionProps) {
             </div>
             <div>
               <p className="font-semibold text-gray-900">
-                <span className="text-maycole-green">2,847 companies</span> started their free trial this month
+                <span className="text-maycole-green">2,847 companies</span> started their free trial
+                this month
               </p>
               <p className="text-sm text-gray-600">Average setup time: 2 minutes</p>
             </div>

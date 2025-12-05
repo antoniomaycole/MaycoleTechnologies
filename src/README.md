@@ -13,6 +13,7 @@
 ## 🌟 Overview
 
 **MaycoleTechnologies™** is a professional, enterprise-grade SaaS website featuring:
+
 - 🎨 **Premium Design** - Oracle/Apple-level presentation quality
 - ⚡ **Built-in CMS** - Dev Panel for content management (no backend needed!)
 - 🚀 **Modern Stack** - React, TypeScript, Tailwind CSS, Vite
@@ -21,6 +22,7 @@
 - 💾 **Export/Import** - Backup and restore content easily
 
 ### Featured Product: MaycoleCheckBook™
+
 An AI-powered digital checkbook register with automated expense tracking, featuring "Manny" - your intelligent financial assistant.
 
 ---
@@ -28,6 +30,7 @@ An AI-powered digital checkbook register with automated expense tracking, featur
 ## ✨ Key Features
 
 ### 🎯 Website Features
+
 - ✅ Professional homepage with hero section
 - ✅ Product showcase with pricing
 - ✅ Services and technologies sections
@@ -42,6 +45,7 @@ An AI-powered digital checkbook register with automated expense tracking, featur
 - ✅ ROI calculator
 
 ### 🛠️ Dev Panel Features (Built-in CMS)
+
 - ✅ **Content Management** - Edit hero text, taglines, company info
 - ✅ **Product Management** - Add/edit/delete products with pricing
 - ✅ **Link Management** - Update navigation and social media links
@@ -56,6 +60,7 @@ An AI-powered digital checkbook register with automated expense tracking, featur
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+ ([Download](https://nodejs.org))
 - npm 9+ (included with Node.js)
 - Git ([Download](https://git-scm.com))
@@ -93,17 +98,20 @@ npm run dev
 We've created comprehensive guides for every aspect:
 
 ### 🎯 Quick References (2-3 min read)
+
 - **[QUICK_START_COMMANDS.md](./QUICK_START_COMMANDS.md)** - All commands in one place
 - **[DEV_PANEL_QUICK_START.md](./DEV_PANEL_QUICK_START.md)** - Dev Panel basics
 - **[SETUP_COMPLETE.md](./SETUP_COMPLETE.md)** - Environment overview
 
 ### 📖 Complete Guides (10-15 min read)
+
 - **[GITHUB_SETUP_GUIDE.md](./GITHUB_SETUP_GUIDE.md)** - Git & GitHub setup
 - **[VSCODE_TROUBLESHOOTING.md](./VSCODE_TROUBLESHOOTING.md)** - Fix VS Code issues
 - **[DEV_PANEL_GUIDE.md](./DEV_PANEL_GUIDE.md)** - Complete Dev Panel manual
 - **[DEV_PANEL_FEATURES.md](./DEV_PANEL_FEATURES.md)** - Feature showcase
 
 ### 🆘 Need Help?
+
 Start with **[SETUP_COMPLETE.md](./SETUP_COMPLETE.md)** - it guides you to the right documentation!
 
 ---
@@ -111,22 +119,26 @@ Start with **[SETUP_COMPLETE.md](./SETUP_COMPLETE.md)** - it guides you to the r
 ## 🏗️ Tech Stack
 
 ### Frontend Framework
+
 - **React 18.3** - UI library
 - **TypeScript 5.6** - Type safety
 - **Vite 6.0** - Build tool & dev server
 
 ### Styling
+
 - **Tailwind CSS 4.0** - Utility-first CSS
 - **Motion/React** - Animations
 - **Lucide React** - Icon library
 
 ### Components
+
 - **shadcn/ui** - UI component library
 - **Recharts** - Charts & graphs
 - **React Hook Form** - Form handling
 - **Sonner** - Toast notifications
 
 ### Development Tools
+
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
 - **TypeScript Compiler** - Type checking
@@ -177,17 +189,20 @@ MaycoleTechnologies/
 ## 🎨 Brand Guidelines
 
 ### Colors
+
 - **Primary Green:** `#1e7f3e` - Company branding
 - **Gold Accent:** `#ffd700` - Highlights & tagline
 - **Background:** `oklch(0.25 0 0)` - Dark theme base
 - **Text:** `oklch(0.85 0 0)` - Light foreground
 
 ### Typography
+
 - **Company Name:** Always green gradient
 - **Tagline:** Always gold/yellow
 - **Trademark:** Always use `™` symbol
 
 ### Logo
+
 - **Atomic Theme:** Red spinning ball with orbiting particles
 - **Usage:** `<AtomicLogo />` component
 
@@ -219,6 +234,7 @@ npm run lint
 ### Environment Variables
 
 Create `.env` file:
+
 ```env
 # Add your environment variables here
 VITE_API_URL=your_api_url
@@ -271,6 +287,7 @@ npm run deploy
 ## 🛠️ Dev Panel Usage
 
 ### Access Methods
+
 1. **Button:** Click purple button (bottom-right)
 2. **Keyboard:** `Ctrl+Shift+D` (Win) / `Cmd+Shift+D` (Mac)
 3. **Password:** `maycole2024` (customizable)
@@ -278,18 +295,23 @@ npm run deploy
 ### Features
 
 #### 📝 Content Tab
+
 Edit hero section text, taglines, company info
 
 #### 📦 Products Tab
+
 Add/edit/delete products with pricing and descriptions
 
 #### 🔗 Links Tab
+
 Manage navigation menu and social media links
 
 #### 🖼️ Images Tab
+
 Upload images via URL, organize by category
 
 #### 💾 Backup/Restore
+
 Export all data as JSON, import to restore
 
 **See [DEV_PANEL_GUIDE.md](./DEV_PANEL_GUIDE.md) for details**
@@ -299,18 +321,21 @@ Export all data as JSON, import to restore
 ## 🔐 Security
 
 ### Password Protection
+
 - Default password: `maycole2024`
 - Change in `/components/DevPanel.tsx` line 23
 - Session-based authentication
 - Auto-logout on browser close
 
 ### Data Storage
+
 - LocalStorage only (no external API calls)
 - No sensitive data collection
 - Export/import for data portability
 - `.gitignore` excludes sensitive files
 
 ### Best Practices
+
 - ✅ Change default password immediately
 - ✅ Export backups regularly
 - ✅ Never commit `.env` files
@@ -342,6 +367,7 @@ git push origin feature/amazing-feature
 ```
 
 ### Coding Standards
+
 - Use TypeScript for all new files
 - Follow existing code style (Prettier auto-formats)
 - Write meaningful commit messages
@@ -366,6 +392,7 @@ of this software and associated documentation files...
 ## 🙏 Acknowledgments
 
 ### Technologies
+
 - [React](https://reactjs.org/) - UI Framework
 - [Vite](https://vitejs.dev/) - Build Tool
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
@@ -373,6 +400,7 @@ of this software and associated documentation files...
 - [Lucide](https://lucide.dev/) - Icons
 
 ### Inspiration
+
 - Apple's design philosophy
 - Oracle's enterprise presentation
 - Modern SaaS best practices
@@ -393,6 +421,7 @@ of this software and associated documentation files...
 ## 🗺️ Roadmap
 
 ### ✅ Completed
+
 - [x] Professional website design
 - [x] Dev Panel CMS
 - [x] Export/import functionality
@@ -401,12 +430,14 @@ of this software and associated documentation files...
 - [x] Git/GitHub integration
 
 ### 🚧 In Progress
+
 - [ ] Supabase integration (optional)
 - [ ] Advanced analytics dashboard
 - [ ] Multi-language support
 - [ ] Dark/light theme toggle
 
 ### 📋 Planned
+
 - [ ] Mobile app (React Native)
 - [ ] Admin user management
 - [ ] Content scheduling
@@ -418,16 +449,19 @@ of this software and associated documentation files...
 ## 📞 Support & Contact
 
 ### Documentation
+
 - Start with: [SETUP_COMPLETE.md](./SETUP_COMPLETE.md)
 - Quick help: [QUICK_START_COMMANDS.md](./QUICK_START_COMMANDS.md)
 - Troubleshooting: [VSCODE_TROUBLESHOOTING.md](./VSCODE_TROUBLESHOOTING.md)
 
 ### Community
+
 - **GitHub Issues:** For bugs and feature requests
 - **Discussions:** For questions and ideas
 - **Pull Requests:** For contributions
 
 ### External Resources
+
 - **React Docs:** https://react.dev
 - **TypeScript:** https://typescriptlang.org
 - **Tailwind:** https://tailwindcss.com
@@ -450,18 +484,22 @@ If you found this project helpful:
 ## 📱 Screenshots
 
 ### Homepage Hero Section
-*Beautiful, professional hero with atomic logo and gradient branding*
+
+_Beautiful, professional hero with atomic logo and gradient branding_
 
 ### Dev Panel - Content Management
-*Easy-to-use interface for updating website content*
+
+_Easy-to-use interface for updating website content_
 
 ### Products Showcase
-*Elegant product cards with pricing and features*
+
+_Elegant product cards with pricing and features_
 
 ### Mobile Responsive
-*Perfect on all devices - desktop, tablet, mobile*
 
-*(Add actual screenshots to `/docs/images/` folder)*
+_Perfect on all devices - desktop, tablet, mobile_
+
+_(Add actual screenshots to `/docs/images/` folder)_
 
 ---
 
@@ -487,7 +525,9 @@ If you found this project helpful:
 **Focus:** Enterprise SaaS solutions
 
 ### The MAYCOLE Method™
+
 Our proprietary framework combining:
+
 - Agile methodologies
 - Spring Framework architecture
 - AI/ML integration
@@ -513,7 +553,7 @@ npm install && npm run dev
 
 **MaycoleTechnologies™** - Professional. Powerful. Simple.
 
-*Built with ❤️ by developers, for developers.*
+_Built with ❤️ by developers, for developers._
 
 ---
 

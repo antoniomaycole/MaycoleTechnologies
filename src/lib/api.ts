@@ -36,126 +36,66 @@ class ApiClient {
       throw new Error('Not authenticated');
     }
 
-    // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 300 + Math.random() * 700));
+    // Make actual fetch call to backend
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.token}`,
+        ...options.headers,
+      },
+    });
 
-    // In production, make actual fetch call:
-    // const response = await fetch(`${this.baseUrl}${endpoint}`, {
-    //   ...options,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${session.token}`,
-    //     ...options.headers,
-    //   },
-    // });
-    // return response.json();
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.statusText}`);
+    }
 
-    // For demo, return mock data
-    return {
-      success: true,
-      timestamp: new Date().toISOString(),
-    } as ApiResponse<T>;
+    return response.json();
   }
 
   // ==================== PRODUCTS ====================
 
   async getProducts(filters?: ProductFilters): Promise<PaginatedResponse<Product>> {
-    await this.request('/products', { method: 'GET' });
+    let endpoint = '/products';
 
-    let products = this.getMockProducts();
-
-    // Apply filters
-    if (filters?.search) {
-      const search = filters.search.toLowerCase();
-      products = products.filter(
-        (p) => p.name.toLowerCase().includes(search) || p.sku.toLowerCase().includes(search)
-      );
-    }
-
-    if (filters?.categoryId) {
-      products = products.filter((p) => p.categoryId === filters.categoryId);
-    }
-
-    if (filters?.status) {
-      products = products.filter((p) => p.status === filters.status);
-    }
-
-    if (filters?.lowStock) {
-      products = products.filter((p) => p.quantity <= p.minStockLevel);
-    }
-
-    // Sorting
+    // Build query string with filters
+    const params = new URLSearchParams();
+    if (filters?.search) params.append('search', filters.search);
+    if (filters?.categoryId) params.append('categoryId', filters.categoryId);
+    if (filters?.status) params.append('status', filters.status);
+    if (filters?.lowStock) params.append('lowStock', 'true');
     if (filters?.sortBy) {
-      products.sort((a, b) => {
-        const aVal = a[filters.sortBy as keyof Product];
-        const bVal = b[filters.sortBy as keyof Product];
-        const order = filters.sortOrder === 'desc' ? -1 : 1;
-        return aVal > bVal ? order : -order;
-      });
+      params.append('sortBy', filters.sortBy);
+      params.append('sortOrder', filters.sortOrder || 'asc');
     }
 
-    return {
-      data: products,
-      pagination: {
-        page: 1,
-        pageSize: 50,
-        totalPages: 1,
-        totalItems: products.length,
-      },
-    };
+    if (params.toString()) {
+      endpoint += '?' + params.toString();
+    }
+
+    const response = await this.request<PaginatedResponse<Product>>(endpoint, { method: 'GET' });
+    return response.data;
   }
 
   async getProduct(id: string): Promise<Product> {
-    await this.request(`/products/${id}`, { method: 'GET' });
-    const products = this.getMockProducts();
-    const product = products.find((p) => p.id === id);
-    if (!product) throw new Error('Product not found');
-    return product;
+    const response = await this.request<Product>(`/products/${id}`, { method: 'GET' });
+    return response.data;
   }
 
   async createProduct(data: Partial<Product>): Promise<Product> {
-    await this.request('/products', {
+    const response = await this.request<Product>('/products', {
       method: 'POST',
       body: JSON.stringify(data),
     });
-
-    const newProduct: Product = {
-      id: this.generateId(),
-      sku: data.sku || this.generateSKU(),
-      name: data.name || 'New Product',
-      description: data.description || '',
-      categoryId: data.categoryId || '1',
-      supplierId: data.supplierId || '1',
-      organizationId: '1',
-      quantity: data.quantity || 0,
-      minStockLevel: data.minStockLevel || 10,
-      maxStockLevel: data.maxStockLevel || 100,
-      reorderPoint: data.reorderPoint || 20,
-      unitCost: data.unitCost || 0,
-      sellingPrice: data.sellingPrice || 0,
-      images: data.images || [],
-      location: data.location || 'Warehouse A',
-      status: 'active',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      lastRestockedAt: null,
-    };
-
-    return newProduct;
+    return response.data;
   }
 
   async updateProduct(id: string, data: Partial<Product>): Promise<Product> {
-    await this.request(`/products/${id}`, {
+    const response = await this.request<Product>(`/products/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-
-    const product = await this.getProduct(id);
-    return {
-      ...product,
-      ...data,
-      updatedAt: new Date().toISOString(),
-    };
+    return response.data;
   }
 
   async deleteProduct(id: string): Promise<void> {
@@ -165,69 +105,36 @@ class ApiClient {
   // ==================== CATEGORIES ====================
 
   async getCategories(): Promise<Category[]> {
-    await this.request('/categories', { method: 'GET' });
-    return this.getMockCategories();
+    const response = await this.request<Category[]>('/categories', { method: 'GET' });
+    return response.data;
   }
 
   async createCategory(data: Partial<Category>): Promise<Category> {
-    await this.request('/categories', {
+    const response = await this.request<Category>('/categories', {
       method: 'POST',
       body: JSON.stringify(data),
     });
-
-    return {
-      id: this.generateId(),
-      name: data.name || 'New Category',
-      description: data.description || '',
-      organizationId: '1',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+    return response.data;
   }
 
   // ==================== SUPPLIERS ====================
 
   async getSuppliers(): Promise<Supplier[]> {
-    await this.request('/suppliers', { method: 'GET' });
-    return this.getMockSuppliers();
+    const response = await this.request<Supplier[]>('/suppliers', { method: 'GET' });
+    return response.data;
   }
 
   async getSupplier(id: string): Promise<Supplier> {
-    await this.request(`/suppliers/${id}`, { method: 'GET' });
-    const suppliers = this.getMockSuppliers();
-    const supplier = suppliers.find((s) => s.id === id);
-    if (!supplier) throw new Error('Supplier not found');
-    return supplier;
+    const response = await this.request<Supplier>(`/suppliers/${id}`, { method: 'GET' });
+    return response.data;
   }
 
   async createSupplier(data: Partial<Supplier>): Promise<Supplier> {
-    await this.request('/suppliers', {
+    const response = await this.request<Supplier>('/suppliers', {
       method: 'POST',
       body: JSON.stringify(data),
     });
-
-    return {
-      id: this.generateId(),
-      name: data.name || 'New Supplier',
-      contactPerson: data.contactPerson || '',
-      email: data.email || '',
-      phone: data.phone || '',
-      address: data.address || {
-        street: '',
-        city: '',
-        state: '',
-        country: '',
-        zipCode: '',
-      },
-      organizationId: '1',
-      rating: 5,
-      leadTime: 7,
-      minimumOrderValue: 0,
-      paymentTerms: 'Net 30',
-      isActive: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+    return response.data;
   }
 
   // ==================== STOCK MOVEMENTS ====================
@@ -236,26 +143,16 @@ class ApiClient {
     productId?: string;
     dateRange?: DateRangeFilter;
   }): Promise<StockMovement[]> {
-    await this.request('/stock-movements', { method: 'GET' });
-    return this.getMockStockMovements();
+    const response = await this.request<StockMovement[]>('/stock-movements', { method: 'GET' });
+    return response.data;
   }
 
   async createStockMovement(data: Partial<StockMovement>): Promise<StockMovement> {
-    await this.request('/stock-movements', {
+    const response = await this.request<StockMovement>('/stock-movements', {
       method: 'POST',
       body: JSON.stringify(data),
     });
-
-    return {
-      id: this.generateId(),
-      productId: data.productId || '',
-      organizationId: '1',
-      type: data.type || 'adjustment',
-      quantity: data.quantity || 0,
-      reason: data.reason || '',
-      performedBy: '1',
-      createdAt: new Date().toISOString(),
-    };
+    return response.data;
   }
 
   // ==================== ORDERS ====================
@@ -319,15 +216,15 @@ class ApiClient {
   }
 
   async getStockAlerts(): Promise<StockAlert[]> {
-    await this.request('/alerts', { method: 'GET' });
-    return this.getMockAlerts();
+    const response = await this.request<StockAlert[]>('/alerts', { method: 'GET' });
+    return response.data;
   }
 
   // ==================== NOTIFICATIONS ====================
 
   async getNotifications(): Promise<Notification[]> {
-    await this.request('/notifications', { method: 'GET' });
-    return this.getMockNotifications();
+    const response = await this.request<Notification[]>('/notifications', { method: 'GET' });
+    return response.data;
   }
 
   async markNotificationRead(id: string): Promise<void> {

@@ -56,7 +56,7 @@ export function createAccessibleButton(
 /**
  * Set focus management for modals
  */
-export function focusTrap(element: HTMLElement): (() => void) => {
+export function focusTrap(element: HTMLElement) {
   const focusableElements = element.querySelectorAll<HTMLElement>(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
   );

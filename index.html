@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#1a1a1a" />
     <meta name="description" content="Professional Inventory Tracking & Management System" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -15,19 +14,95 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
     <title>MaycoleTechnologies</title>
     <style>
+      /* Ensure document renders properly */
       html,
-      body,
-      #root {
-        width: 100%;
-        height: 100%;
+      body {
         margin: 0;
         padding: 0;
-        overflow-x: hidden;
+        width: 100%;
+        min-height: 100vh;
+        background: #ffffff;
+      }
+      
+      #root {
+        width: 100%;
+        min-height: 100vh;
+      }
+      
+      #app-loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        background: #111;
+        color: #00ff88;
+        font-family: system-ui, sans-serif;
+        flex-direction: column;
+        gap: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.3s ease-out;
+      }
+      
+      #app-loader.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      
+      .loader-title {
+        font-size: 48px;
+        font-weight: bold;
+      }
+      
+      .loader-text {
+        font-size: 18px;
+        opacity: 0.7;
+      }
+      
+      .loader-bar {
+        width: 200px;
+        height: 4px;
+        background: #333;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      
+      .loader-progress {
+        width: 30%;
+        height: 100%;
+        background: #00ff88;
+        animation: loading 1.5s ease-in-out infinite;
+      }
+      
+      @keyframes loading {
+        0% {
+          width: 30%;
+        }
+        50% {
+          width: 70%;
+        }
+        100% {
+          width: 30%;
+        }
       }
     </style>
   </head>
 
   <body>
+    <!-- Loading state - independent of React root -->
+    <div id="app-loader">
+      <div class="loader-title">MaycoleTechnologies™</div>
+      <div class="loader-text">Loading application...</div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+    
+    <!-- React application root -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

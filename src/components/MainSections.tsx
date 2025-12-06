@@ -1,7 +1,6 @@
 import { AboutSection } from './AboutSection';
 import { ServicesSection } from './ServicesSection';
 import { ProductsSection } from './ProductsSection';
-import { TestimonialsSection } from './TestimonialsSection';
 import { FreeTrialSection } from './FreeTrialSection';
 import { MobileAppSection } from './MobileAppSection';
 import { AwardsSection } from './AwardsSection';
@@ -42,11 +41,6 @@ export function MainSections({ onLaunchTracker }: MainSectionsProps) {
       {/* Products Section */}
       <div className="maycole-section-products">
         <ProductsSection onLaunchTracker={onLaunchTracker} />
-      </div>
-
-      {/* Testimonials Section - Social Proof after Products */}
-      <div className="maycole-section-about">
-        <TestimonialsSection />
       </div>
 
       {/* ROI Calculator - Show Value Proposition */}

@@ -22,7 +22,6 @@ export { ServicesSection } from './ServicesSection';
 export { ProductsSection } from './ProductsSection';
 export { TechnologiesSection } from './TechnologiesSection';
 export { PaymentSection } from './PaymentSection';
-export { EnhancedPaymentSection } from './EnhancedPaymentSection';
 export { ContactSection } from './ContactSection';
 export { MainSections } from './MainSections';
 export { LeadCapture } from './LeadCapture';
@@ -33,6 +32,11 @@ export { MerchandiseCart } from './MerchandiseCart';
 export { MerchandiseCheckout } from './MerchandiseCheckout';
 export { StorePage } from './StorePage';
 export { MerchandiseBrandDisplay } from './MerchandiseBrandDisplay';
+
+// New Feature Components
+export { AnalyticsDashboard } from './AnalyticsDashboard';
+export { FeatureComparison } from './FeatureComparison';
+export { TestimonialsCarousel } from './TestimonialsCarousel';
 
 // UI Components (re-export from shadcn/ui)
 export { Button } from './ui/button';

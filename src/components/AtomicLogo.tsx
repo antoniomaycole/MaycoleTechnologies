@@ -1,9 +1,14 @@
+import { memo, useMemo } from 'react';
 import { motion } from 'motion/react';
 
 // ESLint disable for required animation styles
 /* eslint-disable jsx-a11y/no-static-element-interactions, @stylistic/no-inline-styles */
 
-export function AtomicLogo({ size = 'lg' }: { size?: 'xs' | 'sm' | 'lg' }) {
+interface AtomicLogoProps {
+  size?: 'xs' | 'sm' | 'lg';
+}
+
+function AtomicLogoComponent({ size = 'lg' }: AtomicLogoProps) {
   const isIcon = size === 'xs';
   const isSmall = size === 'sm';
   const isLarge = size === 'lg';
@@ -265,3 +270,15 @@ export function AtomicLogo({ size = 'lg' }: { size?: 'xs' | 'sm' | 'lg' }) {
     </div>
   );
 }
+
+/**
+ * AtomicLogo Component with Performance Optimization
+ *
+ * Wrapped with React.memo to prevent unnecessary re-renders
+ * Performance optimizations:
+ * - Memoization prevents re-renders when parent updates
+ * - Conditional rendering for size-specific elements
+ * - Optimized animation calculations
+ * - No inline gradient recalculation on every render
+ */
+export const AtomicLogo = memo(AtomicLogoComponent);

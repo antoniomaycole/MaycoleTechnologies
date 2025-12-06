@@ -1,4 +1,9 @@
-import { cn } from '@/lib/utils';
+/**
+ * Utility function for conditional className
+ */
+function cn(...classes: (string | undefined | null | boolean)[]) {
+  return classes.filter(Boolean).join(' ');
+}
 
 /**
  * Skeleton loader component for loading states

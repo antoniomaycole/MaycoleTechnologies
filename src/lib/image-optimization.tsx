@@ -1,7 +1,7 @@
 /**
  * Image Optimization Utilities
  * Provides lazy loading, responsive images, and performance optimization
- * 
+ *
  * Features:
  * - Lazy loading for below-the-fold images
  * - Responsive image sizes (srcset)
@@ -10,11 +10,11 @@
  * - Blur-up placeholder effect
  */
 
-import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component'
-import 'react-lazy-load-image-component/src/effects/blur.css'
-import 'react-lazy-load-image-component/src/effects/black-and-white.css'
-import 'react-lazy-load-image-component/src/effects/opacity.css'
-import React from 'react'
+import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'react-lazy-load-image-component/src/effects/black-and-white.css';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
+import React from 'react';
 
 /**
  * Image size breakpoints for responsive images
@@ -24,8 +24,8 @@ export const IMAGE_BREAKPOINTS = {
   tablet: 768,
   desktop: 1024,
   wide: 1440,
-  ultrawide: 1920
-} as const
+  ultrawide: 1920,
+} as const;
 
 /**
  * Generate responsive image srcset string
@@ -37,46 +37,44 @@ export function generateSrcSet(
   format: 'jpg' | 'webp' = 'jpg'
 ): string {
   return sizes
-    .map(size => {
-      const filename = baseUrl.replace(/(\.\w+)$/, `-${size}.$1`)
-      return `${filename} ${size}w`
+    .map((size) => {
+      const filename = baseUrl.replace(/(\.\w+)$/, `-${size}.$1`);
+      return `${filename} ${size}w`;
     })
-    .join(', ')
+    .join(', ');
 }
 
 /**
  * Get image size hints for srcset sizes attribute
  * Used by browser to select appropriate image size
  */
-export function getImageSizes(
-  isHero?: boolean,
-  containerWidth: string = '100vw'
-): string {
+export function getImageSizes(isHero?: boolean, containerWidth: string = '100vw'): string {
   if (isHero) {
     // Hero images: full viewport width on mobile, 90% on desktop
-    return '(max-width: 768px) 100vw, 90vw'
+    return '(max-width: 768px) 100vw, 90vw';
   }
 
   // Default: 100% on mobile, 50% on tablet, 33% on desktop
-  return '(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, ' +
-    containerWidth
+  return (
+    '(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, ' + containerWidth
+  );
 }
 
 /**
  * Optimized image component with lazy loading
  */
 interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  src: string
-  alt: string
-  width?: number
-  height?: number
-  placeholder?: string
-  effect?: 'blur' | 'black-and-white' | 'opacity' | 'none'
-  wrapperClassName?: string
-  containerWidth?: string
-  isHero?: boolean
-  responsive?: boolean
-  webp?: boolean
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  placeholder?: string;
+  effect?: 'blur' | 'black-and-white' | 'opacity' | 'none';
+  wrapperClassName?: string;
+  containerWidth?: string;
+  isHero?: boolean;
+  responsive?: boolean;
+  webp?: boolean;
 }
 
 export function OptimizedImage({
@@ -96,15 +94,15 @@ export function OptimizedImage({
   ...props
 }: OptimizedImageProps) {
   // Generate responsive srcset
-  const srcSet = responsive ? generateSrcSet(src) : undefined
-  const sizes = responsive ? getImageSizes(isHero, containerWidth) : undefined
+  const srcSet = responsive ? generateSrcSet(src) : undefined;
+  const sizes = responsive ? getImageSizes(isHero, containerWidth) : undefined;
 
   // Aspect ratio for maintaining layout stability
-  const aspectRatio = width && height ? (height / width) * 100 : undefined
+  const aspectRatio = width && height ? (height / width) * 100 : undefined;
   const containerStyle: React.CSSProperties = {
     aspectRatio: aspectRatio ? `${width} / ${height}` : 'auto',
-    overflow: 'hidden'
-  }
+    overflow: 'hidden',
+  };
 
   return (
     <LazyLoadImage
@@ -118,7 +116,7 @@ export function OptimizedImage({
       effect={effect === 'none' ? undefined : effect}
       wrapperClassName={`image-wrapper ${wrapperClassName}`}
       wrapperProps={{
-        style: containerStyle
+        style: containerStyle,
       }}
       className={className}
       style={style}
@@ -130,7 +128,7 @@ export function OptimizedImage({
       visibleByDefault={isHero}
       {...props}
     />
-  )
+  );
 }
 
 /**
@@ -155,20 +153,20 @@ export function HeroImage({
       placeholder={`data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"%3E%3C/svg%3E`}
       {...props}
     />
-  )
+  );
 }
 
 /**
  * Background image component with lazy loading
  */
 interface BackgroundImageProps {
-  src: string
-  alt: string
-  children?: React.ReactNode
-  className?: string
-  style?: React.CSSProperties
-  effect?: 'blur' | 'opacity' | 'none'
-  placeholder?: string
+  src: string;
+  alt: string;
+  children?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  effect?: 'blur' | 'opacity' | 'none';
+  placeholder?: string;
 }
 
 export function BackgroundImage({
@@ -178,9 +176,9 @@ export function BackgroundImage({
   className = '',
   style = {},
   effect = 'blur',
-  placeholder
+  placeholder,
 }: BackgroundImageProps) {
-  const [isLoaded, setIsLoaded] = React.useState(false)
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
   return (
     <div
@@ -189,17 +187,14 @@ export function BackgroundImage({
         backgroundImage: `url('${isLoaded ? src : placeholder || ''}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        ...style
+        ...style,
       }}
     >
-      <LazyLoadComponent
-        threshold={100}
-        onVisible={() => setIsLoaded(true)}
-      >
+      <LazyLoadComponent threshold={100} onVisible={() => setIsLoaded(true)}>
         {children}
       </LazyLoadComponent>
     </div>
-  )
+  );
 }
 
 /**
@@ -207,16 +202,16 @@ export function BackgroundImage({
  */
 interface ResponsivePictureProps {
   sources: Array<{
-    srcSet: string
-    type: 'image/webp' | 'image/jpeg' | 'image/png'
-    sizes?: string
-  }>
-  src: string
-  alt: string
-  width?: number
-  height?: number
-  className?: string
-  isHero?: boolean
+    srcSet: string;
+    type: 'image/webp' | 'image/jpeg' | 'image/png';
+    sizes?: string;
+  }>;
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  className?: string;
+  isHero?: boolean;
 }
 
 export function ResponsivePicture({
@@ -226,17 +221,12 @@ export function ResponsivePicture({
   width,
   height,
   className = '',
-  isHero = false
+  isHero = false,
 }: ResponsivePictureProps) {
   return (
     <picture>
       {sources.map((source, idx) => (
-        <source
-          key={idx}
-          srcSet={source.srcSet}
-          type={source.type}
-          sizes={source.sizes}
-        />
+        <source key={idx} srcSet={source.srcSet} type={source.type} sizes={source.sizes} />
       ))}
       <img
         src={src}
@@ -248,7 +238,7 @@ export function ResponsivePicture({
         decoding="async"
       />
     </picture>
-  )
+  );
 }
 
 /**
@@ -256,22 +246,22 @@ export function ResponsivePicture({
  */
 interface ImageGalleryProps {
   images: Array<{
-    src: string
-    alt: string
-    thumb?: string
-    width?: number
-    height?: number
-  }>
-  columns?: number
-  gap?: string
-  className?: string
+    src: string;
+    alt: string;
+    thumb?: string;
+    width?: number;
+    height?: number;
+  }>;
+  columns?: number;
+  gap?: string;
+  className?: string;
 }
 
 export function ImageGallery({
   images,
   columns = 3,
   gap = '1rem',
-  className = ''
+  className = '',
 }: ImageGalleryProps) {
   return (
     <div
@@ -279,7 +269,7 @@ export function ImageGallery({
       style={{
         display: 'grid',
         gridTemplateColumns: `repeat(auto-fit, minmax(${100 / columns}%, 1fr))`,
-        gap
+        gap,
       }}
     >
       {images.map((image, idx) => (
@@ -295,14 +285,14 @@ export function ImageGallery({
         />
       ))}
     </div>
-  )
+  );
 }
 
 /**
  * Image with fallback for broken/missing images
  */
 interface ImageWithFallbackProps extends OptimizedImageProps {
-  fallbackSrc?: string
+  fallbackSrc?: string;
 }
 
 export function ImageWithFallback({
@@ -310,19 +300,19 @@ export function ImageWithFallback({
   fallbackSrc = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23ddd" width="400" height="300"/%3E%3Ctext x="50%" y="50%" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="24"%3EImage not found%3C/text%3E%3C/svg%3E',
   ...props
 }: ImageWithFallbackProps) {
-  const [, setHasError] = React.useState(false)
-  const [currentSrc, setCurrentSrc] = React.useState(src)
+  const [, setHasError] = React.useState(false);
+  const [currentSrc, setCurrentSrc] = React.useState(src);
 
   return (
     <OptimizedImage
       {...props}
       src={currentSrc}
       onError={() => {
-        setHasError(true)
-        setCurrentSrc(fallbackSrc || '')
+        setHasError(true);
+        setCurrentSrc(fallbackSrc || '');
       }}
     />
-  )
+  );
 }
 
 /**
@@ -332,11 +322,11 @@ export function ImageWithFallback({
 export function getOptimizedImageUrl(
   imageUrl: string,
   options?: {
-    width?: number
-    height?: number
-    quality?: number
-    format?: 'auto' | 'webp' | 'jpg' | 'png'
-    fit?: 'cover' | 'contain' | 'fill'
+    width?: number;
+    height?: number;
+    quality?: number;
+    format?: 'auto' | 'webp' | 'jpg' | 'png';
+    fit?: 'cover' | 'contain' | 'fill';
   }
 ): string {
   // If using Cloudinary:
@@ -346,24 +336,20 @@ export function getOptimizedImageUrl(
   // return `https://[domain].imgix.net/${imageUrl}?w=${options?.width}&q=${options?.quality || 80}&fmt=${options?.format || 'auto'}`
 
   // For now, return original URL (can be enhanced with service)
-  return imageUrl
+  return imageUrl;
 }
 
 /**
  * Preload critical images for better LCP (Largest Contentful Paint)
  */
-export function preloadImage(
-  href: string,
-  as: 'image' = 'image',
-  type?: string
-): void {
+export function preloadImage(href: string, as: 'image' = 'image', type?: string): void {
   if (typeof document !== 'undefined') {
-    const link = document.createElement('link')
-    link.rel = 'preload'
-    link.as = as
-    link.href = href
-    if (type) link.type = type
-    document.head.appendChild(link)
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = as;
+    link.href = href;
+    if (type) link.type = type;
+    document.head.appendChild(link);
   }
 }
 
@@ -372,10 +358,10 @@ export function preloadImage(
  */
 export function prefetchImage(href: string): void {
   if (typeof document !== 'undefined') {
-    const link = document.createElement('link')
-    link.rel = 'prefetch'
-    link.href = href
-    document.head.appendChild(link)
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = href;
+    document.head.appendChild(link);
   }
 }
 
@@ -387,8 +373,8 @@ export function generateBlurDataUrl(
   height: number = 10,
   color: string = '#e5e7eb'
 ): string {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"><rect fill="${color}" width="${width}" height="${height}"/></svg>`
-  return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"><rect fill="${color}" width="${width}" height="${height}"/></svg>`;
+  return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 }
 
 /**
@@ -399,18 +385,18 @@ export const IMAGE_OPTIMIZATION_TIPS = {
     hero: 'WebP with JPEG fallback',
     thumbnail: 'WebP with PNG fallback',
     icon: 'SVG or PNG',
-    logo: 'SVG or PNG'
+    logo: 'SVG or PNG',
   },
   maxSizes: {
     hero: '500 KB', // 50-100 KB after optimization
     thumbnail: '50 KB', // 10-20 KB after optimization
     icon: '20 KB', // 2-5 KB after optimization
-    logo: '30 KB' // 5-10 KB after optimization
+    logo: '30 KB', // 5-10 KB after optimization
   },
   tools: {
     batch: 'ImageMagick, ImageOptim, TinyPNG',
     online: 'TinyPNG, Squoosh, CloudConvert',
-    ci: 'Imagemin (npm), sharp (npm)'
+    ci: 'Imagemin (npm), sharp (npm)',
   },
   recommendations: [
     'Always use WebP format with JPEG/PNG fallback',
@@ -420,9 +406,9 @@ export const IMAGE_OPTIMIZATION_TIPS = {
     'Use SVG for logos and icons',
     'Implement blur-up placeholder effect',
     'Preload critical (LCP) images',
-    'Use native <picture> element for art direction'
-  ]
-}
+    'Use native <picture> element for art direction',
+  ],
+};
 
 export default {
   OptimizedImage,
@@ -438,5 +424,5 @@ export default {
   prefetchImage,
   generateBlurDataUrl,
   IMAGE_BREAKPOINTS,
-  IMAGE_OPTIMIZATION_TIPS
-}
+  IMAGE_OPTIMIZATION_TIPS,
+};

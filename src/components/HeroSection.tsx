@@ -1,10 +1,9 @@
 import { motion } from 'motion/react';
 import { AtomicLogo } from './AtomicLogo';
-import { CleanIcon } from '../MaycoleTracker-Website-Logo-Transfer';
 import { Button } from './ui/button';
-import { BrandedIconButton } from './ui/branded-icon-button';
 import { LeadCapture } from './LeadCapture';
 import { Sparkles } from 'lucide-react';
+import { getVisitorTrackingService } from '../services/VisitorTracking';
 
 interface HeroSectionProps {
   onLaunchTracker?: () => void;
@@ -60,34 +59,66 @@ export function HeroSection({ onLaunchTracker }: HeroSectionProps) {
             </div>
           </motion.div>
 
-          {/* Single MaycoleCheckBook Launch Button */}
+          {/* Dual Product Launch Buttons */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex flex-col items-center justify-center gap-6"
+            className="flex flex-col items-center justify-center gap-8"
           >
-            <Button
-              onClick={() => {
-                if (onLaunchTracker) {
-                  onLaunchTracker();
-                } else {
-                  console.warn('[HeroSection] onLaunchTracker prop not provided');
-                }
-              }}
-              className="maycole-btn-primary px-8 py-4 text-lg font-medium group relative overflow-hidden"
-            >
-              <span>Launch MaycoleCheckBook™</span>
-            </Button>
+            {/* MaycoleCheckBook Button */}
+            <div className="w-full max-w-md">
+              <Button
+                onClick={() => {
+                  const tracker = getVisitorTrackingService();
+                  tracker.trackProductLaunch('MaycoleCheckBook™');
+                  if (onLaunchTracker) {
+                    onLaunchTracker();
+                  } else {
+                    console.warn('[HeroSection] onLaunchTracker prop not provided');
+                  }
+                }}
+                className="maycole-btn-primary px-8 py-4 text-lg font-medium w-full group relative overflow-hidden"
+              >
+                <span>Launch MaycoleCheckBook™</span>
+              </Button>
+            </div>
 
-            {/* Branded Icon Button Display */}
+            {/* MaycoleTracker Product Display */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="mt-4"
+              transition={{ duration: 0.8, delay: 1.0 }}
+              className="w-full max-w-md"
             >
-              <BrandedIconButton size="lg" variant="default" text="MaycoleTechnologies" />
+              <div className="flex flex-col items-center gap-3 bg-maycole-green/10 border-2 border-maycole-green px-8 py-6 rounded-xl">
+                <div className="text-center w-full">
+                  <h3 className="text-2xl font-bold text-maycole-green mb-2">
+                    MaycoleTracker vol XII
+                  </h3>
+                  <div className="flex flex-col gap-2 mb-4">
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="text-maycole-green font-semibold">Innovative Intelligence</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="text-2xl">⚡</span>
+                      <span className="text-gray-700 font-semibold">Spring Logic</span>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={() => {
+                      const tracker = getVisitorTrackingService();
+                      tracker.trackProductLaunch('MaycoleTracker vol XII');
+                      if (onLaunchTracker) {
+                        onLaunchTracker();
+                      }
+                    }}
+                    className="maycole-btn-primary w-full"
+                  >
+                    Launch MaycoleTracker
+                  </Button>
+                </div>
+              </div>
             </motion.div>
 
             {/* Lead Capture - Seamless Integration */}

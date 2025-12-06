@@ -6,6 +6,7 @@ import { Input } from './ui/input';
 import { cn } from './ui/utils';
 import { toast } from 'sonner';
 import { getAnalytics } from '../lib/analytics-tracker';
+import { getVisitorTrackingService } from '../services/VisitorTracking';
 
 interface LeadCaptureProps {
   variant?: 'modal' | 'inline' | 'compact' | 'full';
@@ -61,6 +62,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
 
       // Track form submission attempt
       const analytics = getAnalytics();
+      const tracker = getVisitorTrackingService();
       analytics.trackFormStart('lead-capture');
 
       // Validation
@@ -111,6 +113,7 @@ export const LeadCapture = React.forwardRef<HTMLDivElement, LeadCaptureProps>(
 
         // Track successful form submission
         analytics.trackFormSubmit('lead-capture', true);
+        tracker.trackLeadCapture(formState.email, 'inline-form');
 
         // Success state
         setFormState((prev) => ({

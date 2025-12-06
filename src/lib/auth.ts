@@ -48,26 +48,25 @@ export class AuthService {
    * Login with email and password
    */
   static async login(credentials: LoginCredentials): Promise<AuthSession> {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Call backend API
+    const response = await fetch(`${config.api.baseUrl}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials),
+    });
 
-    // Mock authentication - in production, this would call your backend
-    if (credentials.email === 'demo@maycoletech.com' && credentials.password === 'demo123') {
-      const session = this.createMockSession(credentials.email);
-      this.storeSession(session, credentials.remember);
-      return session;
-    }
-
-    // Check if user exists in local storage (for demo purposes)
-    const users = this.getStoredUsers();
-    const user = users.find((u) => u.email === credentials.email);
-
-    if (!user) {
+    if (!response.ok) {
       throw new Error('Invalid email or password');
     }
 
-    // In production, verify password hash here
-    const session = this.createSessionFromUser(user);
+    const data = await response.json();
+    const session: AuthSession = {
+      user: data.user,
+      organization: data.organization,
+      token: data.token,
+      expiresAt: data.expiresAt,
+    };
+
     this.storeSession(session, credentials.remember);
     return session;
   }
@@ -76,57 +75,24 @@ export class AuthService {
    * Signup new user
    */
   static async signup(credentials: SignupCredentials): Promise<AuthSession> {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // Call backend API
+    const response = await fetch(`${config.api.baseUrl}/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials),
+    });
 
-    // Check if email already exists
-    const users = this.getStoredUsers();
-    if (users.find((u) => u.email === credentials.email)) {
-      throw new Error('Email already registered');
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Registration failed');
     }
 
-    // Create new user
-    const newUser: User = {
-      id: this.generateId(),
-      email: credentials.email,
-      firstName: credentials.firstName,
-      lastName: credentials.lastName,
-      role: 'admin', // First user is admin
-      organizationId: this.generateId(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      lastLoginAt: new Date().toISOString(),
-      phone: credentials.phone,
-      isActive: true,
-    };
-
-    const organization: Organization = {
-      id: newUser.organizationId,
-      name: credentials.organizationName,
-      subscriptionTier: 'professional', // Default tier
-      subscriptionStatus: 'trial',
-      subscriptionExpiresAt: this.getTrialExpiryDate(),
-      createdAt: new Date().toISOString(),
-      settings: {
-        timezone: 'America/New_York',
-        currency: 'USD',
-        lowStockThreshold: 10,
-        enableNotifications: true,
-        enableVoiceControl: true,
-        enableBarcodeScanning: true,
-      },
-    };
-
-    // Store user
-    users.push(newUser);
-    this.storeUsers(users);
-
-    // Create session
+    const result = await response.json();
     const session: AuthSession = {
-      user: newUser,
-      organization,
-      token: this.generateToken(),
-      expiresAt: this.getSessionExpiry(false),
+      user: result.user,
+      organization: result.organization,
+      token: result.token,
+      expiresAt: result.expiresAt,
     };
 
     this.storeSession(session, false);
@@ -181,13 +147,23 @@ export class AuthService {
       throw new Error('No active session');
     }
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    const response = await fetch(`${config.api.baseUrl}/auth/refresh`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.token}`,
+      },
+    });
 
+    if (!response.ok) {
+      throw new Error('Failed to refresh session');
+    }
+
+    const data = await response.json();
     const newSession: AuthSession = {
       ...session,
-      token: this.generateToken(),
-      expiresAt: this.getSessionExpiry(false),
+      token: data.token,
+      expiresAt: data.expiresAt,
     };
 
     this.storeSession(newSession, true);
@@ -203,30 +179,26 @@ export class AuthService {
       throw new Error('Not authenticated');
     }
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    const response = await fetch(`${config.api.baseUrl}/users/${session.user.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.token}`,
+      },
+      body: JSON.stringify(updates),
+    });
 
-    const updatedUser: User = {
-      ...session.user,
-      ...updates,
-      updatedAt: new Date().toISOString(),
-    };
+    if (!response.ok) {
+      throw new Error('Failed to update profile');
+    }
 
+    const updatedUser = await response.json();
     const newSession: AuthSession = {
       ...session,
       user: updatedUser,
     };
 
     this.storeSession(newSession, true);
-
-    // Update in stored users
-    const users = this.getStoredUsers();
-    const index = users.findIndex((u) => u.id === updatedUser.id);
-    if (index !== -1) {
-      users[index] = updatedUser;
-      this.storeUsers(users);
-    }
-
     return updatedUser;
   }
 
@@ -239,85 +211,29 @@ export class AuthService {
       throw new Error('Not authenticated');
     }
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // In production, verify current password and hash new password
-    // For demo, just simulate success
     if (currentPassword.length < 6 || newPassword.length < 6) {
       throw new Error('Password must be at least 6 characters');
+    }
+
+    const response = await fetch(`${config.api.baseUrl}/users/${session.user.id}/password`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.token}`,
+      },
+      body: JSON.stringify({
+        currentPassword,
+        newPassword,
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to change password');
     }
   }
 
   // ==================== HELPER METHODS ====================
-
-  private static createMockSession(email: string): AuthSession {
-    const user: User = {
-      id: '1',
-      email,
-      firstName: 'Demo',
-      lastName: 'User',
-      role: 'admin',
-      organizationId: '1',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      lastLoginAt: new Date().toISOString(),
-      isActive: true,
-    };
-
-    const organization: Organization = {
-      id: '1',
-      name: 'Demo Organization',
-      subscriptionTier: 'professional',
-      subscriptionStatus: 'active',
-      subscriptionExpiresAt: this.getTrialExpiryDate(),
-      createdAt: new Date().toISOString(),
-      settings: {
-        timezone: 'America/New_York',
-        currency: 'USD',
-        lowStockThreshold: 10,
-        enableNotifications: true,
-        enableVoiceControl: true,
-        enableBarcodeScanning: true,
-      },
-    };
-
-    return {
-      user,
-      organization,
-      token: this.generateToken(),
-      expiresAt: this.getSessionExpiry(false),
-    };
-  }
-
-  private static createSessionFromUser(user: User): AuthSession {
-    const organization: Organization = {
-      id: user.organizationId,
-      name: 'My Organization',
-      subscriptionTier: 'professional',
-      subscriptionStatus: 'active',
-      subscriptionExpiresAt: this.getTrialExpiryDate(),
-      createdAt: new Date().toISOString(),
-      settings: {
-        timezone: 'America/New_York',
-        currency: 'USD',
-        lowStockThreshold: 10,
-        enableNotifications: true,
-        enableVoiceControl: true,
-        enableBarcodeScanning: true,
-      },
-    };
-
-    return {
-      user: {
-        ...user,
-        lastLoginAt: new Date().toISOString(),
-      },
-      organization,
-      token: this.generateToken(),
-      expiresAt: this.getSessionExpiry(false),
-    };
-  }
 
   private static storeSession(session: AuthSession, remember: boolean = false): void {
     localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
@@ -326,36 +242,6 @@ export class AuthService {
 
   private static generateToken(): string {
     return `mt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  }
-
-  private static getSessionExpiry(remember: boolean): string {
-    const expiryDays = remember ? 30 : 1;
-    const expiry = new Date();
-    expiry.setDate(expiry.getDate() + expiryDays);
-    return expiry.toISOString();
-  }
-
-  private static getTrialExpiryDate(): string {
-    const expiry = new Date();
-    expiry.setDate(expiry.getDate() + 30);
-    return expiry.toISOString();
-  }
-
-  private static generateId(): string {
-    return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-  }
-
-  private static getStoredUsers(): User[] {
-    try {
-      const stored = localStorage.getItem('maycole_tracker_users');
-      return stored ? JSON.parse(stored) : [];
-    } catch (error) {
-      return [];
-    }
-  }
-
-  private static storeUsers(users: User[]): void {
-    localStorage.setItem('maycole_tracker_users', JSON.stringify(users));
   }
 }
 

@@ -63,7 +63,8 @@ export function initCoreWebVitalsTracking(): void {
       const lcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
-        performanceMetrics.vitals.lcp = lastEntry.renderTime || lastEntry.loadTime;
+        const lcp = (lastEntry as any).renderTime || (lastEntry as any).loadTime;
+        if (lcp) performanceMetrics.vitals.lcp = lcp;
         Sentry.captureMessage(`LCP: ${performanceMetrics.vitals.lcp.toFixed(2)}ms`);
       });
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });

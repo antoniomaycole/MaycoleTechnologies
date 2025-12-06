@@ -183,7 +183,6 @@ Check `.gitignore`:
 4. Click **"Add**
 
 5. Repeat for each variable:
-
    - STRIPE_SECRET_KEY
    - VITE_STRIPE_PRICE_PROFESSIONAL_MONTHLY
    - VITE_STRIPE_PRICE_ENTERPRISE_MONTHLY
@@ -202,19 +201,16 @@ Check `.gitignore`:
 ### Test to Live Conversion (5 minutes)
 
 1. **Complete Stripe Verification**
-
    - Stripe Dashboard → Account → Settings → Business Profile
    - Upload business documents
    - Wait for approval (5 min - 1 hour)
 
 2. **Switch API Keys**
-
    - Stripe Dashboard → Developers → API Keys
    - Toggle **"View test data"** OFF (turn blue toggle OFF)
    - Copy live keys (start with `pk_live_` and `sk_live_`)
 
 3. **Update Environment Variables**
-
    - `.env.local` for local testing:
      ```
      VITE_STRIPE_PUBLIC_KEY=pk_live_XXXXX
@@ -225,7 +221,6 @@ Check `.gitignore`:
      - Redeploy
 
 4. **Update Webhook Endpoint**
-
    - Stripe Dashboard → Webhooks
    - Change URL from localhost to: `https://maycoletechnologies.com/api/webhooks/stripe`
    - Update signing secret if changed
@@ -388,7 +383,6 @@ After setting up, verify:
    ```
 
 6. **Deploy to Vercel**
-
    - Push to GitHub
    - Vercel auto-deploys
    - Add environment variables in Vercel Dashboard

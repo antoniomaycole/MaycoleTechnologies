@@ -8,10 +8,8 @@ import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
 import { MainSections } from './components/MainSections';
 import { Footer } from './components/Footer';
-import { TickerTape } from './components/TickerTape';
 import { FloatingTrialButton } from './components/FloatingTrialButton';
 import { CookieConsent } from './components/CookieConsent';
-import { DemoDisclaimer } from './components/DemoDisclaimer';
 import { DevButton } from './components/DevButton';
 
 // Legal Pages
@@ -24,6 +22,10 @@ import { NotFound } from './components/NotFound';
 import { AuthenticatedTracker } from './components/AuthenticatedTracker';
 import { Toaster } from './components/ui/sonner';
 
+// Analytics & Visitor Tracking
+import { VisitorAnalyticsDashboard } from './components/VisitorAnalyticsDashboard';
+import { getVisitorTrackingService } from './services/VisitorTracking';
+
 // Authentication
 import { AuthProvider } from './contexts/AuthContext';
 
@@ -32,9 +34,30 @@ type AppView = 'website' | 'tracker' | 'privacy' | 'terms' | 'cookies' | '404';
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>('website');
 
+  console.log('[App] Rendering with view:', currentView);
+  console.log('[App] Test message: App component is running');
+
   // DEBUG: Log render
   useEffect(() => {
     console.log('[App] Rendered with view:', currentView);
+  }, [currentView]);
+
+  // Initialize visitor tracking
+  useEffect(() => {
+    const tracker = getVisitorTrackingService();
+    
+    // Track page view
+    const pageMap: Record<AppView, string> = {
+      'website': 'Home',
+      'tracker': 'MaycoleTracker',
+      'privacy': 'Privacy Policy',
+      'terms': 'Terms of Service',
+      'cookies': 'Cookie Policy',
+      '404': 'Not Found',
+    };
+    
+    tracker.trackPageView(pageMap[currentView]);
+    console.log('[App] Visitor tracking initialized');
   }, [currentView]);
 
   // Handle URL-based routing
@@ -120,12 +143,12 @@ export default function App() {
     );
   }
 
+  // TEST: Render simple test div first
+  console.log('[App] About to render website view');
   return (
     <div className="w-full min-h-screen bg-white text-gray-900 overflow-x-hidden">
-      <DemoDisclaimer />
       <Header onLaunchTracker={goToTracker} />
       <HeroSection onLaunchTracker={goToTracker} />
-      <TickerTape />
       <MainSections onLaunchTracker={goToTracker} />
       <FloatingTrialButton onLaunchTracker={goToTracker} />
       <CookieConsent />

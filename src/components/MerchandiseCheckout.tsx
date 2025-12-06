@@ -122,9 +122,10 @@ export function MerchandiseCheckout({ items, onBack, onSuccess }: MerchandiseChe
         const data = await response.json();
 
         // In production, redirect to Stripe checkout
-        if (data.sessionId && typeof window !== 'undefined' && window.Stripe) {
+        const stripeKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+        if (data.sessionId && typeof window !== 'undefined' && window.Stripe && stripeKey) {
           // Redirect to Stripe checkout
-          const stripe = window.Stripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+          const stripe = window.Stripe(stripeKey);
           stripe?.redirectToCheckout({ sessionId: data.sessionId });
         } else {
           // Demo mode or no Stripe - show success
@@ -214,6 +215,7 @@ export function MerchandiseCheckout({ items, onBack, onSuccess }: MerchandiseChe
             onClick={onBack}
             disabled={isProcessing}
             className="p-2 hover:bg-slate-800 rounded-lg transition-colors disabled:opacity-50"
+            aria-label="Go back"
           >
             <ArrowLeft className="w-5 h-5 text-slate-400" />
           </button>
@@ -314,7 +316,7 @@ export function MerchandiseCheckout({ items, onBack, onSuccess }: MerchandiseChe
                       value={checkoutState.formData.state}
                       onChange={handleInputChange}
                       placeholder="NY"
-                      maxLength="2"
+                      maxLength={2}
                       className="bg-slate-800 border-slate-600 text-white placeholder:text-slate-500"
                     />
                   </div>
@@ -336,8 +338,9 @@ export function MerchandiseCheckout({ items, onBack, onSuccess }: MerchandiseChe
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Country</label>
+                    <label htmlFor="country" className="block text-sm font-semibold text-white mb-2">Country</label>
                     <select
+                      id="country"
                       name="country"
                       value={checkoutState.formData.country}
                       onChange={handleInputChange}

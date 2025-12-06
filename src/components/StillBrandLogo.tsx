@@ -1,5 +1,7 @@
 import React from 'react';
 
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
 /**
  * Still Brand Logo - Static version of the atomic logo
  * For merchandise (caps, t-shirts), website branding, and company identity

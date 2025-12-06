@@ -25,16 +25,10 @@ export function NewsletterSection() {
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        {/* eslint-disable-next-line react/no-unknown-property */}
-        <div
-          className="absolute inset-0 bg-no-repeat"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #1e7f3e 1px, transparent 0)`,
-            backgroundSize: '40px 40px',
-          }}
-        ></div>
-      </div>
+      <div className="absolute inset-0 opacity-5 bg-no-repeat" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, #1e7f3e 1px, transparent 0)`,
+        backgroundSize: '40px 40px',
+      }}></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">

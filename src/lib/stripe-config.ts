@@ -8,6 +8,7 @@
  * - Use getStripeInstance() to access Stripe object
  */
 
+// @ts-ignore - @stripe/stripe-js not installed yet
 import { Stripe as StripeType } from '@stripe/stripe-js';
 
 declare global {

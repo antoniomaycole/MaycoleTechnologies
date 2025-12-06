@@ -102,6 +102,7 @@ export function SEOHead({
       <meta name="twitter:site" content={twitterHandle} />
 
       {/* Additional Meta Tags */}
+      {/* Note: theme-color is supported by most browsers despite linter warning */}
       <meta name="theme-color" content="#1a472a" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -109,6 +110,7 @@ export function SEOHead({
 
       {/* Favicon and App Icons */}
       <link rel="icon" href="/favicon.ico" />
+      {/* Note: apple-touch-icon is placed here as it's the standard location */}
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/manifest.json" />
 

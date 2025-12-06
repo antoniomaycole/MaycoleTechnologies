@@ -57,7 +57,7 @@ export function MerchandiseCart({
             <ShoppingBag className="w-6 h-6 text-blue-500" />
             <h2 className="text-xl font-bold text-white">Shopping Cart</h2>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-slate-800 rounded-lg transition-colors">
+          <button onClick={onClose} className="p-2 hover:bg-slate-800 rounded-lg transition-colors" aria-label="Close cart">
             <X className="w-5 h-5 text-slate-400" />
           </button>
         </div>
@@ -96,6 +96,7 @@ export function MerchandiseCart({
                   <button
                     onClick={() => onRemoveItem(item.id)}
                     className="text-slate-500 hover:text-red-500 transition-colors"
+                    aria-label="Remove item from cart"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -106,6 +107,7 @@ export function MerchandiseCart({
                   <button
                     onClick={() => onUpdateQuantity(item.id, Math.max(1, item.quantity - 1))}
                     className="p-1 hover:bg-slate-800 rounded transition-colors"
+                    aria-label="Decrease quantity"
                   >
                     <Minus className="w-4 h-4 text-slate-400" />
                   </button>
@@ -113,6 +115,7 @@ export function MerchandiseCart({
                   <button
                     onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
                     className="p-1 hover:bg-slate-800 rounded transition-colors"
+                    aria-label="Increase quantity"
                   >
                     <Plus className="w-4 h-4 text-slate-400" />
                   </button>

@@ -1,20 +1,11 @@
 export default function App() {
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'white',
-      }}
-    >
-      <div style={{ textAlign: 'center' }}>
-        <h1 style={{ fontSize: '48px', marginBottom: '20px', color: '#1e7f3e' }}>
+    <div className="w-full h-screen flex items-center justify-center bg-white">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold mb-5 text-green-700">
           MaycoleTechnologies™
         </h1>
-        <p style={{ fontSize: '18px', color: '#666' }}>Web app is working!</p>
+        <p className="text-lg text-gray-600">Web app is working!</p>
       </div>
     </div>
   );

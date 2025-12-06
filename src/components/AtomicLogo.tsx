@@ -1,8 +1,8 @@
 import { memo, useMemo } from 'react';
 import { motion } from 'motion/react';
 
-// ESLint disable for required animation styles
-/* eslint-disable jsx-a11y/no-static-element-interactions, @stylistic/no-inline-styles */
+// ESLint disable for required animation styles - dynamic props prevent static CSS extraction
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 
 interface AtomicLogoProps {
   size?: 'xs' | 'sm' | 'lg';

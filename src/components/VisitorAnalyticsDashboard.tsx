@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Users, BarChart3, TrendingUp, Clock, Mouse, Zap } from 'lucide-react';

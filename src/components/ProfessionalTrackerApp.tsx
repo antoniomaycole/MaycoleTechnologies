@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Button } from './ui/button';
@@ -193,11 +194,9 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
         animate={animated ? { rotate: 360 } : {}}
         transition={animated ? { duration: 8, repeat: Infinity, ease: 'linear' } : {}}
         className="relative"
-        // eslint-disable-next-line react/no-unknown-property
         style={{ width: dims.container, height: dims.container }}
       >
         {/* Purple gradient circle */}
-        {/* eslint-disable-next-line react/no-unknown-property */}
         <div
           className="absolute rounded-full shadow-2xl"
           style={{
@@ -211,7 +210,6 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
         {/* White cross and dots */}
         <div className="absolute inset-0 flex items-center justify-center">
           {/* Horizontal line */}
-          {/* eslint-disable-next-line react/no-unknown-property */}
           <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
@@ -222,7 +220,6 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
           />
 
           {/* Vertical line */}
-          {/* eslint-disable-next-line react/no-unknown-property */}
           <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
@@ -233,7 +230,6 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
           />
 
           {/* Four corner dots */}
-          {/* eslint-disable-next-line react/no-unknown-property */}
           <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
@@ -244,7 +240,6 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
               boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)',
             }}
           />
-          {/* eslint-disable-next-line react/no-unknown-property */}
           <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
@@ -255,7 +250,6 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
               boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)',
             }}
           />
-          {/* eslint-disable-next-line react/no-unknown-property */}
           <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{
@@ -266,7 +260,6 @@ export function ProfessionalTrackerApp({ onBack }: ProfessionalTrackerAppProps) 
               boxShadow: '0 0 8px rgba(255, 255, 255, 0.9)',
             }}
           />
-          {/* eslint-disable-next-line react/no-unknown-property */}
           <div
             className="absolute bg-white rounded-full shadow-lg"
             style={{

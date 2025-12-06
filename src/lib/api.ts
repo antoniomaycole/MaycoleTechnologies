@@ -74,12 +74,12 @@ class ApiClient {
     }
 
     const response = await this.request<PaginatedResponse<Product>>(endpoint, { method: 'GET' });
-    return response.data;
+    return (response.data || response) as PaginatedResponse<Product>;
   }
 
   async getProduct(id: string): Promise<Product> {
     const response = await this.request<Product>(`/products/${id}`, { method: 'GET' });
-    return response.data;
+    return (response.data || response) as Product;
   }
 
   async createProduct(data: Partial<Product>): Promise<Product> {
@@ -87,7 +87,7 @@ class ApiClient {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    return response.data;
+    return (response.data || response) as Product;
   }
 
   async updateProduct(id: string, data: Partial<Product>): Promise<Product> {
@@ -106,7 +106,7 @@ class ApiClient {
 
   async getCategories(): Promise<Category[]> {
     const response = await this.request<Category[]>('/categories', { method: 'GET' });
-    return response.data;
+    return (response.data || response) as Category[];
   }
 
   async createCategory(data: Partial<Category>): Promise<Category> {
@@ -114,19 +114,19 @@ class ApiClient {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    return response.data;
+    return (response.data || response) as Category;
   }
 
   // ==================== SUPPLIERS ====================
 
   async getSuppliers(): Promise<Supplier[]> {
     const response = await this.request<Supplier[]>('/suppliers', { method: 'GET' });
-    return response.data;
+    return (response.data || response) as Supplier[];
   }
 
   async getSupplier(id: string): Promise<Supplier> {
     const response = await this.request<Supplier>(`/suppliers/${id}`, { method: 'GET' });
-    return response.data;
+    return (response.data || response) as Supplier;
   }
 
   async createSupplier(data: Partial<Supplier>): Promise<Supplier> {
@@ -134,7 +134,7 @@ class ApiClient {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    return response.data;
+    return (response.data || response) as Supplier;
   }
 
   // ==================== STOCK MOVEMENTS ====================
@@ -144,7 +144,7 @@ class ApiClient {
     dateRange?: DateRangeFilter;
   }): Promise<StockMovement[]> {
     const response = await this.request<StockMovement[]>('/stock-movements', { method: 'GET' });
-    return response.data;
+    return (response.data || response) as StockMovement[];
   }
 
   async createStockMovement(data: Partial<StockMovement>): Promise<StockMovement> {
@@ -152,7 +152,7 @@ class ApiClient {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    return response.data;
+    return (response.data || response) as StockMovement;
   }
 
   // ==================== ORDERS ====================
@@ -217,14 +217,14 @@ class ApiClient {
 
   async getStockAlerts(): Promise<StockAlert[]> {
     const response = await this.request<StockAlert[]>('/alerts', { method: 'GET' });
-    return response.data;
+    return (response.data || response) as StockAlert[];
   }
 
   // ==================== NOTIFICATIONS ====================
 
   async getNotifications(): Promise<Notification[]> {
     const response = await this.request<Notification[]>('/notifications', { method: 'GET' });
-    return response.data;
+    return (response.data || response) as Notification[];
   }
 
   async markNotificationRead(id: string): Promise<void> {

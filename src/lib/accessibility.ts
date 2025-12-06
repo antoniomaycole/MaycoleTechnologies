@@ -153,7 +153,8 @@ export function makeKeyboardAccessible(
     element.setAttribute('tabindex', '0');
   }
 
-  element.addEventListener('click', callback);
+  const handleClick = (e: MouseEvent) => callback(e as unknown as KeyboardEvent);
+  element.addEventListener('click', handleClick);
   element.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();

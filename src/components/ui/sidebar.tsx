@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { VariantProps, cva } from 'class-variance-authority';

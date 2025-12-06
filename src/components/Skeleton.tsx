@@ -54,7 +54,7 @@ export function GridSkeleton({ count = 3 }: { count?: number }) {
 export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; columns?: number }) {
   return (
     <div className="w-full space-y-4">
-      <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
+      <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}>
         {Array.from({ length: columns }).map((_, i) => (
           <Skeleton key={i} className="h-10" />
         ))}
@@ -63,7 +63,7 @@ export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; column
         <div
           key={rowIdx}
           className="grid gap-4"
-          style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
+          style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
         >
           {Array.from({ length: columns }).map((_, colIdx) => (
             <Skeleton key={`${rowIdx}-${colIdx}`} className="h-8" />

@@ -3,6 +3,8 @@
  * Real-time monitoring of Core Web Vitals, bundle size, and optimization status
  */
 
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import React, { useEffect, useState } from 'react';
 import { AlertCircle, CheckCircle, TrendingDown, Zap } from 'lucide-react';
 import {

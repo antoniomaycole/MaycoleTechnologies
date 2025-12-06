@@ -136,7 +136,9 @@ export const PerformanceDashboard: React.FC = () => {
             <Zap className="w-8 h-8 text-yellow-500" />
             Performance Dashboard
           </h2>
-          <p className="text-gray-600 mt-1">Real-time optimization analysis and bot-driven improvements</p>
+          <p className="text-gray-600 mt-1">
+            Real-time optimization analysis and bot-driven improvements
+          </p>
         </div>
         {botStatus && (
           <div className="text-right">
@@ -178,7 +180,9 @@ export const PerformanceDashboard: React.FC = () => {
                 <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
                   <div
                     className="bg-purple-600 h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${(botStatus.completedActions / botStatus.totalActions) * 100}%` }}
+                    style={{
+                      width: `${(botStatus.completedActions / botStatus.totalActions) * 100}%`,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -191,20 +195,24 @@ export const PerformanceDashboard: React.FC = () => {
       <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {metrics.map((metric, idx) => (
           <motion.div key={idx} variants={itemVariants}>
-            <Card className="p-4 border-l-4" style={{
-              borderLeftColor: metric.status === 'good' ? '#10b981' : metric.status === 'warning' ? '#f59e0b' : '#ef4444',
-            }}>
+            <Card
+              className="p-4 border-l-4"
+              style={{
+                borderLeftColor:
+                  metric.status === 'good'
+                    ? '#10b981'
+                    : metric.status === 'warning'
+                      ? '#f59e0b'
+                      : '#ef4444',
+              }}
+            >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <p className="text-sm text-gray-600 mb-1">{metric.name}</p>
                   <p className="text-2xl font-bold text-gray-900">{metric.value.toFixed(1)}</p>
-                  <p className="text-xs text-gray-500 mt-1">
-                    Threshold: {metric.threshold}
-                  </p>
+                  <p className="text-xs text-gray-500 mt-1">Threshold: {metric.threshold}</p>
                 </div>
-                <div className={getStatusColor(metric.status)}>
-                  {getStatusIcon(metric.status)}
-                </div>
+                <div className={getStatusColor(metric.status)}>{getStatusIcon(metric.status)}</div>
               </div>
             </Card>
           </motion.div>

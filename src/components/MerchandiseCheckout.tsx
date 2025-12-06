@@ -338,7 +338,12 @@ export function MerchandiseCheckout({ items, onBack, onSuccess }: MerchandiseChe
                     />
                   </div>
                   <div>
-                    <label htmlFor="country" className="block text-sm font-semibold text-white mb-2">Country</label>
+                    <label
+                      htmlFor="country"
+                      className="block text-sm font-semibold text-white mb-2"
+                    >
+                      Country
+                    </label>
                     <select
                       id="country"
                       name="country"

@@ -25,7 +25,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // 1. SendGrid (configured in env)
     // 2. Mailchimp
     // 3. Your own database
-    
+
     console.log('[Subscribe API] Lead captured:', { email, name, source });
 
     // For now, just acknowledge

@@ -11,22 +11,27 @@ npm install -g vercel && vercel login && vercel --prod
 ## 4 QUICK STEPS
 
 ### Step 1: Install Vercel CLI
+
 ```powershell
 npm install -g vercel
 ```
 
 ### Step 2: Login to Vercel
+
 ```powershell
 vercel login
 ```
+
 _(Opens browser to authenticate with GitHub)_
 
 ### Step 3: Deploy to Production
+
 ```powershell
 vercel --prod
 ```
 
 ### Step 4: Verify Deployment
+
 - Open Vercel dashboard: https://vercel.com/dashboard
 - Wait for "Ready" status ✅
 - Click visit button to see your live app
@@ -61,6 +66,7 @@ JWT_SECRET=your-super-secret-key
 ## TEST YOUR LIVE APP
 
 After deployment:
+
 1. Go to Vercel dashboard
 2. Click "Visit" button
 3. Test:
@@ -73,14 +79,14 @@ After deployment:
 
 ## DEPLOYMENT STATUS
 
-| Item | Status |
-|------|--------|
-| Code | ✅ Pushed to GitHub |
-| Build | ✅ Tested (0 errors) |
-| Config | ✅ Ready |
-| Security | ✅ Protected |
-| APIs | ✅ Functional |
-| **Status** | **🟢 READY** |
+| Item       | Status               |
+| ---------- | -------------------- |
+| Code       | ✅ Pushed to GitHub  |
+| Build      | ✅ Tested (0 errors) |
+| Config     | ✅ Ready             |
+| Security   | ✅ Protected         |
+| APIs       | ✅ Functional        |
+| **Status** | **🟢 READY**         |
 
 ---
 
@@ -95,28 +101,31 @@ After deployment:
 
 ## EXPECTED TIME
 
-| Step | Minutes |
-|------|---------|
-| Install Vercel | 1 |
-| Login | 2 |
-| Deploy | 3-5 |
-| Verify | 5 |
-| **Total** | **~15** |
+| Step           | Minutes |
+| -------------- | ------- |
+| Install Vercel | 1       |
+| Login          | 2       |
+| Deploy         | 3-5     |
+| Verify         | 5       |
+| **Total**      | **~15** |
 
 ---
 
 ## TROUBLE?
 
 ### Build fails
+
 - Run: `npm run build` locally first
 - Check error messages
 
 ### Deploy error
+
 - Check: Vercel dashboard > Deployments
 - Read: Build logs
 - Try: `vercel --prod --debug`
 
 ### API not responding
+
 - Check: Env variables set
 - Verify: API endpoint URLs
 - Test: Manually in browser

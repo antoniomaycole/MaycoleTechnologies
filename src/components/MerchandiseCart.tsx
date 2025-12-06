@@ -57,7 +57,11 @@ export function MerchandiseCart({
             <ShoppingBag className="w-6 h-6 text-blue-500" />
             <h2 className="text-xl font-bold text-white">Shopping Cart</h2>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-slate-800 rounded-lg transition-colors" aria-label="Close cart">
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+            aria-label="Close cart"
+          >
             <X className="w-5 h-5 text-slate-400" />
           </button>
         </div>

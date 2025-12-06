@@ -322,10 +322,7 @@ export class PerformanceOptimizationBot {
   private prefetchResources(): void {
     console.log('[PerformanceBot] Prefetching critical resources...');
 
-    const criticalResources = [
-      '/api/analytics/metrics',
-      '/api/subscribe',
-    ];
+    const criticalResources = ['/api/analytics/metrics', '/api/subscribe'];
 
     criticalResources.forEach((resource) => {
       const link = document.createElement('link');
@@ -405,9 +402,7 @@ export class PerformanceOptimizationBot {
 // Singleton instance
 let botInstance: PerformanceOptimizationBot | null = null;
 
-export function getPerformanceBot(
-  config?: Partial<AIBotConfig>
-): PerformanceOptimizationBot {
+export function getPerformanceBot(config?: Partial<AIBotConfig>): PerformanceOptimizationBot {
   if (!botInstance) {
     botInstance = new PerformanceOptimizationBot(config);
   }

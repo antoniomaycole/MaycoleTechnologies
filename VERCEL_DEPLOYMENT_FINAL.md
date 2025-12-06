@@ -25,6 +25,7 @@ vercel
 Copy these and set them in **Project Settings > Environment Variables**:
 
 ### Frontend Variables
+
 ```
 VITE_API_URL=https://your-domain.vercel.app
 VITE_STRIPE_PUBLIC_KEY=pk_test_xxxxx
@@ -35,6 +36,7 @@ VITE_SENTRY_DSN=https://xxxxx@sentry.io/xxxxxx
 ```
 
 ### Backend/API Variables
+
 ```
 NODE_ENV=production
 STRIPE_SECRET_KEY=sk_test_xxxxx
@@ -57,11 +59,13 @@ CORS_ORIGINS=https://your-domain.vercel.app
 ## GitHub Protection (Private Repository)
 
 ### Step 1: Make Repository Private
+
 1. Go to GitHub: https://github.com/AntonioMaycole/MaycoleTechnologies
 2. Settings > Visibility > Change to **Private**
 3. Save changes
 
 ### Step 2: Set Up Branch Protection
+
 1. Settings > Branches > Add Rule
 2. Branch name: `main`
 3. ✅ Require pull request reviews before merging
@@ -69,6 +73,7 @@ CORS_ORIGINS=https://your-domain.vercel.app
 5. ✅ Require branches to be up to date
 
 ### Step 3: Add Collaborators (if needed)
+
 1. Settings > Collaborators
 2. Add team members with appropriate permissions
 
@@ -104,6 +109,7 @@ vercel --prod
 ## API Configuration for Vercel
 
 ### Frontend API Base URL
+
 Update `src/lib/api.ts`:
 
 ```typescript
@@ -111,6 +117,7 @@ const API_BASE = process.env.VITE_API_URL || 'https://your-vercel-domain.vercel.
 ```
 
 ### API Routes Structure
+
 Your `/api` directory structure is already set up for Vercel:
 
 ```
@@ -128,18 +135,21 @@ These automatically become Vercel Serverless Functions!
 ## Testing Before Production
 
 ### 1. Test Build Locally
+
 ```powershell
 npm run build
 # Check for errors
 ```
 
 ### 2. Preview Production Build
+
 ```powershell
 npm run preview
 # Visit http://localhost:4173
 ```
 
 ### 3. Test API Endpoints
+
 ```bash
 # Test analytics tracking
 curl -X POST https://your-domain.vercel.app/api/analytics/track \
@@ -170,11 +180,13 @@ curl https://your-domain.vercel.app/api/analytics/metrics
 ## GitHub & Vercel Integration
 
 ✅ Already Connected:
+
 - GitHub to Vercel automatic deployments
 - CI/CD pipeline configured
 - Pre-commit hooks installed
 
 ### Auto-Deploy on Push
+
 Every push to `main` branch automatically deploys to production!
 
 ---
@@ -182,11 +194,13 @@ Every push to `main` branch automatically deploys to production!
 ## Security Best Practices
 
 ### 1. Environment Variables
+
 - ✅ Never commit `.env` files (in .gitignore)
 - ✅ Set all secrets in Vercel dashboard
 - ✅ Rotate API keys regularly
 
 ### 2. GitHub Secrets
+
 Set these for CI/CD pipeline: Settings > Secrets and variables
 
 ```
@@ -196,6 +210,7 @@ VERCEL_PROJECT_ID=your-project-id
 ```
 
 ### 3. API Security
+
 - ✅ CORS configured
 - ✅ Rate limiting enabled
 - ✅ Input validation implemented
@@ -206,9 +221,11 @@ VERCEL_PROJECT_ID=your-project-id
 ## Monitoring & Logs
 
 ### Vercel Dashboard
+
 - https://vercel.com/dashboard
 
 Monitor:
+
 - Deployment status
 - Real-time logs
 - Error tracking
@@ -232,16 +249,19 @@ Monitor:
 ### Common Issues
 
 **Build fails on Vercel:**
+
 - Check Node version compatibility
 - Verify all env vars are set
 - Review build logs in Vercel dashboard
 
 **API returns 500 errors:**
+
 - Check API logs in Vercel dashboard
 - Verify environment variables
 - Test locally with `vercel dev`
 
 **Cold starts slow:**
+
 - Normal for Vercel serverless functions
 - First call takes ~1-2 seconds
 - Subsequent calls are fast

@@ -116,7 +116,9 @@ export const VisitorAnalyticsDashboard: React.FC = () => {
       {/* Header */}
       <div>
         <h2 className="text-3xl font-bold text-gray-900 mb-2">Visitor Analytics</h2>
-        <p className="text-gray-600">Real-time tracking of your website visitors and interactions</p>
+        <p className="text-gray-600">
+          Real-time tracking of your website visitors and interactions
+        </p>
       </div>
 
       {/* Key Metrics Grid */}

@@ -52,7 +52,13 @@ export class PerformanceAnalyzer {
 
       // Observe various performance entry types
       this.observer.observe({
-        entryTypes: ['paint', 'largest-contentful-paint', 'first-input', 'layout-shift', 'resource'],
+        entryTypes: [
+          'paint',
+          'largest-contentful-paint',
+          'first-input',
+          'layout-shift',
+          'resource',
+        ],
         buffered: true,
       });
 
@@ -247,9 +253,7 @@ export class PerformanceAnalyzer {
     const suggestions = this.generateSuggestions(allMetrics);
 
     // Identify bottlenecks
-    const bottlenecks = allMetrics
-      .filter((m) => m.status === 'critical')
-      .map((m) => m.name);
+    const bottlenecks = allMetrics.filter((m) => m.status === 'critical').map((m) => m.name);
 
     const report: OptimizationReport = {
       timestamp: new Date(),

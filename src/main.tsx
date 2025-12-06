@@ -32,12 +32,12 @@ if (rootElement) {
     );
     console.log('[main.tsx] React app rendered to DOM');
     
-    // Hide loader after React renders
+    // Hide loader immediately when React renders (100ms for browser repaint)
     if (loaderElement) {
       setTimeout(() => {
         console.log('[main.tsx] Hiding loader');
         loaderElement.classList.add('hidden');
-      }, 500);
+      }, 100); // Reduced from 500ms - loader disappears faster
     }
   } catch (error) {
     console.error('[main.tsx] Error mounting React app:', error);
@@ -51,15 +51,6 @@ if (rootElement) {
     loaderElement.innerHTML = '<div style="color: #ff4444; padding: 20px; text-align: center; background: #111;"><h2>Error</h2><p>Root element not found</p></div>';
   }
 }
-
-// Load services after React mounts (lazy, non-blocking)
-import('./lib/service-enforcer')
-  .then(({ initializeAllServices, setupOnlineMonitoring, setupPWAInstallPrompt }) => {
-    setupPWAInstallPrompt();
-    setupOnlineMonitoring();
-    initializeAllServices().catch(() => {});
-  })
-  .catch(() => {});
 
 // Load services after React mounts (lazy, non-blocking)
 import('./lib/service-enforcer')

@@ -17,6 +17,7 @@
 - ✅ Currently 404 (expected - needs DNS update)
 
 **Current DNS**:
+
 ```
 maycoletechnologies.com → 216.198.79.1
                        → 64.29.17.1
@@ -44,6 +45,7 @@ maycoletechnologies.com → 216.198.79.1
    - Vercel shows you the records to add
 
 4. **Typical records to add**:
+
    ```
    Type: A
    Host: @ (root domain)
@@ -52,6 +54,7 @@ maycoletechnologies.com → 216.198.79.1
    ```
 
    OR for CNAME:
+
    ```
    Type: CNAME
    Host: www
@@ -70,6 +73,7 @@ maycoletechnologies.com → 216.198.79.1
 DNS takes **5 minutes to 48 hours** to fully propagate
 
 **Check DNS Status**:
+
 ```powershell
 # Windows
 nslookup maycoletechnologies.com
@@ -90,11 +94,13 @@ Resolve-DnsName maycoletechnologies.com -Type A
 **Objective**: Verify HTTPS is working
 
 ### What Vercel Does (Automatic):
+
 1. Detects your domain in project settings
 2. Automatically provisions Let's Encrypt SSL cert
 3. Renews automatically every 90 days
 
 ### Verification:
+
 ```powershell
 # Check if HTTPS works
 Invoke-WebRequest https://maycoletechnologies.com
@@ -103,11 +109,13 @@ Invoke-WebRequest https://maycoletechnologies.com
 ```
 
 ### Timeline:
+
 - 🟢 **5-15 minutes** after DNS resolves = SSL issued
 - 🟢 Browser shows 🔒 lock icon
 - 🟡 If 15 min passed, DNS may not be propagated yet
 
 ### If SSL Not Issued:
+
 - ⏳ Wait another 15 minutes
 - ✅ Verify DNS is correctly pointing to Vercel
 - ✅ Vercel → Domains → Check Status
@@ -119,6 +127,7 @@ Invoke-WebRequest https://maycoletechnologies.com
 **Objective**: Verify domain works end-to-end
 
 ### 4.1 DNS Resolution Test
+
 ```powershell
 # Should show Vercel IP
 nslookup maycoletechnologies.com
@@ -128,6 +137,7 @@ nslookup maycoletechnologies.com
 ```
 
 ### 4.2 HTTPS Connection Test
+
 ```powershell
 # Check if site loads
 Invoke-WebRequest https://maycoletechnologies.com
@@ -138,12 +148,14 @@ Invoke-WebRequest https://maycoletechnologies.com
 ```
 
 ### 4.3 Browser Test
+
 1. Open `https://maycoletechnologies.com` in browser
 2. Should show website (not 404 or error)
 3. Look for 🔒 lock icon (SSL verified)
 4. Click lock → verify certificate is from Let's Encrypt
 
 ### 4.4 Sub-routes Test
+
 ```
 ✅ https://maycoletechnologies.com/               (Home)
 ✅ https://maycoletechnologies.com/tracker         (MaycoleTracker)
@@ -153,6 +165,7 @@ Invoke-WebRequest https://maycoletechnologies.com
 ```
 
 ### ✅ All Working?
+
 **Proceed to Step 5**
 
 ---
@@ -162,10 +175,12 @@ Invoke-WebRequest https://maycoletechnologies.com
 **Objective**: Set up production environment variables
 
 ### 5.1 In Vercel Dashboard:
+
 1. Go to **Project Settings** → **Environment Variables**
 2. Set these for **PRODUCTION** environment:
 
 **Frontend Variables** (public, safe to expose):
+
 ```
 VITE_API_URL=https://maycoletechnologies.com/api
 VITE_STRIPE_PUBLIC_KEY=pk_live_[YOUR_LIVE_KEY]
@@ -177,6 +192,7 @@ VITE_APP_NAME=Maycole Technologies
 ```
 
 **Backend Variables** (secret, Vercel only):
+
 ```
 STRIPE_SECRET_KEY=sk_live_[YOUR_LIVE_KEY]
 STRIPE_WEBHOOK_SECRET=whsec_[YOUR_WEBHOOK_SECRET]
@@ -189,6 +205,7 @@ NODE_ENV=production
 ```
 
 **Optional** (if using database):
+
 ```
 DATABASE_URL=postgresql://[USER]:[PASS]@[HOST]:[PORT]/[DB]?sslmode=require
 ```
@@ -196,6 +213,7 @@ DATABASE_URL=postgresql://[USER]:[PASS]@[HOST]:[PORT]/[DB]?sslmode=require
 ### 5.2 Generate Secure Secrets
 
 For `JWT_SECRET` and `NEXTAUTH_SECRET`:
+
 ```powershell
 # Generate 32-character random string
 $secret = -join((65..90) + (97..122) + (48..57) | Get-Random -Count 32 | ForEach-Object {[char]$_})
@@ -219,6 +237,7 @@ Copy output and use in Vercel.
 ### 5.4 Redeploy Project
 
 After adding env vars:
+
 1. Go to **Deployments** in Vercel
 2. Click **...** on latest deployment
 3. Select **Redeploy**
@@ -231,6 +250,7 @@ After adding env vars:
 **Objective**: Configure Stripe to send payment events to production domain
 
 ### 6.1 In Stripe Dashboard:
+
 1. Go to **Developers** → **Webhooks**
 2. Find your webhook endpoint (or create new)
 3. Update **Endpoint URL** to:
@@ -279,6 +299,7 @@ After adding env vars:
 ### 7.2 Verify Payment Succeeded
 
 In Stripe Dashboard:
+
 1. Go to **Payments** → **Charges**
 2. Should see your test charge for `$[amount]`
 3. Status should be **Succeeded** ✅
@@ -286,6 +307,7 @@ In Stripe Dashboard:
 ### 7.3 Verify Webhook Received
 
 In Stripe Dashboard:
+
 1. Go to **Developers** → **Webhooks** → Your endpoint
 2. Click **Recent Events**
 3. Should see `checkout.session.completed` event
@@ -302,6 +324,7 @@ In Stripe Dashboard:
    - ✅ Date/time
 
 **If email not received**:
+
 - Check spam/junk folder
 - Verify SendGrid domain is authenticated
 - Check Vercel logs for errors
@@ -310,6 +333,7 @@ In Stripe Dashboard:
 ### 7.5 Verify Database Record Created
 
 If using database:
+
 1. Check your database (Supabase, PostgreSQL, etc.)
 2. Query `orders` table
 3. Should see new order with:
@@ -325,24 +349,28 @@ If using database:
 Print this and check off as you complete:
 
 ### PHASE 1: Domain & DNS
+
 - [ ] Domain registered: `maycoletechnologies.com`
 - [ ] Domain resolves: `nslookup` shows Vercel IP
 - [ ] SSL certificate issued: Browser shows 🔒 lock
 - [ ] HTTPS works: `https://maycoletechnologies.com` loads
 
 ### PHASE 2: Vercel Configuration
+
 - [ ] Environment variables added (frontend & backend)
 - [ ] Stripe LIVE keys configured (not test keys)
 - [ ] JWT_SECRET and NEXTAUTH_SECRET generated
 - [ ] Project redeployed after env vars
 
 ### PHASE 3: Stripe Setup
+
 - [ ] Stripe webhook URL updated to production domain
 - [ ] Webhook secret matches env var
 - [ ] Test webhook delivery successful
 - [ ] Switched Stripe dashboard to LIVE mode
 
 ### PHASE 4: Payment Testing
+
 - [ ] Test payment with `4242 4242 4242 4242` succeeded
 - [ ] Charge visible in Stripe Dashboard
 - [ ] Webhook received `checkout.session.completed`
@@ -350,6 +378,7 @@ Print this and check off as you complete:
 - [ ] Database order record created (if applicable)
 
 ### PHASE 5: Full Site Testing
+
 - [ ] All 6 routes load and work:
   - [ ] `/` (home)
   - [ ] `/tracker` (app)
@@ -361,6 +390,7 @@ Print this and check off as you complete:
 - [ ] No console errors
 
 ### PHASE 6: Performance & Security
+
 - [ ] Load test with multiple users (Vercel auto-scales)
 - [ ] Monitor error rate (should be ~0%)
 - [ ] Check Vercel Analytics for performance
@@ -386,6 +416,7 @@ Print this and check off as you complete:
 ## 📞 TROUBLESHOOTING
 
 ### Domain shows 404:
+
 ```
 ✅ Is DNS updated? (nslookup maycoletechnologies.com)
 ✅ Wait 5-48 hours for propagation
@@ -394,6 +425,7 @@ Print this and check off as you complete:
 ```
 
 ### SSL not issuing:
+
 ```
 ✅ Wait 15 minutes after DNS update
 ✅ Vercel auto-provisions Let's Encrypt
@@ -401,6 +433,7 @@ Print this and check off as you complete:
 ```
 
 ### Payment fails:
+
 ```
 ✅ Using LIVE Stripe keys (not test)?
 ✅ Webhook secret matches env var?
@@ -409,6 +442,7 @@ Print this and check off as you complete:
 ```
 
 ### Email not sending:
+
 ```
 ✅ SendGrid API key configured?
 ✅ Domain verified in SendGrid?
@@ -430,13 +464,15 @@ Print this and check off as you complete:
 ## 🚀 NEXT PHASES
 
 After Phase 1 (Domain):
+
 1. **Phase 2**: Email Implementation (stripe-merchandise.ts)
 2. **Phase 3**: Database Schema (order records)
 3. **Phase 4**: Full QA & Launch
 
 ---
 
-**ESTIMATED TOTAL TIME**: 
+**ESTIMATED TOTAL TIME**:
+
 - Phase 1: 1-48 hours (DNS propagation)
 - Phase 2-4: 2-4 hours (once domain is live)
 

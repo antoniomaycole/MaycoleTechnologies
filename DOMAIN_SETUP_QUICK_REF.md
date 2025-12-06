@@ -37,6 +37,7 @@ STRIPE_WEBHOOK_SECRET = whsec_[YOUR_KEY]
 ```
 
 **Where to get them:**
+
 1. Stripe Dashboard → Developers → API Keys
 2. Toggle to **View live data** (top right)
 3. Copy keys
@@ -89,12 +90,12 @@ Then **Redeploy** project.
 
 ## 🆘 IF STUCK
 
-| Problem | Solution |
-|---------|----------|
-| 404 on domain | DNS not updated yet, wait 5-48 hours |
-| No 🔒 lock | SSL issuing, wait 15 min after DNS update |
-| Payment fails | Using test keys? Use LIVE keys instead |
-| Email not sent | SendGrid domain verified? Check SPF/DKIM |
+| Problem              | Solution                                             |
+| -------------------- | ---------------------------------------------------- |
+| 404 on domain        | DNS not updated yet, wait 5-48 hours                 |
+| No 🔒 lock           | SSL issuing, wait 15 min after DNS update            |
+| Payment fails        | Using test keys? Use LIVE keys instead               |
+| Email not sent       | SendGrid domain verified? Check SPF/DKIM             |
 | Webhook not received | Domain actually live? Check webhook status in Stripe |
 
 ---

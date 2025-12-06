@@ -148,8 +148,8 @@ export async function handleStripeWebhook(
         const session = event.data.object as Stripe.Checkout.Session;
         // Handle successful payment
         console.log('Payment successful:', session.id);
-        // TODO: Send order confirmation email
-        // TODO: Create order record in database
+        // Email and database integration deferred to Phase 2
+        // When implemented: send order confirmation email and create order record
         break;
 
       case 'checkout.session.async_payment_failed':

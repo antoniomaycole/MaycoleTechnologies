@@ -131,6 +131,8 @@ export const PerformanceOptimizationDashboard: React.FC = () => {
                   ? 'border-b-2 border-blue-500 text-blue-600'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
+              aria-label={`View ${tab === 'vitals' ? 'Core Web Vitals' : tab} metrics`}
+              aria-selected={activeTab === tab}
             >
               {tab === 'vitals' ? 'Core Web Vitals' : tab}
             </button>

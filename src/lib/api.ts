@@ -95,7 +95,7 @@ class ApiClient {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-    return response.data;
+    return (response.data || response) as Product;
   }
 
   async deleteProduct(id: string): Promise<void> {

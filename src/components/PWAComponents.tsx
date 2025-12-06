@@ -62,6 +62,7 @@ export function PWAInstallPrompt() {
       disabled={installing}
       className="fixed bottom-4 right-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg flex items-center gap-2 shadow-lg transition-colors z-50"
       title="Install MaycoleTechnologies as an app"
+      aria-label="Install MaycoleTechnologies as an app"
     >
       <Download size={18} />
       {installing ? 'Installing...' : 'Install App'}
